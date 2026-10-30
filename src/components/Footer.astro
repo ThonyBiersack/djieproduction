@@ -1,0 +1,17 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-10 border-t border-zinc-800/60 bg-zinc-950 text-xs text-zinc-400">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+    <div class="flex items-center gap-2 text-zinc-400">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+      <span>Anthony Suryadjie &copy; {currentYear}. Built with Astro &amp; Tailwind CSS.</span>
+    </div>
+    <div class="flex items-center gap-5 text-zinc-400">
+      <a href="#hero" class="hover:text-zinc-200 transition-colors">Back to top &uarr;</a>
+      <a href="https://github.com/ThonyBiersack" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-200 transition-colors">GitHub</a>
+      <a href="https://linkedin.com/in/anthony-suryadjie-500063200" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-200 transition-colors">LinkedIn</a>
+    </div>
+  </div>
+</footer>

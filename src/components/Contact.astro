@@ -1,0 +1,67 @@
+---
+const contacts = [
+  {
+    name: "GitHub",
+    handle: "@ThonyBiersack",
+    href: "https://github.com/ThonyBiersack",
+    description: "Source code, personal projects & repositories",
+    icon: `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>`
+  },
+  {
+    name: "LinkedIn",
+    handle: "Anthony Suryadjie",
+    href: "https://linkedin.com/in/anthony-suryadjie-500063200",
+    description: "Professional background & career updates",
+    icon: `<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>`
+  },
+  {
+    name: "Email",
+    handle: "thony.djie@djieproduction.com",
+    href: "mailto:thony.djie@djieproduction.com",
+    description: "Direct inquiries and opportunities",
+    icon: `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>`
+  }
+];
+---
+
+<section id="contact" class="py-24 border-t border-zinc-800/60">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="mb-12">
+      <p class="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2 font-medium">Contact</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">Get In Touch</h2>
+      <p class="text-zinc-400 text-sm mt-2 max-w-xl">
+        Currently available for full-time software engineering roles and contract systems. Reach out directly.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {contacts.map((c) => (
+        <a
+          href={c.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="scroll-reveal rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-6 flex flex-col justify-between hover:bg-zinc-900/80 hover:border-zinc-700 transition-all duration-200 group focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
+        >
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-zinc-800/70 border border-zinc-700/60 flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:border-zinc-600 transition-colors mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" set:html={c.icon} />
+            </div>
+            <h3 class="text-sm font-semibold text-zinc-100 group-hover:text-white transition-colors">
+              {c.name}
+            </h3>
+            <p class="text-xs text-zinc-400 mt-1 mb-4 leading-relaxed">
+              {c.description}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-zinc-800/60 flex items-center justify-between text-xs font-mono text-zinc-300 group-hover:text-zinc-100">
+            <span class="truncate">{c.handle}</span>
+            <svg class="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 shrink-0 ml-1 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M7 17l9.2-9.2M17 17V8H8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
