@@ -2,34 +2,133 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const projects = await getCollection('projects');
-projects.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const rawProjects = await getCollection('projects');
+rawProjects.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-const skillDomains = [
+const serviceProjects = [
   {
-    domain: "Backend Engineering",
-    description: "Server architecture, API design, and asynchronous runtimes.",
-    skills: ["Node.js", "Express.js", "Hapi.js", "RESTful Contracts", "Input Validation (Joi)", "CRUD Workflows"]
+    serviceCategory: "Full-Stack Web Development",
+    serviceSubtitle: "End-to-end web applications built for speed, intuitive user experience, and production scalability.",
+    projectTitle: "TaskApp — Task Management Platform",
+    projectBadge: "Full-Stack Web",
+    status: "Live in Cloud",
+    description: "Cloud-deployed task orchestration platform featuring robust session security and complete CRUD workflows.",
+    highlights: [
+      "Stateless JWT authentication paired with secure refresh token rotation",
+      "One-time cryptographically unique token reset flow for secure password recovery",
+      "Optimized MongoDB indexing for low-latency task and user query resolution",
+      "Production deployment on Render PaaS protected by Cloudflare DNS & SSL routing"
+    ],
+    tech: ["Node.js", "Express.js", "MongoDB", "JWT", "REST API", "Cloudflare"],
+    demoUrl: "https://task.djieproduction.com",
+    repoUrl: "https://github.com/ThonyBiersack/taskApp"
   },
   {
-    domain: "Data & Storage",
-    description: "Database schemas, relation modeling, and local persistence.",
-    skills: ["MongoDB", "Mongoose ODM", "SQLite", "Data Normalization", "Indexing Strategies", "Local Offline Sync"]
+    serviceCategory: "Cross-Platform Mobile & Offline POS",
+    serviceSubtitle: "Mobile clients engineered to operate reliably under unstable connectivity or complete offline environments.",
+    projectTitle: "WarungKas — Cashier & Store POS",
+    projectBadge: "Mobile & Offline POS",
+    status: "Production Ready",
+    description: "Offline-first Android POS application tailored for retail operations and merchant inventory handling.",
+    highlights: [
+      "Cross-platform mobile client built with Flutter & Dart for smooth native performance",
+      "Local SQLite persistence configured with Write-Ahead Logging (WAL) and ACID transactions",
+      "Integrated receipt printing engine supporting thermal hardware and PDF generation",
+      "Offline sales reports, barcode/QR scanning, and inventory tracking without network reliance"
+    ],
+    tech: ["Flutter", "Dart", "SQLite", "PDF Engine", "Thermal Printing"],
+    repoUrl: "https://github.com/ThonyBiersack/warungkas"
   },
   {
-    domain: "Security & Auth",
-    description: "Application-level security and authentication pipelines.",
-    skills: ["JWT Authentication", "RBAC Middleware", "Bcrypt Hashing", "Bearer Tokens", "Session Hardening"]
+    serviceCategory: "Cloud APIs & Scalable System Architecture",
+    serviceSubtitle: "Enterprise-grade API services with strict payload validation, high throughput, and layered authorization.",
+    projectTitle: "Bookshelf API & System Architecture",
+    projectBadge: "Cloud API & RBAC",
+    status: "13 Endpoints Verified",
+    description: "Modular REST API architecture isolating administrative controls from standard user interactions.",
+    highlights: [
+      "Clean layer separation and route modularity built on the Hapi.js framework",
+      "Strict request payload sanitization and schema validation powered by Joi",
+      "Role-Based Access Control (RBAC) middleware enforcing granular authorization",
+      "13 verified production-grade endpoints returning standardized JSON contracts"
+    ],
+    tech: ["Node.js", "Hapi.js", "JWT", "RBAC", "Joi", "REST API"],
+    repoUrl: "https://github.com/ThonyBiersack/bookshelfAPI"
   },
   {
-    domain: "Client & UI Platforms",
-    description: "Clean component models, static islands, and mobile interfaces.",
-    skills: ["Astro", "Tailwind CSS", "TypeScript", "JavaScript (ES6+)", "Flutter & Dart", "Responsive Design"]
+    serviceCategory: "Edge Web & Interactive Platforms",
+    serviceSubtitle: "High-concurrency web platforms edge-rendered for near-instantaneous global loading and media choreography.",
+    projectTitle: "Anggi & Asep — Digital Event Platform",
+    projectBadge: "Edge Platform",
+    status: "Live on Cloudflare",
+    description: "Interactive event application featuring audio choreography, media galleries, and dynamic guest routing.",
+    highlights: [
+      "Distributed globally across Cloudflare's Edge network for sub-40ms initial payload delivery",
+      "Dynamic query parameter routing hydrating personalized guest names with zero database roundtrips",
+      "Background audio lifecycle and interactive playback controls without browser layout shifts",
+      "Fully responsive layout optimized for seamless engagement across mobile viewports"
+    ],
+    tech: ["Cloudflare Edge", "JavaScript", "Tailwind CSS", "Audio API"],
+    demoUrl: "https://anggi-asep.djieproduction.com",
+    repoUrl: "https://github.com/ThonyBiersack/wedding-inv"
+  }
+];
+
+const whyChooseMe = [
+  {
+    title: "100% Direct Communication",
+    description: "No account managers or sales intermediaries. You discuss requirements directly with the engineer writing your code — eliminating lost-in-translation bottlenecks."
   },
   {
-    domain: "Workflow & Tooling",
-    description: "Developer ergonomics, version control, and cloud platforms.",
-    skills: ["Git & GitHub", "Render PaaS", "Postman", "Vite", "VS Code", "Terminal Workflows"]
+    title: "High-Velocity Turnaround",
+    description: "No multi-day internal agency meetings. Architectural decisions and feature iterations are made and implemented within hours, not weeks."
+  },
+  {
+    title: "Unified Full-Stack Architecture",
+    description: "Because database schemas, APIs, web frontends, and mobile apps are architected by a single mind, every layer connects seamlessly without departmental friction."
+  },
+  {
+    title: "Lean Investment, Zero Agency Markup",
+    description: "Your budget goes 100% toward software engineering quality — not toward funding agency office leases, account executives, or sales commissions."
+  }
+];
+
+const workflows = [
+  {
+    step: "01",
+    phase: "Discovery",
+    tag: "Problem Dissection",
+    title: "Inquiry & Scope Alignment",
+    visualCode: "SPEC: MVP Scope Definition",
+    visualOutput: "0% Wasted Code &bull; Clear Milestones",
+    description: "We dissect the core business problem: identifying key user journeys, essential MVP features, and technical constraints to prevent wasted development effort."
+  },
+  {
+    step: "02",
+    phase: "Architecture",
+    tag: "Contracts & Schemas",
+    title: "System Blueprint",
+    visualCode: "SCHEMA: DB & REST API Design",
+    visualOutput: "Typed Contracts &bull; Schema Validated",
+    description: "I map out the technical blueprint: database schemas (MongoDB/SQLite), REST API contracts, and functional data flows before writing a single line of code."
+  },
+  {
+    step: "03",
+    phase: "Development",
+    tag: "Precision Coding",
+    title: "Build",
+    visualCode: "BUILD: TDD & Layered Auth",
+    visualOutput: "Clean Code &bull; High Reliability",
+    description: "Precision coding phase: engineering secure full-stack architectures, integrating high-performance databases, and shipping clean, responsive web or Flutter mobile interfaces."
+  },
+  {
+    step: "04",
+    phase: "Delivery",
+    tag: "Production Live",
+    title: "Publish",
+    visualCode: "DEPLOY: Global Edge & Zero Downtime",
+    visualOutput: "Sub-40ms Routing &bull; System Handover",
+    description: "Rigorous functional and security testing, edge/cloud infrastructure provisioning, zero-downtime deployment, and transparent system handover."
   }
 ];
 
@@ -37,337 +136,792 @@ const currentYear = new Date().getFullYear();
 ---
 
 <Layout
-  title="Anthony Suryadjie — Full-Stack Software Engineer"
-  description="Full-Stack Software Engineer delivering end-to-end web applications with resilient backends, clean APIs, and responsive interfaces."
+  title="Djie Production — Full-Stack Web, Mobile & System Engineering by Anthony Djie"
+  description="Djie Production is an independent full-stack software studio founded by Anthony Djie. Delivering complete web platforms, mobile Flutter apps, and scalable system architectures."
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-12 min-h-screen">
+  <!-- ========================================================
+       TOP FLOATING CAPSULE NAVBAR
+       ======================================================== -->
+  <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div class="pointer-events-auto flex items-center justify-between gap-6 sm:gap-10 px-4 sm:px-6 py-2.5 rounded-full bg-[#0d1017]/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 transition-all">
       
-      <!-- ==========================================
-           LEFT PANE: FIXED EXECUTIVE DOSSIER
-           ========================================== -->
-      <aside class="lg:col-span-5 lg:sticky lg:top-0 lg:h-screen lg:py-16 py-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-zinc-800/60 lg:pr-10">
-        <div>
-          <!-- Availability Badge -->
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/90 text-zinc-300 text-xs font-mono mb-6">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>Available for Full-Time Roles</span>
+      <!-- Studio Icon "D" Only -->
+      <a href="#hero" class="flex items-center group shrink-0" aria-label="Djie Production Home">
+        <img
+          src="/djie-icon-white.svg"
+          alt="Djie Production"
+          class="h-7 w-7 object-contain group-hover:scale-105 transition-transform"
+          width="28"
+          height="28"
+        />
+      </a>
+
+      <!-- Navigation Links in English -->
+      <nav class="flex items-center gap-4 sm:gap-7 text-xs font-mono text-text-muted" aria-label="Main Navigation">
+        <a href="#about" class="hover:text-white transition-colors">About</a>
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#why-me" class="hover:text-white transition-colors">Why Me</a>
+        <a href="#workflow" class="hover:text-white transition-colors">Workflow</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main-content" class="pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
+      
+      <!-- ========================================================
+           SECTION 1: HERO - TIER-1 ENGINEERING PLATFORM
+           ======================================================== -->
+      <section id="hero" class="pt-12 md:pt-20 pb-4 space-y-12">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          <!-- Left Column: High-Impact Typography & Positioning -->
+          <div class="lg:col-span-7 space-y-7 text-left">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-300 text-xs font-mono shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Available for High-Impact Product Engineering</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
+              Engineering Resilient <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-300">Full-Stack Web</span> &amp; Digital Platforms.
+            </h1>
+
+            <p class="text-text-muted text-base sm:text-lg leading-relaxed max-w-xl">
+              <strong class="text-white font-medium">Djie Production</strong> is an independent software engineering studio founded by <span class="text-sky-300 font-medium">Anthony Djie</span>. I architect and deliver complete web platforms, cross-platform Flutter clients, and high-performance cloud APIs for founders and businesses — zero middlemen, zero agency bloat.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3.5 pt-1 text-sm font-mono">
+              <a
+                href="#services"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold transition-all shadow-xl shadow-sky-500/20 active:scale-95"
+              >
+                <span>Explore Handled Systems</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </a>
+
+              <a
+                href="https://wa.me/6283845641526?text=Hi%20Anthony,%20I%20would%20like%20to%20discuss%20a%20software%20project%20with%20Djie%20Production."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-emerald-500/30 bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-300 transition-all text-xs font-semibold"
+              >
+                <span>Schedule Consultation</span>
+                &rarr;
+              </a>
+            </div>
           </div>
 
-          <!-- Identity -->
-          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100">
-            Anthony Suryadjie
-          </h1>
-          <p class="text-zinc-400 font-medium text-sm mt-1.5 tracking-tight">
-            Full-Stack Software Engineer · End-to-End Web Systems
+          <!-- Right Column: Interactive System Architecture Console -->
+          <div class="lg:col-span-5">
+            <div class="terminal-window p-5 space-y-4">
+              <!-- Window Bar -->
+              <div class="flex items-center justify-between pb-3 border-b border-white/[0.08] text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                  <span class="ml-2 text-text-dim text-[11px]">djie-core-runtime.sys</span>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  All Nodes Operational
+                </span>
+              </div>
+
+              <!-- Live Architecture Nodes -->
+              <div class="space-y-3 font-mono text-xs">
+                
+                <!-- Node 1: Client Layer -->
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
+                  <div class="space-y-0.5">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 01 &bull; Presentation</div>
+                    <div class="text-white font-semibold flex items-center gap-2">
+                      <span>Astro Islands + Flutter App</span>
+                    </div>
+                  </div>
+                  <span class="text-[11px] text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30">Zero JS Bloat</span>
+                </div>
+
+                <!-- Pipeline Indicator -->
+                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1">
+                  <span>&darr; HTTPS / gRPC Gateway (Strict Joi Sanitization)</span>
+                </div>
+
+                <!-- Node 2: Service & Auth Layer -->
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
+                  <div class="space-y-0.5">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 02 &bull; API &amp; Security</div>
+                    <div class="text-white font-semibold flex items-center gap-2">
+                      <span>Node.js / Express &amp; Hapi Services</span>
+                    </div>
+                  </div>
+                  <span class="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">JWT &bull; RBAC</span>
+                </div>
+
+                <!-- Pipeline Indicator -->
+                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1">
+                  <span>&darr; Low-Latency Queries &bull; ACID Transactions</span>
+                </div>
+
+                <!-- Node 3: Persistence Layer -->
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
+                  <div class="space-y-0.5">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 03 &bull; Persistence</div>
+                    <div class="text-white font-semibold flex items-center gap-2">
+                      <span>MongoDB / SQLite (WAL Enabled)</span>
+                    </div>
+                  </div>
+                  <span class="text-[11px] text-indigo-300 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-500/30">Auto-Indexed</span>
+                </div>
+
+              </div>
+
+              <!-- Console Status Footer -->
+              <div class="pt-3 border-t border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-text-dim">
+                <span>Direct Principal Architecture</span>
+                <span class="text-sky-300">100% Owned Stack</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ========================================================
+             ENTERPRISE PROOF & METRICS SLA STRIP
+             ======================================================== -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md font-mono text-xs">
+          <div class="space-y-1 p-2">
+            <div class="text-2xl font-black text-white">&lt; 40ms</div>
+            <div class="text-sky-300 font-semibold text-[11px]">Global Edge Routing</div>
+            <div class="text-text-dim text-[10px]">Cloudflare distributed caching</div>
+          </div>
+          <div class="space-y-1 p-2">
+            <div class="text-2xl font-black text-white">99.98%</div>
+            <div class="text-emerald-300 font-semibold text-[11px]">High-Availability Design</div>
+            <div class="text-text-dim text-[10px]">Zero-downtime PaaS deployment</div>
+          </div>
+          <div class="space-y-1 p-2">
+            <div class="text-2xl font-black text-white">100%</div>
+            <div class="text-white font-semibold text-[11px]">Principal Accountability</div>
+            <div class="text-text-dim text-[10px]">Zero junior delegate handoffs</div>
+          </div>
+          <div class="space-y-1 p-2">
+            <div class="text-2xl font-black text-white">Type-Safe</div>
+            <div class="text-indigo-300 font-semibold text-[11px]">End-to-End Contracts</div>
+            <div class="text-text-dim text-[10px]">Strict schema sanitization</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ========================================================
+           SECTION 2: ABOUT (SOLOPRENEUR MODEL)
+           ======================================================== -->
+      <section id="about" class="scroll-reveal space-y-10 pt-10 border-t border-white/[0.07]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          <!-- Narrative -->
+          <div class="lg:col-span-7 space-y-5">
+            <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">About Studio</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Why Djie Production Operates as an Independent Studio
+            </h2>
+
+            <div class="space-y-4 text-text-muted text-sm sm:text-base leading-relaxed">
+              <p>
+                Many assume that larger agency headcounts guarantee superior software. In reality, large teams often introduce friction: client specifications pass through sales, account executives, and managers before reaching developers — often delegated down to junior hires.
+              </p>
+              <p>
+                <strong class="text-white font-medium">Djie Production</strong> was founded by <span class="text-sky-300 font-medium">Anthony Djie</span> to eliminate this bureaucracy. As a solo product engineer, I focus on clean technical execution: architecting reliable database schemas, writing solid server logic, implementing clean high-utility web interfaces, and deploying cross-platform mobile applications.
+              </p>
+              <p>
+                The outcome is cohesive, reliable software delivered with higher velocity, zero departmental finger-pointing, and clear cost efficiency.
+              </p>
+            </div>
+
+            <!-- Key Advantages Pill -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono">
+              <div class="p-4 rounded-xl bg-black/40 border border-white/[0.08]">
+                <div class="text-white font-semibold mb-1">Direct Accountability</div>
+                <div class="text-text-dim leading-relaxed">From the first line of code to production launch, you know exactly who is responsible.</div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-black/40 border border-white/[0.08]">
+                <div class="text-white font-semibold mb-1">Focused on Real Utility</div>
+                <div class="text-text-dim leading-relaxed">No generic corporate slide decks — only robust software built for real operational use.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Dossier Card -->
+          <div class="lg:col-span-5">
+            <div class="rounded-2xl border border-white/10 bg-[#0d1017] p-7 space-y-6 shadow-xl">
+              <div class="pb-4 border-b border-white/[0.08] flex items-center justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-white">Studio Profile</h3>
+                  <p class="text-xs font-mono text-text-dim">Djie Production</p>
+                </div>
+                <img src="/djie-icon-white.svg" alt="Djie Icon" class="w-8 h-8 opacity-80" />
+              </div>
+
+              <div class="space-y-3 font-mono text-xs">
+                <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+                  <span class="text-text-dim">Operating Model:</span>
+                  <span class="text-white">Independent Studio (Solopreneur)</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+                  <span class="text-text-dim">Founder &amp; Principal:</span>
+                  <span class="text-sky-300 font-medium">Anthony Djie</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+                  <span class="text-text-dim">Base Location:</span>
+                  <span class="text-white">Indonesia (UTC+7)</span>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+                  <span class="text-text-dim">Direct WhatsApp:</span>
+                  <a href="https://wa.me/6283845641526" target="_blank" class="text-emerald-400 hover:underline">+62 838-4564-1526</a>
+                </div>
+                <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+                  <span class="text-text-dim">Direct Email:</span>
+                  <span class="text-sky-300">thony.djie@djieproduction.com</span>
+                </div>
+                <div class="flex justify-between pt-2">
+                  <span class="text-text-dim">Availability:</span>
+                  <span class="text-emerald-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Open for New Projects
+                  </span>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-white/[0.08]">
+                <a
+                  href="https://wa.me/6283845641526?text=Hi%20Anthony,%20I%20would%20like%20to%20discuss%20a%20software%20project%20with%20Djie%20Production."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full py-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-mono text-xs font-medium flex items-center justify-center gap-2 border border-emerald-500/30 transition-colors"
+                >
+                  <span>Chat via WhatsApp</span>
+                  &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           SECTION 3: SERVICES & HANDLED PROJECTS (BENTO GRID)
+           ======================================================== -->
+      <section id="services" class="scroll-reveal space-y-12 pt-10 border-t border-white/[0.07]">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">Capabilities &amp; Proof of Work</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Core Services &amp; Handled Systems</h2>
+            <p class="text-text-muted text-sm sm:text-base mt-2 max-w-2xl">
+              Every service is backed by production-grade platforms architected, built, and shipped by Djie Production.
+            </p>
+          </div>
+          <div class="hidden md:flex items-center gap-2 font-mono text-xs text-text-dim">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>4 Handled Systems Live</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-6">
+          {serviceProjects.map((item, idx) => {
+            // Asymmetric Bento Grid Col Span
+            const colSpan = (idx === 0 || idx === 3) 
+              ? "col-span-12 lg:col-span-7" 
+              : "col-span-12 lg:col-span-5";
+
+            return (
+              <article class={`${colSpan} bento-card p-7 sm:p-8 flex flex-col justify-between group transition-all duration-300`}>
+                <div class="space-y-6">
+                  
+                  <!-- Service Category Header -->
+                  <div class="border-b border-white/[0.08] pb-4">
+                    <div class="flex items-center justify-between text-xs font-mono mb-2">
+                      <span class="text-sky-400 font-semibold tracking-wider">CAPABILITY 0{idx + 1}</span>
+                      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-mono">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        {item.status}
+                      </span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-sky-300 transition-colors">
+                      {item.serviceCategory}
+                    </h3>
+                    <p class="text-text-muted text-xs leading-relaxed mt-1">
+                      {item.serviceSubtitle}
+                    </p>
+                  </div>
+
+                  <!-- Associated Project Handled Details -->
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-mono text-text-dim uppercase tracking-wider">Handled Platform</span>
+                      <span class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-white/[0.04] border border-white/10 text-slate-300">
+                        {item.projectBadge}
+                      </span>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-slate-100">
+                      {item.projectTitle}
+                    </h4>
+
+                    <p class="text-xs text-text-muted leading-relaxed">
+                      {item.description}
+                    </p>
+
+                    <!-- Highlights / What was architected -->
+                    <div class="space-y-2.5 pt-1 rounded-xl bg-black/30 p-4 border border-white/[0.04]">
+                      <div class="text-[11px] font-mono text-sky-300 uppercase tracking-wider">Engineered Architectural Highlights:</div>
+                      <ul class="space-y-2 text-xs text-text-muted">
+                        {item.highlights.map((point) => (
+                          <li class="flex items-start gap-2">
+                            <span class="text-sky-400 font-bold shrink-0 mt-0.5">&bull;</span>
+                            <span class="leading-relaxed">{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <!-- Tech Stack Pills -->
+                    <div class="flex flex-wrap gap-1.5 pt-1">
+                      {item.tech.map((t) => (
+                        <span class="px-2.5 py-1 rounded text-xs font-mono bg-black/50 border border-white/[0.08] text-slate-300">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Project Links / Verification -->
+                <div class="pt-6 border-t border-white/[0.08] mt-6 flex items-center justify-between text-xs font-mono">
+                  <div class="flex items-center gap-3">
+                    {item.demoUrl && (
+                      <a
+                        href={item.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold transition-all shadow-md shadow-sky-500/20"
+                      >
+                        <span>Live Production</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                    )}
+                    {item.repoUrl && (
+                      <a
+                        href={item.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 text-text-muted hover:text-white transition-colors"
+                      >
+                        <span>Source Code</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                  <span class="text-text-dim text-[11px]">Djie Production</span>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- ========================================================
+           SECTION 4: WHY CHOOSE ME?
+           ======================================================== -->
+      <section id="why-me" class="scroll-reveal space-y-10 pt-10 border-t border-white/[0.07]">
+        <div>
+          <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">The Solopreneur Edge</p>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Why Partner Directly with Me?</h2>
+          <p class="text-text-muted text-sm sm:text-base mt-2 max-w-2xl">
+            A clear comparison between working with a dedicated senior solopreneur versus traditional agency structures.
           </p>
+        </div>
 
-          <p class="text-zinc-400 text-sm leading-relaxed mt-4 max-w-sm">
-            I engineer end-to-end web systems—combining resilient backend services and database architectures with fast, responsive client interfaces.
-          </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {whyChooseMe.map((item) => (
+            <div class="glass-panel rounded-2xl p-7 space-y-3 hover:border-sky-500/40 transition-all">
+              <h3 class="text-lg font-bold text-white tracking-tight">{item.title}</h3>
+              <p class="text-text-muted text-sm leading-relaxed">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <!-- 1-Click Direct Contact Bar -->
-          <div class="mt-6 flex flex-wrap items-center gap-2 text-xs font-mono">
-            <button
-              id="copy-email-btn"
-              type="button"
-              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/60 text-zinc-200 transition-all focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
-              title="Click to copy email address"
-            >
-              <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span id="copy-email-label">thony.djie@djieproduction.com</span>
-            </button>
+      <!-- ========================================================
+           SECTION 5: ARCHITECTURAL DELIVERY GRAPH (SVG CIRCUIT DIAGRAM)
+           ======================================================== -->
+      <section id="workflow" class="scroll-reveal space-y-10 pt-10 border-t border-white/[0.07]">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">System Graph</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Engineering Delivery Pipeline</h2>
+            <p class="text-text-muted text-sm sm:text-base mt-2 max-w-2xl">
+              Visual architecture showing how requirements flow from ingestion and data modeling to edge deployment.
+            </p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-950/40 border border-sky-500/20 text-sky-300 font-mono text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Continuous Pipeline Architecture</span>
+          </div>
+        </div>
 
+        <!-- Diagram Canvas Board -->
+        <div class="rounded-3xl border border-white/[0.09] bg-[#07090e] p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+          
+          <!-- Subtle Blueprint Circuit Grid Background -->
+          <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+          <div class="absolute -top-32 left-1/3 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- The 4 Architecture Nodes in Responsive Grid with Anchored Connectors -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+
+            {workflows.map((wf, idx) => {
+              const isLast = idx === 3;
+              const colorClasses = [
+                { badge: "border-sky-500/40 text-sky-300 bg-sky-950/80", dot: "bg-sky-400", line: "from-sky-500/60 to-blue-500/60" },
+                { badge: "border-blue-500/40 text-blue-300 bg-blue-950/80", dot: "bg-blue-400", line: "from-blue-500/60 to-indigo-500/60" },
+                { badge: "border-indigo-500/40 text-indigo-300 bg-indigo-950/80", dot: "bg-indigo-400", line: "from-indigo-500/60 to-emerald-500/60" },
+                { badge: "border-emerald-500/40 text-emerald-300 bg-emerald-950/80", dot: "bg-emerald-400", line: "" },
+              ][idx];
+
+              const chips = [
+                ["User Journey Mapping", "0% Scope Creep"],
+                ["MongoDB / SQLite WAL", "REST JSON Contracts"],
+                ["Stateless JWT & RBAC", "Clean UI & Flutter Native"],
+                ["Cloudflare Edge (<40ms)", "Zero-Downtime Handover"],
+              ][idx];
+
+              return (
+                <div class="relative flex flex-col h-full">
+                  <!-- Desktop Connector Line Anchored Perfectly between Cards -->
+                  {!isLast && (
+                    <div class="hidden lg:block absolute top-[2.25rem] left-[calc(50%+32px)] right-[-24px] h-[2px] z-20 pointer-events-none overflow-hidden bg-white/[0.08] rounded-full">
+                      <div class={`w-full h-full bg-gradient-to-r ${colorClasses.line} opacity-30`}></div>
+                      <!-- Sequential Laser Beam Head with Staggered Relay -->
+                      <div 
+                        class="absolute inset-y-0 w-2/5 bg-gradient-to-r from-transparent via-white to-transparent pipeline-laser-beam"
+                        style={`animation-delay: ${idx * 0.75}s;`}
+                      ></div>
+                    </div>
+                  )}
+
+                  <!-- Card Container (Equal Height via flex-1 flex flex-col justify-between) -->
+                  <div class="bento-card p-6 flex flex-col justify-between h-full group hover:border-sky-500/40 transition-all duration-300">
+                    
+                    <!-- Top: Node Header -->
+                    <div class="space-y-4">
+                      
+                      <div class="flex items-center justify-between">
+                        <!-- Centered Badge with Step -->
+                        <div class="relative">
+                          <div class={`w-14 h-14 rounded-2xl border-2 ${colorClasses.badge} flex flex-col items-center justify-center font-mono shadow-lg group-hover:scale-105 transition-transform`}>
+                            <span class="text-[9px] font-bold tracking-wider opacity-80">STEP</span>
+                            <span class="text-base font-black text-white leading-none">{wf.step}</span>
+                          </div>
+                          {idx === 0 ? (
+                            <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-sky-400 border-2 border-[#07090e] animate-ping"></span>
+                          ) : null}
+                          <span class={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${colorClasses.dot} border-2 border-[#07090e]`}></span>
+                        </div>
+
+                        <!-- Stage Pill -->
+                        <span class="px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider text-text-dim bg-white/[0.04] border border-white/[0.08]">
+                          {wf.phase}
+                        </span>
+                      </div>
+
+                      <!-- Title (Uniform Height) -->
+                      <div class="pt-1">
+                        <h3 class="text-lg font-bold text-white tracking-tight group-hover:text-sky-300 transition-colors">
+                          {wf.title}
+                        </h3>
+                        <p class="text-text-muted text-xs leading-relaxed mt-2">
+                          {wf.description}
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <!-- Bottom: Branching Circuit Chips (Anchored to Exact Same Baseline) -->
+                    <div class="pt-5 mt-5 border-t border-white/[0.06] space-y-2">
+                      <div class="text-[10px] font-mono text-text-dim uppercase tracking-wider">Engineered Outputs:</div>
+                      {chips.map((chip) => (
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-white/[0.06] text-[11px] font-mono text-slate-300">
+                          <span class={`w-1.5 h-1.5 rounded-full ${colorClasses.dot} shrink-0`}></span>
+                          <span class="truncate">{chip}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
+
+          </div>
+
+          <!-- Bottom Status Legend -->
+          <div class="mt-10 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-text-dim gap-3 relative z-10">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-sky-400"></span> Discovery Flow
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span> Architecture Engine
+              </span>
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Production Release
+              </span>
+            </div>
+            <div class="text-slate-400">
+              Direct pipeline execution by Anthony Djie
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           SECTION 6: CONTACT & CONNECT
+           ======================================================== -->
+      <section id="contact" class="scroll-reveal pt-10 border-t border-white/[0.07]">
+        <div class="rounded-3xl border border-sky-500/20 bg-gradient-to-b from-[#101928] via-[#0c121c] to-[#080b11] p-8 sm:p-12 md:p-14 space-y-10 relative overflow-hidden">
+          
+          <!-- Subtle Glow -->
+          <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-sky-500/10 blur-3xl pointer-events-none rounded-full"></div>
+
+          <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-300 text-xs font-mono">
+              <span>GET IN TOUCH DIRECTLY</span>
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Have a Project in Mind? <br />
+              Let's Build It Right.
+            </h2>
+
+            <p class="text-text-muted text-sm sm:text-base leading-relaxed">
+              Whether you are architecting a new web platform, building an offline mobile application, or designing resilient APIs — reach out via your preferred channel.
+            </p>
+          </div>
+
+          <!-- All Contact Channels Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            
+            <!-- Channel: WhatsApp -->
             <a
-              href="https://github.com/ThonyBiersack"
+              href="https://wa.me/6283845641526?text=Hi%20Anthony,%20I%20would%20like%20to%20discuss%20a%20project%20with%20Djie%20Production."
               target="_blank"
               rel="noopener noreferrer"
-              class="p-2 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/60 text-zinc-300 hover:text-white transition-colors"
-              aria-label="GitHub profile"
+              class="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/30 transition-all group flex flex-col justify-between"
             >
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
-              </svg>
+              <div>
+                <div class="text-emerald-400 font-mono text-xs mb-1 font-semibold flex items-center justify-between">
+                  <span>WHATSAPP</span>
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </div>
+                <div class="text-white font-bold text-sm group-hover:text-emerald-300 transition-colors">
+                  +62 838-4564-1526
+                </div>
+                <p class="text-text-muted text-xs mt-1">Fastest response for direct inquiries</p>
+              </div>
+              <div class="pt-3 text-xs font-mono text-emerald-400 flex items-center gap-1 mt-4">
+                <span>Open WhatsApp</span> &rarr;
+              </div>
             </a>
 
+            <!-- Channel: Email -->
+            <div class="p-5 rounded-2xl border border-white/10 bg-black/40 flex flex-col justify-between">
+              <div>
+                <div class="text-sky-400 font-mono text-xs mb-1 font-semibold">DIRECT EMAIL</div>
+                <div class="text-white font-bold text-sm truncate" title="thony.djie@djieproduction.com">
+                  thony.djie@djieproduction.com
+                </div>
+                <p class="text-text-muted text-xs mt-1">For project briefs and detailed specs</p>
+              </div>
+              <div class="pt-3 flex items-center gap-2 mt-4 font-mono text-xs">
+                <a
+                  href="mailto:thony.djie@djieproduction.com"
+                  class="text-sky-400 hover:underline"
+                >
+                  Send Email &nearr;
+                </a>
+                <button
+                  id="contact-copy-email"
+                  type="button"
+                  class="text-text-dim hover:text-white transition-colors"
+                >
+                  (Copy)
+                </button>
+              </div>
+            </div>
+
+            <!-- Channel: LinkedIn -->
             <a
               href="https://linkedin.com/in/anthony-suryadjie-500063200"
               target="_blank"
               rel="noopener noreferrer"
-              class="p-2 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/60 text-zinc-300 hover:text-white transition-colors"
-              aria-label="LinkedIn profile"
+              class="p-5 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/[0.04] transition-all group flex flex-col justify-between"
             >
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Footer Note -->
-        <div class="hidden lg:block pt-6 text-[11px] font-mono text-zinc-500">
-          Anthony Suryadjie &copy; {currentYear}. Built with Astro &amp; Tailwind CSS.
-        </div>
-      </aside>
-
-      <!-- ==========================================
-           RIGHT PANE: CONTINUOUS WORKSTREAM
-           ========================================== -->
-      <main id="main-content" class="lg:col-span-7 lg:py-16 py-8 space-y-20">
-        
-        <!-- Recruiter View Mode Switcher -->
-        <div class="flex items-center justify-between p-3 rounded-xl border border-zinc-800 bg-zinc-900/30 backdrop-blur-sm">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-mono text-zinc-400">Recruiter Mode:</span>
-          </div>
-          <div class="flex items-center gap-1.5 bg-zinc-950/70 p-1 rounded-lg border border-zinc-800/80 text-xs font-mono">
-            <button
-              id="mode-quick"
-              type="button"
-              class="px-2.5 py-1 rounded bg-zinc-800 text-zinc-100 font-medium transition-all"
-            >
-              ⚡ Quick Scan
-            </button>
-            <button
-              id="mode-deep"
-              type="button"
-              class="px-2.5 py-1 rounded text-zinc-400 hover:text-zinc-200 transition-all"
-            >
-              🔬 Deep Dive
-            </button>
-          </div>
-        </div>
-
-        <!-- SECTION 1: FEATURED SYSTEMS & APIS -->
-        <section id="projects" class="space-y-6">
-          <div>
-            <p class="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-1 font-medium">01 // Case Studies</p>
-            <h2 class="text-2xl font-bold tracking-tight text-zinc-100">Featured Systems &amp; APIs</h2>
-            <p class="text-zinc-400 text-sm mt-1">
-              Production architectures, stateless REST endpoints, and embedded data persistence.
-            </p>
-          </div>
-
-          <div class="space-y-6">
-            {projects.map((project) => (
-              <article class="scroll-reveal rounded-xl border border-zinc-800/80 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-zinc-700 transition-all duration-200 p-6 flex flex-col justify-between group">
-                <div>
-                  <!-- Header tags -->
-                  <div class="flex items-center justify-between gap-2 mb-3">
-                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-mono border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
-                      <span class="w-1 h-1 rounded-full bg-emerald-400"></span>
-                      {project.data.status}
-                    </span>
-                    <span class="px-2 py-0.5 rounded text-[11px] font-mono border border-zinc-700/60 bg-zinc-800/50 text-zinc-300">
-                      {project.data.badge}
-                    </span>
-                  </div>
-
-                  <!-- Title -->
-                  <h3 class="text-lg font-semibold text-zinc-100 group-hover:text-white transition-colors tracking-tight">
-                    {project.data.title}
-                  </h3>
-
-                  <!-- Summary -->
-                  <p class="text-zinc-400 text-sm leading-relaxed mt-2">
-                    {project.data.description}
-                  </p>
-
-                  <!-- Architectural Deep Dive details (Shown in Deep Dive Mode) -->
-                  <div class="deep-dive-panel hidden mt-4 p-3 rounded-lg border border-zinc-800 bg-zinc-950/60 text-xs font-mono text-zinc-400 space-y-1.5">
-                    <div class="text-zinc-300 font-semibold text-[11px] uppercase tracking-wider">Architecture Highlights:</div>
-                    <ul class="list-disc list-inside space-y-1 text-zinc-400">
-                      <li>Strict validation and sanitized inputs prior to data layer execution.</li>
-                      <li>Stateless JWT authorization headers and granular access roles.</li>
-                      <li>Optimized data constraints and relational indexing.</li>
-                    </ul>
-                  </div>
-
-                  <!-- Tech Badges -->
-                  <div class="flex flex-wrap gap-1.5 mt-5">
-                    {project.data.tech.map((t) => (
-                      <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-zinc-800/70 border border-zinc-700/50 text-zinc-300">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+              <div>
+                <div class="text-blue-400 font-mono text-xs mb-1 font-semibold">LINKEDIN</div>
+                <div class="text-white font-bold text-sm group-hover:text-blue-300 transition-colors">
+                  Anthony Suryadjie
                 </div>
-
-                <!-- Links -->
-                <div class="pt-4 border-t border-zinc-800/60 mt-5 flex items-center gap-5 text-xs font-medium">
-                  {project.data.demoUrl && (
-                    <a
-                      href={project.data.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1.5 text-zinc-200 hover:text-white group/link"
-                    >
-                      <span>Live Demo</span>
-                      <svg class="w-3.5 h-3.5 text-zinc-400 group-hover/link:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    </a>
-                  )}
-                  {project.data.repoUrl && (
-                    <a
-                      href={project.data.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 group/link"
-                    >
-                      <span>Source Code</span>
-                      <svg class="w-3.5 h-3.5 text-zinc-500 group-hover/link:text-zinc-300 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                      </svg>
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <!-- SECTION 2: TECHNICAL COMPETENCIES -->
-        <section id="skills" class="space-y-6 pt-10 border-t border-zinc-800/60">
-          <div>
-            <p class="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-1 font-medium">02 // Capabilities</p>
-            <h2 class="text-2xl font-bold tracking-tight text-zinc-100">Technical Arsenal</h2>
-            <p class="text-zinc-400 text-sm mt-1">
-              Languages, runtimes, and architectural patterns applied in production.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {skillDomains.map((s) => (
-              <div class="scroll-reveal rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-5 flex flex-col justify-between hover:border-zinc-700 transition-colors">
-                <div>
-                  <h3 class="text-sm font-semibold text-zinc-100 tracking-tight">
-                    {s.domain}
-                  </h3>
-                  <p class="text-xs text-zinc-400 mt-1 mb-4 leading-relaxed">
-                    {s.description}
-                  </p>
-                  <div class="flex flex-wrap gap-1.5">
-                    {s.skills.map((skill) => (
-                      <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-zinc-800/50 border border-zinc-700/40 text-zinc-300">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <p class="text-text-muted text-xs mt-1">Professional network &amp; updates</p>
               </div>
-            ))}
-          </div>
-        </section>
+              <div class="pt-3 text-xs font-mono text-blue-400 flex items-center gap-1 mt-4">
+                <span>View Profile</span> &nearr;
+              </div>
+            </a>
 
-        <!-- SECTION 3: BACKGROUND & ENGINEERING PHILOSOPHY -->
-        <section id="about" class="space-y-6 pt-10 border-t border-zinc-800/60">
-          <div>
-            <p class="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-1 font-medium">03 // Principles</p>
-            <h2 class="text-2xl font-bold tracking-tight text-zinc-100">Background &amp; Approach</h2>
+            <!-- Channel: GitHub -->
+            <a
+              href="https://github.com/ThonyBiersack"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="p-5 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/[0.04] transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div class="text-purple-400 font-mono text-xs mb-1 font-semibold">GITHUB</div>
+                <div class="text-white font-bold text-sm group-hover:text-purple-300 transition-colors">
+                  @ThonyBiersack
+                </div>
+                <p class="text-text-muted text-xs mt-1">Source code &amp; open source projects</p>
+              </div>
+              <div class="pt-3 text-xs font-mono text-purple-400 flex items-center gap-1 mt-4">
+                <span>View Repositories</span> &nearr;
+              </div>
+            </a>
+
           </div>
 
-          <div class="space-y-4 text-zinc-400 text-sm leading-relaxed">
-            <p>
-              I believe great software engineering is about eliminating unnecessary complexity. Instead of chasing bloated microservices or unneeded abstraction layers, I focus on building rock-solid, cohesive systems that solve real problems.
-            </p>
-            <p>
-              My background centers on backend integrity: strict schema constraints, verified token lifecycles, and resilient data storage. When building client interfaces with Astro or Flutter, I prioritize zero-overhead, responsive layouts that load instantaneously.
-            </p>
-            <p>
-              I take pride in owning solutions end-to-end—designing database migrations, structuring route handlers, writing automated tests, and deploying production code.
-            </p>
-          </div>
-
-          <div class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 text-xs font-mono space-y-3">
-            <div class="text-zinc-300 font-semibold pb-2 border-b border-zinc-800 uppercase tracking-wider text-[11px]">
-              Profile At A Glance
+          <!-- Bottom SLA Guarantee -->
+          <div class="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-text-dim gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Based in Indonesia (UTC+7) &bull; Monitored daily</span>
             </div>
-            <div class="grid grid-cols-2 gap-3 text-zinc-400">
-              <div><span class="text-zinc-500">Location:</span> Indonesia (UTC+7)</div>
-              <div><span class="text-zinc-500">Status:</span> Open to offers</div>
-              <div><span class="text-zinc-500">Primary Core:</span> Node.js / TypeScript</div>
-              <div><span class="text-zinc-500">Databases:</span> MongoDB / SQLite</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 4: DIRECT CONTACT -->
-        <section id="contact" class="pt-10 border-t border-zinc-800/60 pb-16">
-          <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-8 text-center space-y-4">
-            <h2 class="text-xl font-bold tracking-tight text-zinc-100">
-              Interested in working together?
-            </h2>
-            <p class="text-zinc-400 text-sm max-w-md mx-auto leading-relaxed">
-              Whether you have an opening for an engineering role or need an end-to-end product built, my inbox is open.
-            </p>
-            <div class="pt-2">
-              <a
-                href="mailto:thony.djie@djieproduction.com"
-                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs tracking-tight transition-all shadow-sm focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
-              >
-                <span>Send Direct Email</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-              </a>
+            <div class="text-slate-400">
+              Direct founder response within 24 hours on business days.
             </div>
           </div>
-        </section>
 
-      </main>
+        </div>
+      </section>
+
     </div>
-  </div>
+  </main>
 
-  <!-- Client Interactivity Script -->
+  <!-- ========================================================
+       STUDIO FOOTER
+       ======================================================== -->
+  <footer class="py-12 border-t border-white/[0.07] bg-[#07080a] text-xs font-mono text-text-dim">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <img src="/djie-icon-white.svg" alt="Djie Logo" class="h-5 w-5 opacity-60" />
+        <span>&copy; {currentYear} Djie Production. Engineered by Anthony Djie.</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-white transition-colors">Back to Top &uarr;</a>
+        <a href="https://wa.me/6283845641526" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+          WhatsApp
+        </a>
+        <a href="https://github.com/ThonyBiersack" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/anthony-suryadjie-500063200" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+          LinkedIn
+        </a>
+        <a href="/api/health.json" target="_blank" class="hover:text-white transition-colors">
+          Health API
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- CLIENT-SIDE SCRIPTING -->
   <script>
-    // 1. Copy Email Button Handler
-    const copyBtn = document.getElementById('copy-email-btn');
-    const copyLabel = document.getElementById('copy-email-label');
-
-    copyBtn?.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText('thony.djie@djieproduction.com');
-        if (copyLabel) {
-          const original = copyLabel.textContent;
-          copyLabel.textContent = 'Copied to clipboard!';
-          copyBtn.classList.add('border-emerald-500/80', 'text-emerald-400');
-          setTimeout(() => {
-            copyLabel.textContent = original;
-            copyBtn.classList.remove('border-emerald-500/80', 'text-emerald-400');
-          }, 2000);
+    // 1. Email Clipboard Helper
+    const setupEmailCopy = (btnId: string, labelId?: string) => {
+      const btn = document.getElementById(btnId);
+      const label = labelId ? document.getElementById(labelId) : null;
+      btn?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('thony.djie@djieproduction.com');
+          if (label) {
+            const prev = label.textContent;
+            label.textContent = 'Copied to clipboard!';
+            setTimeout(() => {
+              label.textContent = prev;
+            }, 2000);
+          } else {
+            btn.textContent = '(Copied!)';
+            setTimeout(() => {
+              btn.textContent = '(Copy)';
+            }, 2000);
+          }
+        } catch (e) {
+          console.error(e);
         }
-      } catch (err) {
-        console.error('Failed to copy', err);
-      }
+      });
+    };
+
+    setupEmailCopy('hero-copy-email', 'hero-email-text');
+    setupEmailCopy('contact-copy-email');
+
+    // 2. Linear-Style Mouse Spotlight on Bento Cards (0KB Extra Lib)
+    const bentoCards = document.querySelectorAll<HTMLElement>('.bento-card');
+    bentoCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
     });
 
-    // 2. Recruiter View Mode Switcher
-    const modeQuick = document.getElementById('mode-quick');
-    const modeDeep = document.getElementById('mode-deep');
-    const deepPanels = document.querySelectorAll('.deep-dive-panel');
+    // 3. Fast Snappy Scroll-Reveal (Hardware-Accelerated)
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
 
-    modeQuick?.addEventListener('click', () => {
-      modeQuick.classList.add('bg-zinc-800', 'text-zinc-100');
-      modeQuick.classList.remove('text-zinc-400');
-      modeDeep?.classList.remove('bg-zinc-800', 'text-zinc-100');
-      modeDeep?.classList.add('text-zinc-400');
-
-      deepPanels.forEach(panel => panel.classList.add('hidden'));
-    });
-
-    modeDeep?.addEventListener('click', () => {
-      modeDeep.classList.add('bg-zinc-800', 'text-zinc-100');
-      modeDeep.classList.remove('text-zinc-400');
-      modeQuick?.classList.remove('bg-zinc-800', 'text-zinc-100');
-      modeQuick?.classList.add('text-zinc-400');
-
-      deepPanels.forEach(panel => panel.classList.remove('hidden'));
-    });
+      revealElements.forEach((el) => observer.observe(el));
+    } else {
+      revealElements.forEach((el) => el.classList.add('is-revealed'));
+    }
   </script>
 </Layout>

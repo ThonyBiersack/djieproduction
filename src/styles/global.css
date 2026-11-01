@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-dark: #09090b;
-  --color-bg-panel: #121215;
-  --color-bg-terminal: #0c0c0e;
-  --color-bg-surface: #18181c;
+  --color-bg-dark: #08090b;
+  --color-bg-panel: #0e1117;
+  --color-bg-terminal: #07090d;
+  --color-bg-surface: #141820;
 
-  --color-border-card: #27272a;
-  --color-border-subtle: #1e1e24;
-  --color-border-hover: #3f3f46;
+  --color-border-card: #1f242e;
+  --color-border-subtle: #171b22;
+  --color-border-hover: #3b4354;
   
-  --color-text-main: #f4f4f5;
-  --color-text-muted: #a1a1aa;
-  --color-text-dim: #71717a;
+  --color-text-main: #f0f3f6;
+  --color-text-muted: #949da6;
+  --color-text-dim: #656d76;
 
-  --color-accent: #ffffff;
-  --color-accent-emerald: #10b981;
+  --color-brand-cyan: #38bdf8;
+  --color-brand-blue: #3b82f6;
+  --color-brand-emerald: #10b981;
 
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -26,34 +27,204 @@ body {
   color: var(--color-text-main);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  scrollbar-color: #3f3f46 #09090b;
+  scrollbar-color: #272d38 #08090b;
   scrollbar-width: thin;
 }
 
-@supports not (scrollbar-color: auto) {
-  body::-webkit-scrollbar {
-    width: 8px;
-  }
-  body::-webkit-scrollbar-track {
-    background: #09090b;
-  }
-  body::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 4px;
+/* Background Engineering Grid */
+.bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.bg-radial-vignette {
+  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, rgba(8, 9, 11, 0) 70%);
+}
+
+/* Glass & Glow utilities */
+.glass-panel {
+  background: rgba(14, 17, 23, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 25px -8px rgba(56, 189, 248, 0.15);
+}
+
+/* Tier-1 Tech Bento Card with Dynamic Cursor Spotlight */
+.bento-card {
+  background: radial-gradient(circle at 50% 0%, rgba(20, 24, 33, 0.85) 0%, rgba(10, 12, 16, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+/* Linear-style Dynamic Cursor Spotlight on Bento Card */
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    450px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(56, 189, 248, 0.12),
+    transparent 50%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.bento-card:hover::after {
+  opacity: 1;
+}
+
+.bento-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7), 0 0 30px -10px rgba(56, 189, 248, 0.15);
+}
+
+/* Snappy Scroll Reveal (GPU Accelerated) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive Node Pulse */
+@keyframes node-ping {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.node-pulse {
+  position: relative;
+}
+
+.node-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: inherit;
+  animation: node-ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* SVG Circuit Diagram Wiring Animations */
+@keyframes circuit-pulse-line {
+  to {
+    stroke-dashoffset: -100;
   }
 }
 
-/* Typographic balance & orphan elimination */
+.circuit-animated-wire {
+  stroke-dasharray: 8 14;
+  animation: circuit-pulse-line 3s linear infinite;
+}
+
+/* Sequential Pipeline Laser Flow */
+@keyframes pipeline-beam-travel {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(250%);
+    opacity: 0;
+  }
+}
+
+.pipeline-laser-beam {
+  animation: pipeline-beam-travel 2.25s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  box-shadow: 0 0 10px 1px rgba(56, 189, 248, 0.6);
+  will-change: transform, opacity;
+}
+
+/* Architecture Terminal Window */
+.terminal-window {
+  background: #090b0f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.875rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.3), rgba(59, 130, 246, 0.1), transparent);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Typographic balance */
 h1, h2, h3, h4 {
   text-wrap: balance;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 p, li {
   text-wrap: pretty;
 }
 
-/* Native Scroll Progress Indicator */
+/* Interactive Cursor Spotlight Glow */
+#cursor-spotlight {
+  pointer-events: none;
+  position: fixed;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.065) 0%, rgba(59, 130, 246, 0.02) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Terminal Pulse */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scroll Progress */
 @keyframes scroll-progress {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
@@ -67,27 +238,5 @@ p, li {
   #scroll-progress-bar {
     animation: scroll-progress auto linear;
     animation-timeline: scroll(root);
-  }
-}
-
-/* Subtle view-driven entrance */
-@media (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: view()) and (animation-range: entry)) {
-    @keyframes card-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .scroll-reveal {
-      animation: card-reveal auto cubic-bezier(0.16, 1, 0.3, 1) backwards;
-      animation-timeline: view();
-      animation-range: entry 5% cover 25%;
-    }
   }
 }

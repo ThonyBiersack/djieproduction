@@ -1,25 +1,18 @@
 ---
 const contacts = [
   {
-    name: "GitHub",
-    handle: "@ThonyBiersack",
-    href: "https://github.com/ThonyBiersack",
-    description: "Source code, personal projects & repositories",
-    icon: `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>`
-  },
-  {
-    name: "LinkedIn",
-    handle: "Anthony Suryadjie",
-    href: "https://linkedin.com/in/anthony-suryadjie-500063200",
-    description: "Professional background & career updates",
-    icon: `<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>`
-  },
-  {
     name: "Email",
     handle: "thony.djie@djieproduction.com",
     href: "mailto:thony.djie@djieproduction.com",
-    description: "Direct inquiries and opportunities",
+    description: "Project inquiries and business opportunities",
     icon: `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>`
+  },
+  {
+    name: "GitHub",
+    handle: "@ThonyBiersack",
+    href: "https://github.com/ThonyBiersack",
+    description: "Source code, open-source projects & repositories",
+    icon: `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>`
   }
 ];
 ---
@@ -28,13 +21,13 @@ const contacts = [
   <div class="max-w-5xl mx-auto px-4 sm:px-6">
     <div class="mb-12">
       <p class="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2 font-medium">Contact</p>
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">Get In Touch</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">Start a Project</h2>
       <p class="text-zinc-400 text-sm mt-2 max-w-xl">
-        Currently available for full-time software engineering roles and contract systems. Reach out directly.
+        Have a project in mind? Let's build something solid together. Reach out directly.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {contacts.map((c) => (
         <a
           href={c.href}

@@ -7,24 +7,26 @@ export const GET: APIRoute = async () => {
         status: 200,
         message: 'System operational',
         uptime: '99.98%',
-        developer: {
-          name: 'Anthony Suryadjie',
-          title: 'Full-Stack Developer',
+        studio: {
+          name: 'Djie Production',
+          founder: 'Anthony Djie',
+          title: 'Full-Stack Software Engineering Studio',
           capabilities: [
-            'End-to-End Web Applications',
-            'RESTful API Systems',
-            'Database Modeling & Querying',
-            'JWT & RBAC Security Flows',
-            'Responsive UI & Component Architecture'
+            'End-to-End Full-Stack Web Applications',
+            'Cross-Platform Mobile Apps (Flutter & Dart)',
+            'Mission-Critical RESTful API Systems',
+            'Database Modeling & Offline SQLite Storage',
+            'Stateless JWT & Granular RBAC Security Flows',
+            'Edge Deployments & Modern UI Islands'
           ],
           stack: {
-            frontend: ['Astro', 'Tailwind CSS', 'JavaScript (ES6+)', 'TypeScript', 'Flutter'],
+            frontend: ['Astro', 'Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
+            mobile: ['Flutter', 'Dart', 'Android Native'],
             backend: ['Node.js', 'Express.js', 'Hapi.js', 'REST APIs'],
-            databases: ['MongoDB', 'SQLite', 'Mongoose ODM'],
-            security: ['JWT', 'RBAC Middleware', 'Bcrypt']
+            databases: ['MongoDB', 'SQLite (WAL Mode)', 'Mongoose ODM'],
+            infrastructure: ['Cloudflare Edge', 'Render', 'Git & GitHub']
           },
-          architecture: 'Majestic Monolith',
-          status: 'Open for full-stack & software engineering opportunities'
+          status: 'Open for client projects & contract engineering — djieproduction.com'
         },
         timestamp: new Date().toISOString()
       },

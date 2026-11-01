@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Anthony Suryadjie — Full-Stack Software Engineer",
-  description = "Full-Stack Software Engineer delivering end-to-end web applications with resilient backends, clean APIs, and responsive interfaces."
+  title = "Djie Production — Independent Full-Stack Web & Mobile Product Studio",
+  description = "Independent full-stack software studio by Anthony Djie. Engineering end-to-end web applications, cross-platform Flutter apps, and scalable cloud architectures."
 } = Astro.props;
 ---
 
@@ -19,42 +19,68 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Anthony Suryadjie" />
+    <meta name="author" content="Anthony Djie — Djie Production" />
     <link rel="icon" type="image/svg+xml" href="/djie-icon-white.svg" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-bg-dark text-text-main font-sans selection:bg-zinc-800 selection:text-white min-h-screen relative antialiased">
+  <body class="bg-bg-dark text-text-main font-sans selection:bg-sky-500/20 selection:text-sky-200 min-h-screen relative antialiased overflow-x-hidden">
     <!-- Skip to main content -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-mono focus:text-xs focus:rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-400 font-medium"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-sky-400 focus:text-black focus:font-mono focus:text-xs focus:rounded-md focus:outline-none focus:ring-2 focus:ring-sky-300 font-semibold"
     >
-      Skip to main content
+      Skip to content
     </a>
 
     <!-- Top Scroll Progress Indicator -->
     <div
       id="scroll-progress-bar"
-      class="fixed top-0 left-0 w-full h-[2px] bg-white/70 z-[60] pointer-events-none"
+      class="fixed top-0 left-0 w-full h-[2px] bg-gradient-to-r from-sky-400 via-blue-500 to-emerald-400 z-[60] pointer-events-none"
       role="progressbar"
       aria-label="Scroll progress"
     ></div>
 
-    <!-- Refined Ambient Lighting -->
-    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-zinc-800/20 via-zinc-900/10 to-transparent blur-3xl opacity-60"></div>
-    </div>
-    
+    <!-- Interactive Cursor Spotlight -->
+    <div id="cursor-spotlight" aria-hidden="true"></div>
+
+    <!-- Engineering Blueprint Grid & Atmospheric Lighting -->
+    <div class="fixed inset-0 pointer-events-none -z-10 bg-grid-pattern opacity-60"></div>
+    <div class="fixed inset-0 pointer-events-none -z-10 bg-radial-vignette"></div>
+
     <slot />
 
     <script>
+      // 1. Mouse Spotlight tracking
+      const spotlight = document.getElementById('cursor-spotlight');
+      if (spotlight && window.matchMedia('(pointer: fine)').matches) {
+        let posX = window.innerWidth / 2;
+        let posY = window.innerHeight / 3;
+        let targetX = posX;
+        let targetY = posY;
+
+        window.addEventListener('mousemove', (e) => {
+          targetX = e.clientX;
+          targetY = e.clientY;
+        });
+
+        const loop = () => {
+          posX += (targetX - posX) * 0.12;
+          posY += (targetY - posY) * 0.12;
+          spotlight.style.left = `${posX}px`;
+          spotlight.style.top = `${posY}px`;
+          requestAnimationFrame(loop);
+        };
+        loop();
+      }
+
+      // 2. Fallback Scroll Progress
       if (!CSS.supports('animation-timeline', 'scroll()')) {
         const bar = document.getElementById('scroll-progress-bar');
         if (bar) {
