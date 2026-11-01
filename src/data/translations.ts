@@ -157,8 +157,8 @@ export interface SiteContent {
 export const content: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "Djie Production — Full-Stack Web & Mobile Development by Anthony Djie",
-      description: "Independent full-stack developer portfolio and studio by Anthony Djie. Building complete web platforms, cross-platform Flutter apps, and REST APIs with structured validation."
+      title: "Djie Production — Full-Stack Web & Mobile Developer",
+      description: "Independent developer building web apps, Flutter mobile apps, and REST APIs. See my projects and request a quote."
     },
     nav: {
       about: "About",

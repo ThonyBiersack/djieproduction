@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://djieproduction.com/sitemap-index.xml
