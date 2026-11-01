@@ -80,18 +80,26 @@ const {
         loop();
       }
 
-      // 2. Fallback Scroll Progress
-      if (!CSS.supports('animation-timeline', 'scroll()')) {
-        const bar = document.getElementById('scroll-progress-bar');
-        if (bar) {
-          const updateProgress = () => {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            const ratio = max > 0 ? window.scrollY / max : 0;
-            bar.style.transform = `scaleX(${ratio})`;
-          };
-          window.addEventListener('scroll', updateProgress, { passive: true });
-          updateProgress();
-        }
+      // 2. High-Performance Universal Scroll Progress (Mobile & Desktop)
+      const bar = document.getElementById('scroll-progress-bar');
+      if (bar) {
+        let ticking = false;
+        const updateProgress = () => {
+          const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+          const ratio = scrollH > 0 ? Math.min(Math.max(window.scrollY / scrollH, 0), 1) : 0;
+          bar.style.transform = `scaleX(${ratio})`;
+          ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateProgress);
+            ticking = true;
+          }
+        }, { passive: true });
+
+        window.addEventListener('resize', updateProgress, { passive: true });
+        updateProgress();
       }
     </script>
   </body>

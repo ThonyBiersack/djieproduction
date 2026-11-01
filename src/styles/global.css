@@ -164,6 +164,29 @@ body {
   will-change: transform, opacity;
 }
 
+@keyframes pipeline-beam-travel-vertical {
+  0% {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(250%);
+    opacity: 0;
+  }
+}
+
+.pipeline-laser-beam-vertical {
+  animation: pipeline-beam-travel-vertical 2.25s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+  box-shadow: 0 0 10px 1px rgba(56, 189, 248, 0.6);
+  will-change: transform, opacity;
+}
+
 /* Architecture Terminal Window */
 .terminal-window {
   background: #090b0f;
@@ -224,19 +247,9 @@ p, li {
   animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Scroll Progress */
-@keyframes scroll-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
+/* Scroll Progress Bar */
 #scroll-progress-bar {
   transform-origin: left;
-}
-
-@supports (animation-timeline: scroll()) {
-  #scroll-progress-bar {
-    animation: scroll-progress auto linear;
-    animation-timeline: scroll(root);
-  }
+  transform: scaleX(0);
+  will-change: transform;
 }

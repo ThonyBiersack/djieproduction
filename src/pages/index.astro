@@ -142,34 +142,34 @@ const currentYear = new Date().getFullYear();
   <!-- ========================================================
        TOP FLOATING CAPSULE NAVBAR
        ======================================================== -->
-  <header class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-    <div class="pointer-events-auto flex items-center justify-between gap-6 sm:gap-10 px-4 sm:px-6 py-2.5 rounded-full bg-[#0d1017]/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 transition-all">
+  <header class="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
+    <div class="pointer-events-auto flex items-center justify-between gap-3 sm:gap-8 px-3.5 sm:px-6 py-2 rounded-full bg-[#0d1017]/90 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/60 transition-all max-w-[92vw] sm:max-w-none">
       
       <!-- Studio Icon "D" Only -->
       <a href="#hero" class="flex items-center group shrink-0" aria-label="Djie Production Home">
         <img
           src="/djie-icon-white.svg"
           alt="Djie Production"
-          class="h-7 w-7 object-contain group-hover:scale-105 transition-transform"
+          class="h-6 w-6 sm:h-7 sm:w-7 object-contain group-hover:scale-105 transition-transform"
           width="28"
           height="28"
         />
       </a>
 
-      <!-- Navigation Links in English -->
-      <nav class="flex items-center gap-4 sm:gap-7 text-xs font-mono text-text-muted" aria-label="Main Navigation">
-        <a href="#about" class="hover:text-white transition-colors">About</a>
+      <!-- Responsive Navigation Links -->
+      <nav class="flex items-center gap-3 sm:gap-6 text-[11px] sm:text-xs font-mono text-text-muted" aria-label="Main Navigation">
+        <a href="#about" class="hidden sm:inline-block hover:text-white transition-colors">About</a>
         <a href="#services" class="hover:text-white transition-colors">Services</a>
-        <a href="#why-me" class="hover:text-white transition-colors">Why Me</a>
-        <a href="#workflow" class="hover:text-white transition-colors">Workflow</a>
-        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        <a href="#why-me" class="hidden md:inline-block hover:text-white transition-colors">Why Me</a>
+        <a href="#workflow" class="hover:text-white transition-colors">Pipeline</a>
+        <a href="#contact" class="px-2.5 py-1 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-white transition-colors font-semibold">Contact</a>
       </nav>
 
     </div>
   </header>
 
-  <main id="main-content" class="pt-24 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
+  <main id="main-content" class="pt-20 sm:pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 lg:space-y-28">
       
       <!-- ========================================================
            SECTION 1: HERO - TIER-1 ENGINEERING PLATFORM
@@ -237,46 +237,46 @@ const currentYear = new Date().getFullYear();
               <div class="space-y-3 font-mono text-xs">
                 
                 <!-- Node 1: Client Layer -->
-                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 01 &bull; Presentation</div>
-                    <div class="text-white font-semibold flex items-center gap-2">
-                      <span>Astro Islands + Flutter App</span>
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div class="space-y-0.5 min-w-0">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim truncate">Layer 01 &bull; Presentation</div>
+                    <div class="text-white font-semibold flex items-center gap-2 text-xs sm:text-sm">
+                      <span class="truncate">Astro Islands + Flutter App</span>
                     </div>
                   </div>
-                  <span class="text-[11px] text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30">Zero JS Bloat</span>
+                  <span class="text-[10px] sm:text-[11px] text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30 shrink-0">Zero JS Bloat</span>
                 </div>
 
                 <!-- Pipeline Indicator -->
-                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1">
-                  <span>&darr; HTTPS / gRPC Gateway (Strict Joi Sanitization)</span>
+                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1 text-center">
+                  <span>&darr; HTTPS / gRPC Gateway (Strict Validation)</span>
                 </div>
 
                 <!-- Node 2: Service & Auth Layer -->
-                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 02 &bull; API &amp; Security</div>
-                    <div class="text-white font-semibold flex items-center gap-2">
-                      <span>Node.js / Express &amp; Hapi Services</span>
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div class="space-y-0.5 min-w-0">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim truncate">Layer 02 &bull; API &amp; Security</div>
+                    <div class="text-white font-semibold flex items-center gap-2 text-xs sm:text-sm">
+                      <span class="truncate">Node.js / Express &amp; Hapi</span>
                     </div>
                   </div>
-                  <span class="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">JWT &bull; RBAC</span>
+                  <span class="text-[10px] sm:text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30 shrink-0">JWT &bull; RBAC</span>
                 </div>
 
                 <!-- Pipeline Indicator -->
-                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1">
+                <div class="flex items-center justify-center text-text-dim text-[10px] -my-1 text-center">
                   <span>&darr; Low-Latency Queries &bull; ACID Transactions</span>
                 </div>
 
                 <!-- Node 3: Persistence Layer -->
-                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <div class="text-[10px] uppercase tracking-wider text-text-dim">Layer 03 &bull; Persistence</div>
-                    <div class="text-white font-semibold flex items-center gap-2">
-                      <span>MongoDB / SQLite (WAL Enabled)</span>
+                <div class="p-3 rounded-lg bg-black/40 border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div class="space-y-0.5 min-w-0">
+                    <div class="text-[10px] uppercase tracking-wider text-text-dim truncate">Layer 03 &bull; Persistence</div>
+                    <div class="text-white font-semibold flex items-center gap-2 text-xs sm:text-sm">
+                      <span class="truncate">MongoDB / SQLite (WAL)</span>
                     </div>
                   </div>
-                  <span class="text-[11px] text-indigo-300 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-500/30">Auto-Indexed</span>
+                  <span class="text-[10px] sm:text-[11px] text-indigo-300 bg-indigo-950/60 px-2 py-0.5 rounded border border-indigo-500/30 shrink-0">Auto-Indexed</span>
                 </div>
 
               </div>
@@ -294,26 +294,26 @@ const currentYear = new Date().getFullYear();
         <!-- ========================================================
              ENTERPRISE PROOF & METRICS SLA STRIP
              ======================================================== -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md font-mono text-xs">
-          <div class="space-y-1 p-2">
-            <div class="text-2xl font-black text-white">&lt; 40ms</div>
-            <div class="text-sky-300 font-semibold text-[11px]">Global Edge Routing</div>
-            <div class="text-text-dim text-[10px]">Cloudflare distributed caching</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-3.5 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md font-mono text-xs">
+          <div class="space-y-1 p-1.5 sm:p-2">
+            <div class="text-xl sm:text-2xl font-black text-white">&lt; 40ms</div>
+            <div class="text-sky-300 font-semibold text-[10px] sm:text-[11px]">Global Edge Routing</div>
+            <div class="text-text-dim text-[9px] sm:text-[10px] leading-tight">Cloudflare distributed caching</div>
           </div>
-          <div class="space-y-1 p-2">
-            <div class="text-2xl font-black text-white">99.98%</div>
-            <div class="text-emerald-300 font-semibold text-[11px]">High-Availability Design</div>
-            <div class="text-text-dim text-[10px]">Zero-downtime PaaS deployment</div>
+          <div class="space-y-1 p-1.5 sm:p-2">
+            <div class="text-xl sm:text-2xl font-black text-white">99.98%</div>
+            <div class="text-emerald-300 font-semibold text-[10px] sm:text-[11px]">High-Availability</div>
+            <div class="text-text-dim text-[9px] sm:text-[10px] leading-tight">Zero-downtime PaaS deploy</div>
           </div>
-          <div class="space-y-1 p-2">
-            <div class="text-2xl font-black text-white">100%</div>
-            <div class="text-white font-semibold text-[11px]">Principal Accountability</div>
-            <div class="text-text-dim text-[10px]">Zero junior delegate handoffs</div>
+          <div class="space-y-1 p-1.5 sm:p-2">
+            <div class="text-xl sm:text-2xl font-black text-white">100%</div>
+            <div class="text-white font-semibold text-[10px] sm:text-[11px]">Direct Principal</div>
+            <div class="text-text-dim text-[9px] sm:text-[10px] leading-tight">Zero junior delegate handoffs</div>
           </div>
-          <div class="space-y-1 p-2">
-            <div class="text-2xl font-black text-white">Type-Safe</div>
-            <div class="text-indigo-300 font-semibold text-[11px]">End-to-End Contracts</div>
-            <div class="text-text-dim text-[10px]">Strict schema sanitization</div>
+          <div class="space-y-1 p-1.5 sm:p-2">
+            <div class="text-xl sm:text-2xl font-black text-white">Type-Safe</div>
+            <div class="text-indigo-300 font-semibold text-[10px] sm:text-[11px]">End-to-End Contracts</div>
+            <div class="text-text-dim text-[9px] sm:text-[10px] leading-tight">Strict schema sanitization</div>
           </div>
         </div>
 
@@ -360,7 +360,7 @@ const currentYear = new Date().getFullYear();
 
           <!-- Studio Dossier Card -->
           <div class="lg:col-span-5">
-            <div class="rounded-2xl border border-white/10 bg-[#0d1017] p-7 space-y-6 shadow-xl">
+            <div class="rounded-2xl border border-white/10 bg-[#0d1017] p-5 sm:p-7 space-y-6 shadow-xl">
               <div class="pb-4 border-b border-white/[0.08] flex items-center justify-between">
                 <div>
                   <h3 class="text-base font-bold text-white">Studio Profile</h3>
@@ -442,7 +442,7 @@ const currentYear = new Date().getFullYear();
               : "col-span-12 lg:col-span-5";
 
             return (
-              <article class={`${colSpan} bento-card p-7 sm:p-8 flex flex-col justify-between group transition-all duration-300`}>
+              <article class={`${colSpan} bento-card p-5 sm:p-7 md:p-8 flex flex-col justify-between group transition-all duration-300`}>
                 <div class="space-y-6">
                   
                   <!-- Service Category Header -->
@@ -505,8 +505,8 @@ const currentYear = new Date().getFullYear();
                 </div>
 
                 <!-- Project Links / Verification -->
-                <div class="pt-6 border-t border-white/[0.08] mt-6 flex items-center justify-between text-xs font-mono">
-                  <div class="flex items-center gap-3">
+                <div class="pt-6 border-t border-white/[0.08] mt-6 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                  <div class="flex flex-wrap items-center gap-3">
                     {item.demoUrl && (
                       <a
                         href={item.demoUrl}
@@ -556,9 +556,9 @@ const currentYear = new Date().getFullYear();
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {whyChooseMe.map((item) => (
-            <div class="glass-panel rounded-2xl p-7 space-y-3 hover:border-sky-500/40 transition-all">
+            <div class="glass-panel rounded-2xl p-5 sm:p-7 space-y-3 hover:border-sky-500/40 transition-all">
               <h3 class="text-lg font-bold text-white tracking-tight">{item.title}</h3>
               <p class="text-text-muted text-sm leading-relaxed">{item.description}</p>
             </div>
@@ -625,7 +625,7 @@ const currentYear = new Date().getFullYear();
                   )}
 
                   <!-- Card Container (Equal Height via flex-1 flex flex-col justify-between) -->
-                  <div class="bento-card p-6 flex flex-col justify-between h-full group hover:border-sky-500/40 transition-all duration-300">
+                  <div class="bento-card p-5 sm:p-6 flex flex-col justify-between h-full group hover:border-sky-500/40 transition-all duration-300">
                     
                     <!-- Top: Node Header -->
                     <div class="space-y-4">
@@ -673,6 +673,19 @@ const currentYear = new Date().getFullYear();
                     </div>
 
                   </div>
+
+                  <!-- Mobile & Tablet Vertical Connector Line with Laser Relay -->
+                  {!isLast && (
+                    <div class="lg:hidden flex justify-center py-2 relative z-20 pointer-events-none">
+                      <div class="w-[2px] h-7 bg-white/[0.08] relative overflow-hidden rounded-full">
+                        <div class={`w-full h-full bg-gradient-to-b ${colorClasses.line} opacity-40`}></div>
+                        <div 
+                          class="absolute inset-x-0 h-2/5 bg-gradient-to-b from-transparent via-white to-transparent pipeline-laser-beam-vertical"
+                          style={`animation-delay: ${idx * 0.75}s;`}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -681,7 +694,7 @@ const currentYear = new Date().getFullYear();
 
           <!-- Bottom Status Legend -->
           <div class="mt-10 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-text-dim gap-3 relative z-10">
-            <div class="flex items-center gap-4">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
               <span class="flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-sky-400"></span> Discovery Flow
               </span>
@@ -692,7 +705,7 @@ const currentYear = new Date().getFullYear();
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Production Release
               </span>
             </div>
-            <div class="text-slate-400">
+            <div class="text-slate-400 text-center sm:text-right">
               Direct pipeline execution by Anthony Djie
             </div>
           </div>
@@ -704,7 +717,7 @@ const currentYear = new Date().getFullYear();
            SECTION 6: CONTACT & CONNECT
            ======================================================== -->
       <section id="contact" class="scroll-reveal pt-10 border-t border-white/[0.07]">
-        <div class="rounded-3xl border border-sky-500/20 bg-gradient-to-b from-[#101928] via-[#0c121c] to-[#080b11] p-8 sm:p-12 md:p-14 space-y-10 relative overflow-hidden">
+        <div class="rounded-3xl border border-sky-500/20 bg-gradient-to-b from-[#101928] via-[#0c121c] to-[#080b11] p-6 sm:p-10 md:p-14 space-y-10 relative overflow-hidden">
           
           <!-- Subtle Glow -->
           <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-sky-500/10 blur-3xl pointer-events-none rounded-full"></div>
@@ -836,14 +849,14 @@ const currentYear = new Date().getFullYear();
        STUDIO FOOTER
        ======================================================== -->
   <footer class="py-12 border-t border-white/[0.07] bg-[#07080a] text-xs font-mono text-text-dim">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
       
       <div class="flex items-center gap-3">
         <img src="/djie-icon-white.svg" alt="Djie Logo" class="h-5 w-5 opacity-60" />
         <span>&copy; {currentYear} Djie Production. Engineered by Anthony Djie.</span>
       </div>
 
-      <div class="flex items-center gap-6">
+      <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6">
         <a href="#hero" class="hover:text-white transition-colors">Back to Top &uarr;</a>
         <a href="https://wa.me/6283845641526" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
           WhatsApp
