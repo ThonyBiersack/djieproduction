@@ -1,12 +1,10 @@
 ---
-title: "Anggi & Asep - Digital Invitation Platform"
-description: "An edge-deployed interactive digital invitation web app featuring personalized guest URL parameter routing, responsive media choreography, audio controls, and low-latency global delivery on Cloudflare."
-tech: ["Cloudflare", "Edge Delivery", "JavaScript", "Tailwind CSS", "Audio API"]
-badge: "Cloudflare Edge"
-status: "Live Production"
-demoUrl: "https://anggi-asep.djieproduction.com"
-repoUrl: "https://github.com/ThonyBiersack/wedding-inv"
+title: "Digital Invitation Platform"
+description: "An interactive digital invitation web app delivered via Cloudflare CDN, featuring personalized guest URL parameter routing, responsive media presentation, audio controls, and mobile-optimized UX."
+tech: ["Cloudflare CDN", "JavaScript", "Tailwind CSS", "Audio API"]
+badge: "Cloudflare CDN"
+status: "Served via CDN"
 order: 4
 ---
 
-Interactive event platform delivered across Cloudflare edge CDN with personalized guest routing, dynamic RSVP engagement, and smooth mobile UX.
+Interactive event platform delivered across Cloudflare CDN with personalized guest routing, dynamic RSVP engagement, and smooth mobile UX.

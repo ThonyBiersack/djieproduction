@@ -6,27 +6,27 @@ export const GET: APIRoute = async () => {
       {
         status: 200,
         message: 'System operational',
-        uptime: '99.98%',
+        deployedOn: 'Cloudflare & Cloud PaaS',
         studio: {
           name: 'Djie Production',
           founder: 'Anthony Djie',
-          title: 'Full-Stack Software Engineering Studio',
+          title: 'Full-Stack Software Development',
           capabilities: [
             'End-to-End Full-Stack Web Applications',
             'Cross-Platform Mobile Apps (Flutter & Dart)',
-            'Mission-Critical RESTful API Systems',
+            'Structured RESTful API Systems',
             'Database Modeling & Offline SQLite Storage',
-            'Stateless JWT & Granular RBAC Security Flows',
-            'Edge Deployments & Modern UI Islands'
+            'Stateless JWT Authentication & Password Hashing',
+            'Request Schema Validation with Zod'
           ],
           stack: {
             frontend: ['Astro', 'Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
             mobile: ['Flutter', 'Dart', 'Android Native'],
-            backend: ['Node.js', 'Express.js', 'Hapi.js', 'REST APIs'],
+            backend: ['Node.js', 'Express.js', 'Zod', 'REST APIs'],
             databases: ['MongoDB', 'SQLite (WAL Mode)', 'Mongoose ODM'],
-            infrastructure: ['Cloudflare Edge', 'Render', 'Git & GitHub']
+            infrastructure: ['Cloudflare CDN', 'Render', 'Git & GitHub']
           },
-          status: 'Open for client projects & contract engineering — djieproduction.com'
+          status: 'Open for full-time, remote roles & client projects — djieproduction.com'
         },
         timestamp: new Date().toISOString()
       },

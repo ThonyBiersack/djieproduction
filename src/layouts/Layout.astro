@@ -4,16 +4,18 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  lang?: string;
 }
 
 const {
-  title = "Djie Production — Independent Full-Stack Web & Mobile Product Studio",
-  description = "Independent full-stack software studio by Anthony Djie. Engineering end-to-end web applications, cross-platform Flutter apps, and scalable cloud architectures."
+  title = "Djie Production — Full-Stack Web & Mobile Product Studio",
+  description = "Independent full-stack software studio by Anthony Djie. Engineering end-to-end web applications, cross-platform Flutter apps, and scalable cloud architectures.",
+  lang = "en"
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
