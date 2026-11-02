@@ -7,11 +7,18 @@ export interface ProjectItem {
   projectBadge: string;
   status: string;
   description: string;
-  highlights: string[];
+  architectureSpecs: {
+    engine: string;
+    database: string;
+    security: string;
+  };
+  features: string[];
   tech: string[];
   demoUrl?: string;
   repoUrl?: string;
   isComingSoonDemo?: boolean;
+  publicRegisterNotice?: string;
+  screenshotType: 'taskapp' | 'warungkas' | 'bookshelf' | 'invitation';
 }
 
 export interface SiteContent {
@@ -90,6 +97,17 @@ export interface SiteContent {
     pricingNote: string;
     badgeCount: string;
     highlightsTitle: string;
+    labels: {
+      specsTitle: string;
+      featuresTitle: string;
+      techStack: string;
+      liveDemo: string;
+      sourceCode: string;
+      comingSoon: string;
+      engineLabel: string;
+      dbLabel: string;
+      securityLabel: string;
+    };
     projects: ProjectItem[];
   };
   whyMe: {
@@ -157,8 +175,8 @@ export interface SiteContent {
 export const content: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "Djie Production — Full-Stack Web & Mobile Developer",
-      description: "Independent developer building web apps, Flutter mobile apps, and REST APIs. See my projects and request a quote."
+      title: "Djie Production — Web & Mobile Software Studio by Anthony Djie",
+      description: "Independent software studio by Anthony Djie. Custom web applications, company profiles, offline-first POS systems, and REST APIs. Direct consultation without agency overhead."
     },
     nav: {
       about: "About",
@@ -170,10 +188,10 @@ export const content: Record<Language, SiteContent> = {
     },
     hero: {
       roleStatus: "Open to full-time & remote roles • Available for select projects",
-      headlineStart: "Engineering Reliable ",
-      headlineHighlight: "Full-Stack Web",
-      headlineEnd: " & Digital Platforms.",
-      bio: "<strong>Djie Production</strong> is an independent software studio founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span>, a full-stack developer. I architect and build complete web applications, cross-platform Flutter clients, and REST APIs with structured data validation — with direct communication from day one.",
+      headlineStart: "Production-Ready Websites & Applications, ",
+      headlineHighlight: "from Database",
+      headlineEnd: " to Cloud Deploy.",
+      bio: "<strong>Djie Production</strong> is an independent software studio founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. Specializing in company profile websites, offline-first cashier POS apps, and custom full-stack web platforms. Direct engineering without agency middlemen — fast communication, transparent pricing, and resilient systems.",
       exploreBtn: "Explore Systems",
       quoteBtn: "Request a Quote",
       downloadCvBtn: "Download CV (EN)",
@@ -182,19 +200,19 @@ export const content: Record<Language, SiteContent> = {
       console: {
         windowTitle: "core-stack.sys",
         statusBadge: "Active Stack",
-        layer1Title: "Layer 01 • Presentation",
-        layer1Name: "Astro Islands + Flutter App",
-        layer1Tag: "Responsive UI",
-        gatewayText: "↓ HTTPS / REST API (Zod Validation)",
-        layer2Title: "Layer 02 • API & Security",
-        layer2Name: "Node.js / Express.js",
-        layer2Tag: "JWT • bcrypt",
-        dbText: "↓ Structured Queries • Local SQLite ACID",
-        layer3Title: "Layer 03 • Persistence",
-        layer3Name: "MongoDB / SQLite (WAL)",
-        layer3Tag: "Indexed Schemas",
-        footerLeft: "Direct Communication",
-        footerRight: "100% Focused Quality"
+        layer1Title: "Layer 01 • Frontend",
+        layer1Name: "Astro (Web) / Flutter (Mobile)",
+        layer1Tag: "Frontend",
+        gatewayText: "↓ REST API (HTTPS)",
+        layer2Title: "Layer 02 • Backend",
+        layer2Name: "Node.js + Express.js",
+        layer2Tag: "JWT & Zod",
+        dbText: "↓ Data Persistence",
+        layer3Title: "Layer 03 • Database",
+        layer3Name: "MongoDB / SQLite",
+        layer3Tag: "Database",
+        footerLeft: "Direct Development",
+        footerRight: "Anthony Djie"
       }
     },
     metrics: {
@@ -254,78 +272,117 @@ export const content: Record<Language, SiteContent> = {
       }
     },
     services: {
-      tag: "Capabilities & Proof of Work",
-      title: "Core Services & Handled Systems",
-      subtitle: "Every service is backed by working systems architected, built, and deployed by Anthony Djie.",
-      pricingNote: "Pricing is tailored to project requirements. Contact me for consultation and estimates.",
-      badgeCount: "4 Handled Systems",
-      highlightsTitle: "Engineered Architectural Highlights:",
+      tag: "Handled Systems & Technical Specifications",
+      title: "Production Systems & Engineering Architecture",
+      subtitle: "Verified software systems architected, developed, and deployed by Anthony Djie. Inspect the exact technical stack, database engines, and core operational features.",
+      pricingNote: "Pricing is tailored to project requirements. Contact me for consultation and transparent estimates.",
+      badgeCount: "4 Production Systems",
+      highlightsTitle: "Technical Architecture & Security:",
+      labels: {
+        specsTitle: "System Architecture & Security",
+        featuresTitle: "Core Application Features",
+        techStack: "Tech Stack",
+        liveDemo: "Live Demo",
+        sourceCode: "Source Code",
+        comingSoon: "Demo Coming Soon",
+        engineLabel: "Runtime & Framework",
+        dbLabel: "Database Engine",
+        securityLabel: "Security & Auth"
+      },
       projects: [
         {
-          serviceCategory: "Full-Stack Web Development",
-          serviceSubtitle: "End-to-end web applications built for speed, intuitive user experience, and practical reliability.",
+          serviceCategory: "Full-Stack Web Application",
+          serviceSubtitle: "Modular cloud task management platform with cookie session security, schema validation, and Gemini AI integration.",
           projectTitle: "TaskApp — Task Management Platform",
-          projectBadge: "Full-Stack Web",
-          status: "Live in Cloud",
-          description: "Cloud-deployed task orchestration platform featuring robust session security and complete CRUD workflows.",
-          highlights: [
-            "Stateless JWT authentication paired with secure refresh token handling",
-            "One-time cryptographically unique token reset flow for secure password recovery",
-            "Optimized MongoDB indexing for efficient task and user query resolution",
-            "Cloud deployment with HTTPS and Cloudflare DNS routing"
+          projectBadge: "Express 5 + MongoDB",
+          status: "Live Production",
+          description: "Full-stack productivity and task orchestration platform built on Express.js 5 and MongoDB Atlas with production-grade session security.",
+          architectureSpecs: {
+            engine: "Node.js (ESM) + Express.js 5 + EJS Layouts & Bootstrap 5 UI",
+            database: "MongoDB Atlas (Mongoose ODM) with compound indexes on userId and task status",
+            security: "JWT stored in HTTP-Only Cookies (sameSite: lax, secure flag), bcrypt (12 salt rounds), Zod input schema validation"
+          },
+          features: [
+            "Complete authentication pipeline: secure registration, login, and reset password with cryptographically unique tokens",
+            "Role-Based Permission middleware strictly segregating Admin dashboards from standard user views",
+            "Full CRUD task management with priority tags, status transitions, and user ownership checks",
+            "Google Gemini AI integration (@google/genai) delivering automated task planning assistance",
+            "Dynamic visual mindmap generation rendering task hierarchy via Mermaid.js"
           ],
-          tech: ["Node.js", "Express.js", "MongoDB", "JWT", "REST API", "Cloudflare"],
+          publicRegisterNotice: "Visitors can freely sign up for a new account to test authentication, cookie sessions, and task workflows live.",
+          screenshotType: "taskapp",
+          tech: ["Node.js", "Express 5", "MongoDB", "JWT", "bcrypt", "Zod", "Gemini AI", "Bootstrap 5"],
           demoUrl: "https://task.djieproduction.com",
           repoUrl: "https://github.com/ThonyBiersack/taskApp"
         },
         {
-          serviceCategory: "Cross-Platform Mobile & Offline POS",
-          serviceSubtitle: "Mobile clients engineered to operate reliably under unstable connectivity or complete offline environments.",
+          serviceCategory: "Offline-First Mobile POS Application",
+          serviceSubtitle: "Native retail cashier and store management app engineered to operate seamlessly with zero internet connectivity.",
           projectTitle: "WarungKas — Cashier & Store POS",
-          projectBadge: "Mobile & Offline POS",
+          projectBadge: "Flutter + SQLite WAL",
           status: "Production Ready",
-          description: "Offline-first Android POS application tailored for retail operations and merchant inventory handling.",
-          highlights: [
-            "Cross-platform mobile client built with Flutter & Dart for smooth native performance",
-            "Local SQLite persistence configured with Write-Ahead Logging (WAL) and ACID transactions",
-            "Integrated receipt printing engine supporting thermal hardware and PDF generation",
-            "Offline sales reports, barcode/QR scanning, and inventory tracking without network reliance"
+          description: "Cross-platform mobile point-of-sale application for retail merchants, featuring local ACID transactions and thermal printing.",
+          architectureSpecs: {
+            engine: "Flutter 3 SDK & Dart for smooth 60fps native mobile execution",
+            database: "Local SQLite persistence (sqflite) configured with Write-Ahead Logging (WAL) and ACID transactions",
+            security: "Local cryptographic data protection (cryptography & crypto) and secure application sandbox"
+          },
+          features: [
+            "100% offline transaction processing, cart calculation, and inventory lookup without internet connection",
+            "Real-time product barcode and QR code camera scanning powered by mobile_scanner",
+            "Direct Bluetooth thermal receipt printer integration via ESC/POS protocol (printing package)",
+            "Automated PDF invoice generation and transaction receipts shareable via system sheet (pdf package)",
+            "Currency formatting with Indonesian Rupiah standard, tax calculations, and daily cash revenue reports (intl)"
           ],
-          tech: ["Flutter", "Dart", "SQLite", "PDF Engine", "Thermal Printing"],
+          screenshotType: "warungkas",
+          tech: ["Flutter", "Dart", "SQLite (WAL)", "Thermal Print", "Barcode Scanner", "PDF Engine"],
           repoUrl: "https://github.com/ThonyBiersack/warungkas"
         },
         {
-          serviceCategory: "REST APIs & Backend Architecture",
-          serviceSubtitle: "Modular backend API services with strict schema validation, structured routing, and secure authentication.",
-          projectTitle: "Bookshelf REST API & Auth Architecture",
-          projectBadge: "Express.js & Zod",
+          serviceCategory: "RESTful Backend Architecture & Auth API",
+          serviceSubtitle: "Modular backend API service featuring strict Zod schema validation, RBAC authorization, and structured routing.",
+          projectTitle: "Bookshelf REST API & Auth Engine",
+          projectBadge: "Express + Zod + RBAC",
           status: "13 Endpoints Verified",
-          description: "Modular REST API architecture isolating administrative controls from standard user interactions.",
-          highlights: [
-            "Clean layer separation and route modularity built on the Express.js framework",
-            "Strict request payload sanitization and schema validation powered by Zod",
-            "Authentication with JWT and password hashing using bcrypt",
-            "Role-Based Access Control (RBAC) middleware enforcing granular authorization",
-            "MongoDB persistence via Mongoose with structured schemas and indexes"
+          description: "Modular REST API architecture isolating administrative controls from standard users with production-ready input validation.",
+          architectureSpecs: {
+            engine: "Node.js + Express.js modular clean-layer separation (controllers, validators, middleware, models)",
+            database: "MongoDB via Mongoose ODM with structured schemas, validations, and user references",
+            security: "Strict request payload sanitization via Zod, bcrypt password hashing (12 rounds), stateless JWT auth"
+          },
+          features: [
+            "13 verified RESTful endpoints covering full book catalog CRUD and user credential operations",
+            "Industry-standard HTTP status code compliance (200 OK, 201 Created, 400 Bad Request, 401, 403, 404)",
+            "Role-Based Access Control (RBAC) middleware enforcing granular authorization for administrative routes",
+            "Zod schema validator preventing invalid payloads, injection, or data pollution before database queries",
+            "Decoupled token utility module for deterministic JWT signing and claim verification"
           ],
+          screenshotType: "bookshelf",
           tech: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "bcrypt", "Zod", "REST API"],
           repoUrl: "https://github.com/ThonyBiersack/bookshelfAPI"
         },
         {
-          serviceCategory: "Web Platforms & Event Applications",
-          serviceSubtitle: "Interactive web applications with personalized guest routing and responsive multimedia presentation.",
+          serviceCategory: "Edge-Rendered Web & Event Platform",
+          serviceSubtitle: "High-performance digital invitation platform powered by Cloudflare edge workers and serverless SQL database.",
           projectTitle: "Digital Invitation Platform",
-          projectBadge: "Cloudflare CDN",
-          status: "Served via CDN",
-          description: "Interactive event application featuring audio controls, media galleries, and dynamic guest routing.",
-          highlights: [
-            "Served globally via Cloudflare CDN for fast initial asset delivery and caching",
-            "Dynamic query parameter routing hydrating personalized guest names without database roundtrips",
-            "Background audio lifecycle and interactive playback controls without browser layout shifts",
-            "Fully responsive layout optimized for seamless engagement across mobile viewports"
+          projectBadge: "Astro + Cloudflare D1",
+          status: "Cloudflare Edge D1",
+          description: "Interactive wedding and event platform deployed globally to Cloudflare CDN with edge relational SQL storage.",
+          architectureSpecs: {
+            engine: "Astro SSG/SSR + Cloudflare Pages / Workers edge runtime",
+            database: "Cloudflare D1 Serverless Relational SQL (invitation_db) with indexed guest lookups",
+            security: "Cloudflare Turnstile bot protection and server-side IP rate limiting on RSVP forms"
+          },
+          features: [
+            "Dynamic guest personalization: personalized guest names resolved instantly via URL slugs without heavy DB queries",
+            "Real-time RSVP submission pipeline persisting attendance status and guest wishes to Cloudflare D1",
+            "Server-side IP rate limiting (rsvp_rate_limits table) and Turnstile CAPTCHA preventing spam submissions",
+            "Self-hosted local audio asset (MP3) triggered via user gesture on open invitation, paired with floating audio controls without layout shift (CLS 0.00)",
+            "Mobile-first responsive presentation optimized for instant loading on cellular networks"
           ],
-          tech: ["Cloudflare CDN", "JavaScript", "Tailwind CSS", "Audio API"],
-          isComingSoonDemo: true
+          screenshotType: "invitation",
+          isComingSoonDemo: true,
+          tech: ["Astro", "Cloudflare Pages", "Cloudflare D1 (SQL)", "Turnstile", "Tailwind CSS", "HTML5 Audio"]
         }
       ]
     },
@@ -432,8 +489,8 @@ export const content: Record<Language, SiteContent> = {
   },
   id: {
     meta: {
-      title: "Djie Production — Software Studio & Full-Stack Developer oleh Anthony Djie",
-      description: "Portfolio dan software studio independen oleh Anthony Djie. Membangun platform web full-stack, aplikasi mobile Flutter cross-platform, dan REST API dengan validasi terstruktur."
+      title: "Djie Production — Jasa Pembuatan Website & Aplikasi Bisnis | Anthony Djie",
+      description: "Jasa pembuatan website company profile, aplikasi kasir offline (POS), dan software web custom oleh Anthony Djie (Djie Production). Konsultasi langsung tanpa perantara agensi."
     },
     nav: {
       about: "Tentang",
@@ -445,31 +502,31 @@ export const content: Record<Language, SiteContent> = {
     },
     hero: {
       roleStatus: "Terbuka untuk posisi full-time & remote • Menerima project pilihan",
-      headlineStart: "Membangun Solusi ",
-      headlineHighlight: "Full-Stack Web",
-      headlineEnd: " & Aplikasi Digital yang Andal.",
-      bio: "<strong>Djie Production</strong> adalah studio software independen yang dikembangkan oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span>, seorang full-stack developer. Saya merancang dan membangun platform web lengkap, aplikasi Flutter cross-platform, dan REST API dengan validasi skema data yang ketat — komunikasi langsung tanpa perantara.",
-      exploreBtn: "Lihat Project",
-      quoteBtn: "Konsultasi & Minta Estimasi",
+      headlineStart: "Website & Aplikasi Siap Pakai untuk Bisnis Anda, ",
+      headlineHighlight: "dari Database",
+      headlineEnd: " sampai Siap Deploy.",
+      bio: "<strong>Djie Production</strong> adalah software studio independen yang dirintis oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. Melayani <strong>jasa pembuatan website company profile</strong>, <strong>aplikasi kasir offline</strong> untuk UMKM, hingga sistem web custom. Dibangun langsung dari skema database sampai deployment tanpa perantara sales agensi — komunikasi cepat, harga transparan, dan sistem yang andal.",
+      exploreBtn: "Lihat Studi Kasus",
+      quoteBtn: "Konsultasi & Estimasi Project",
       downloadCvBtn: "Download CV (ID)",
       cvUrl: "/AnthonyDJie-CV-ID.pdf",
       cvFileName: "AnthonyDJie-CV-ID.pdf",
       console: {
         windowTitle: "core-stack.sys",
         statusBadge: "Stack Aktif",
-        layer1Title: "Layer 01 • Antarmuka",
-        layer1Name: "Astro Islands + Flutter App",
-        layer1Tag: "UI Responsif",
-        gatewayText: "↓ HTTPS / REST API (Validasi Zod)",
-        layer2Title: "Layer 02 • API & Keamanan",
-        layer2Name: "Node.js / Express.js",
-        layer2Tag: "JWT • bcrypt",
-        dbText: "↓ Query Terstruktur • SQLite ACID Lokal",
-        layer3Title: "Layer 03 • Penyimpanan",
-        layer3Name: "MongoDB / SQLite (WAL)",
-        layer3Tag: "Skema Terindeks",
-        footerLeft: "Komunikasi Langsung",
-        footerRight: "Fokus pada Kualitas"
+        layer1Title: "Layer 01 • Frontend",
+        layer1Name: "Astro (Web) / Flutter (Mobile)",
+        layer1Tag: "Frontend",
+        gatewayText: "↓ REST API (HTTPS)",
+        layer2Title: "Layer 02 • Backend",
+        layer2Name: "Node.js + Express.js",
+        layer2Tag: "JWT & Zod",
+        dbText: "↓ Penyimpanan Data",
+        layer3Title: "Layer 03 • Database",
+        layer3Name: "MongoDB / SQLite",
+        layer3Tag: "Database",
+        footerLeft: "Dikerjakan Langsung",
+        footerRight: "Anthony Djie"
       }
     },
     metrics: {
@@ -529,78 +586,117 @@ export const content: Record<Language, SiteContent> = {
       }
     },
     services: {
-      tag: "Kemampuan & Portofolio",
-      title: "Layanan Utama & Portofolio Project",
-      subtitle: "Setiap layanan didukung oleh sistem nyata yang telah dibangun dan dideploy oleh Anthony Djie.",
-      pricingNote: "Harga disesuaikan dengan kebutuhan project. Hubungi saya untuk konsultasi dan estimasi.",
-      badgeCount: "4 Project Aktif",
-      highlightsTitle: "Highlight Arsitektur yang Dibangun:",
+      tag: "Sistem & Spesifikasi Teknis",
+      title: "Sistem Produksi & Arsitektur Rekayasa",
+      subtitle: "Sistem software nyata yang dirancang, dibangun, dan dideploy langsung oleh Anthony Djie. Lihat spesifikasi engine, basis data, dan fitur operasional yang bekerja di balik layar.",
+      pricingNote: "Harga disesuaikan dengan kebutuhan project. Hubungi saya untuk konsultasi gratis dan estimasi transparan.",
+      badgeCount: "4 Sistem Produksi",
+      highlightsTitle: "Spesifikasi Arsitektur & Keamanan:",
+      labels: {
+        specsTitle: "Spesifikasi Arsitektur & Keamanan",
+        featuresTitle: "Fitur Operasional Utama",
+        techStack: "Tech Stack",
+        liveDemo: "Live Demo",
+        sourceCode: "Source Code",
+        comingSoon: "Demo Segera Hadir",
+        engineLabel: "Framework & Runtime",
+        dbLabel: "Engine Database",
+        securityLabel: "Keamanan & Auth"
+      },
       projects: [
         {
-          serviceCategory: "Pengembangan Web Full-Stack",
-          serviceSubtitle: "Aplikasi web lengkap yang responsif, intuitif, dan siap digunakan untuk kebutuhan nyata.",
+          serviceCategory: "Aplikasi Web Full-Stack",
+          serviceSubtitle: "Platform manajemen tugas cloud dengan arsitektur autentikasi modular, session cookies aman, dan integrasi Gemini AI.",
           projectTitle: "TaskApp — Platform Manajemen Tugas",
-          projectBadge: "Full-Stack Web",
+          projectBadge: "Express 5 + MongoDB",
           status: "Aktif di Cloud",
-          description: "Platform orkestrasi tugas berbasis cloud dengan keamanan sesi yang kuat dan alur kerja CRUD lengkap.",
-          highlights: [
-            "Autentikasi stateless berbasis JWT dengan penanganan token yang aman",
-            "Alur pemulihan kata sandi dengan token reset kriptografis sekali pakai",
-            "Indexing MongoDB yang dioptimalkan untuk query tugas yang cepat",
-            "Dideploy di cloud dengan HTTPS dan routing via Cloudflare"
+          description: "Platform produktivitas dan orkestrasi tugas full-stack berbasis Express.js 5 dan MongoDB Atlas dengan keamanan sesi tingkat produksi.",
+          architectureSpecs: {
+            engine: "Node.js (ESM) + Express.js 5 + EJS Layouts & UI Bootstrap 5",
+            database: "MongoDB Atlas (Mongoose ODM) dengan indexing majemuk pada userId dan status tugas",
+            security: "JWT disimpan di HTTP-Only Cookies (sameSite: lax, secure flag), bcrypt (12 salt rounds), sanitasi input via Zod"
+          },
+          features: [
+            "Alur autentikasi lengkap: pendaftaran akun baru, login, dan reset password dengan token kriptografis sekali pakai",
+            "Middleware Role-Based Permission yang memisahkan dashboard Admin dari tampilan pengguna biasa secara ketat",
+            "Manajemen tugas CRUD penuh dengan tag prioritas, transisi status progres, dan validasi kepemilikan user",
+            "Integrasi Google Gemini AI (@google/genai) untuk asistensi perencanaan dan pemecahan langkah tugas",
+            "Visualisasi alur tugas dan mindmap otomatis menggunakan diagram Mermaid.js"
           ],
-          tech: ["Node.js", "Express.js", "MongoDB", "JWT", "REST API", "Cloudflare"],
+          publicRegisterNotice: "Pengunjung dapat langsung mendaftar akun baru mandiri untuk menguji alur auth, cookie session, dan manajemen tugas secara live.",
+          screenshotType: "taskapp",
+          tech: ["Node.js", "Express 5", "MongoDB", "JWT", "bcrypt", "Zod", "Gemini AI", "Bootstrap 5"],
           demoUrl: "https://task.djieproduction.com",
           repoUrl: "https://github.com/ThonyBiersack/taskApp"
         },
         {
-          serviceCategory: "Aplikasi Mobile POS & Mode Offline",
-          serviceSubtitle: "Aplikasi mobile yang dirancang andal bekerja saat koneksi tidak stabil maupun kondisi offline total.",
+          serviceCategory: "Aplikasi Mobile POS Mode Offline",
+          serviceSubtitle: "Aplikasi kasir dan manajemen toko ritel native yang beroperasi mulus 100% tanpa koneksi internet.",
           projectTitle: "WarungKas — POS Kasir & Manajemen Toko",
-          projectBadge: "Mobile & Offline POS",
+          projectBadge: "Flutter + SQLite WAL",
           status: "Siap Digunakan",
-          description: "Aplikasi kasir Android berbasis offline-first untuk operasional ritel dan pencatatan inventaris barang.",
-          highlights: [
-            "Aplikasi mobile cross-platform dibangun dengan Flutter & Dart untuk performa native yang mulus",
-            "Penyimpanan lokal SQLite dengan mode WAL (Write-Ahead Logging) dan transaksi ACID",
-            "Integrasi cetak struk via thermal printer bluetooth dan pembuatan invoice PDF",
-            "Laporan penjualan offline, pemindaian barcode/QR, dan manajemen stok tanpa ketergantungan internet"
+          description: "Aplikasi kasir mobile cross-platform untuk UMKM dan toko ritel dengan database transaksi lokal berkecepatan tinggi.",
+          architectureSpecs: {
+            engine: "Flutter 3 SDK & Dart untuk rendering native 60fps yang responsif",
+            database: "SQLite lokal (sqflite) dengan Write-Ahead Logging (WAL) dan transaksi ACID",
+            security: "Enkripsi data lokal (cryptography & crypto) dan sandbox file system aplikasi yang aman"
+          },
+          features: [
+            "Pemrosesan transaksi kasir, kalkulasi keranjang, dan pencarian produk 100% offline tanpa internet",
+            "Pemindaian barcode dan QR code produk secara instan via kamera smartphone (mobile_scanner)",
+            "Integrasi printer kasir thermal bluetooth langsung menggunakan protokol ESC/POS (printing package)",
+            "Generator struk belanja otomatis dan ekspor invoice laporan penjualan format PDF (pdf package)",
+            "Kalkulasi total belanja, diskon, uang kembalian, dan format mata uang Rupiah otomatis (intl)"
           ],
-          tech: ["Flutter", "Dart", "SQLite", "PDF Engine", "Thermal Printing"],
+          screenshotType: "warungkas",
+          tech: ["Flutter", "Dart", "SQLite (WAL)", "Thermal Print", "Barcode Scanner", "PDF Engine"],
           repoUrl: "https://github.com/ThonyBiersack/warungkas"
         },
         {
-          serviceCategory: "REST API & Arsitektur Backend",
-          serviceSubtitle: "Layanan API backend modular dengan validasi skema ketat, routing rapi, dan sistem autentikasi aman.",
-          projectTitle: "Bookshelf REST API & Arsitektur Auth",
-          projectBadge: "Express.js & Zod",
+          serviceCategory: "RESTful Backend Architecture & Auth API",
+          serviceSubtitle: "Layanan backend API modular dengan validasi skema ketat, otorisasi RBAC, dan struktur data terisolasi.",
+          projectTitle: "Bookshelf REST API & Auth Engine",
+          projectBadge: "Express + Zod + RBAC",
           status: "13 Endpoint Terverifikasi",
-          description: "Arsitektur REST API modular yang memisahkan kendali administratif dari interaksi pengguna biasa.",
-          highlights: [
-            "Pemisahan layer bersih dan routing modular dibangun di atas framework Express.js",
-            "Validasi skema request dan sanitasi payload input yang ketat menggunakan Zod",
-            "Autentikasi menggunakan JWT dan enkripsi kata sandi menggunakan bcrypt",
-            "Middleware Role-Based Access Control (RBAC) untuk penegakan otorisasi bertingkat",
-            "Penyimpanan MongoDB menggunakan Mongoose dengan skema dan indeks terstruktur"
+          description: "Arsitektur REST API modular yang memisahkan kendali administratif dari pengguna biasa dengan validasi input standar industri.",
+          architectureSpecs: {
+            engine: "Node.js + Express.js pemisahan layer bersih (controllers, validators, middleware, models)",
+            database: "MongoDB via Mongoose ODM dengan skema data tervalidasi dan referensi pengguna",
+            security: "Sanitasi payload input via skema Zod, password hashing bcrypt (12 rounds), stateless JWT auth"
+          },
+          features: [
+            "13 endpoint RESTful CRUD teruji mencakup katalog buku dan kredensial pengguna",
+            "Kepatuhan standar HTTP response codes (200 OK, 201 Created, 400 Bad Request, 401, 403, 404)",
+            "Middleware Role-Based Access Control (RBAC) untuk otorisasi bertingkat rute Admin vs User",
+            "Validator skema Zod mencegah serangan injeksi dan inkonsistensi tipe data sebelum query DB",
+            "Modul helper token terisolasi untuk penandatanganan dan verifikasi JWT secara konsisten"
           ],
+          screenshotType: "bookshelf",
           tech: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "bcrypt", "Zod", "REST API"],
           repoUrl: "https://github.com/ThonyBiersack/bookshelfAPI"
         },
         {
-          serviceCategory: "Platform Web & Undangan Digital",
-          serviceSubtitle: "Aplikasi web interaktif dengan routing personalisasi tamu dan presentasi multimedia responsif.",
+          serviceCategory: "Platform Web & Undangan Digital di Edge",
+          serviceSubtitle: "Platform undangan digital interaktif berkecepatan tinggi dengan serverless SQL database di edge CDN.",
           projectTitle: "Digital Invitation Platform",
-          projectBadge: "Cloudflare CDN",
-          status: "Tersedia via CDN",
-          description: "Aplikasi acara interaktif dengan kontrol pemutar audio latar, galeri media, dan routing tamu dinamis.",
-          highlights: [
-            "Dilayani lewat Cloudflare CDN untuk distribusi web yang cepat dan aman",
-            "Routing parameter URL dinamis untuk menampilkan nama tamu secara personal tanpa query database",
-            "Siklus pemutaran audio latar interaktif tanpa pergeseran layout browser",
-            "Tata letak sepenuhnya responsif yang dioptimalkan untuk perangkat mobile"
+          projectBadge: "Astro + Cloudflare D1",
+          status: "Cloudflare Edge D1",
+          description: "Platform acara dan undangan pernikahan interaktif yang di-deploy ke edge Cloudflare dengan database relasional SQL terdistribusi.",
+          architectureSpecs: {
+            engine: "Astro SSG/SSR + runtime edge Cloudflare Pages / Workers",
+            database: "Cloudflare D1 Serverless Relational SQL (invitation_db) dengan index pencarian cepat",
+            security: "Proteksi bot via Cloudflare Turnstile CAPTCHA & rate limiting per IP address server-side"
+          },
+          features: [
+            "Personalization routing: nama tamu otomatis tampil personal via URL slug tanpa query database lambat",
+            "Pipeline pengiriman RSVP real-time yang langsung tersimpan di tabel SQL Cloudflare D1",
+            "Rate limiting IP address (tabel rsvp_rate_limits) dan Turnstile anti-spam pada formulir ucapan",
+            "Aset audio lokal mandiri (self-hosted MP3) yang aktif saat tamu klik 'Buka Undangan', dilengkapi floating widget kontrol musik tanpa layout shift (CLS 0.00)",
+            "Tata letak responsif mobile-first yang dioptimalkan untuk akses instan di koneksi seluler"
           ],
-          tech: ["Cloudflare CDN", "JavaScript", "Tailwind CSS", "Audio API"],
-          isComingSoonDemo: true
+          screenshotType: "invitation",
+          isComingSoonDemo: true,
+          tech: ["Astro", "Cloudflare Pages", "Cloudflare D1 (SQL)", "Turnstile", "Tailwind CSS", "HTML5 Audio"]
         }
       ]
     },

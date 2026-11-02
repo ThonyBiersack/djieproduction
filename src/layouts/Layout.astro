@@ -13,15 +13,87 @@ const defaultDescription = "Independent developer building web apps, Flutter mob
 const {
   title = defaultTitle,
   description = defaultDescription,
-  lang = "en"
+  lang = "id"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = "https://djieproduction.com/og-image.png";
+const locale = lang === 'id' ? 'id_ID' : 'en_US';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://djieproduction.com/#studio",
+      "name": "Djie Production",
+      "url": "https://djieproduction.com",
+      "logo": "https://djieproduction.com/djie-icon-white.svg",
+      "image": "https://djieproduction.com/og-image.png",
+      "description": lang === 'id' 
+        ? "Studio software independen spesialis jasa pembuatan website company profile, aplikasi kasir offline (POS), dan pengembangan sistem web custom untuk UMKM dan bisnis."
+        : "Independent software studio specializing in company profile websites, offline cashier POS apps, and custom full-stack web platforms.",
+      "telephone": "+6283845641526",
+      "email": "thony.djie@djieproduction.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ID"
+      },
+      "founder": {
+        "@id": "https://djieproduction.com/#founder"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": lang === 'id' ? "Layanan Pengembangan Software" : "Software Engineering Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": lang === 'id' ? "Jasa Pembuatan Website Company Profile" : "Company Profile & Web Development"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": lang === 'id' ? "Aplikasi Kasir Offline (POS Flutter & SQLite)" : "Offline-First Cashier POS App"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": lang === 'id' ? "Pengembangan REST API & Arsitektur Backend" : "REST API & Backend Architecture"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": lang === 'id' ? "Website Undangan Digital Interaktif" : "Interactive Digital Invitation Web App"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://djieproduction.com/#founder",
+      "name": "Anthony Djie",
+      "jobTitle": "Full-Stack Developer & Founder",
+      "url": "https://djieproduction.com",
+      "sameAs": [
+        "https://github.com/ThonyBiersack",
+        "https://linkedin.com/in/anthony-suryadjie-500063200"
+      ]
+    }
+  ]
+};
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,13 +105,18 @@ const ogImageURL = "https://djieproduction.com/og-image.png";
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/djie-icon-white.svg" />
 
+    <!-- Multi-Language Hreflang SEO -->
+    <link rel="alternate" hreflang="id" href="https://djieproduction.com/" />
+    <link rel="alternate" hreflang="en" href="https://djieproduction.com/en" />
+    <link rel="alternate" hreflang="x-default" href="https://djieproduction.com/" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:site_name" content="Djie Production" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={locale} />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:secure_url" content={ogImageURL} />
     <meta property="og:image:type" content="image/png" />
@@ -52,6 +129,9 @@ const ogImageURL = "https://djieproduction.com/og-image.png";
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

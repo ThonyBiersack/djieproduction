@@ -46,22 +46,22 @@ const waUrl = lang === 'id'
         <a href="#contact" class="px-2.5 py-1 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-white transition-colors font-semibold">{t.nav.contact}</a>
       </nav>
 
-      <!-- Language Toggle (EN / ID) -->
+      <!-- Language Toggle (ID / EN - ID as Default) -->
       <div class="flex items-center gap-1 text-[11px] font-mono border-l border-white/10 pl-2.5 sm:pl-3">
         <a
           href="/"
+          class={`px-1.5 py-0.5 rounded transition-colors ${lang === 'id' ? 'bg-sky-500/20 text-sky-300 font-bold' : 'text-text-muted hover:text-white'}`}
+          aria-label="Versi Bahasa Indonesia (Default)"
+        >
+          ID
+        </a>
+        <span class="text-white/20">/</span>
+        <a
+          href="/en"
           class={`px-1.5 py-0.5 rounded transition-colors ${lang === 'en' ? 'bg-sky-500/20 text-sky-300 font-bold' : 'text-text-muted hover:text-white'}`}
           aria-label="English Version"
         >
           EN
-        </a>
-        <span class="text-white/20">/</span>
-        <a
-          href="/id"
-          class={`px-1.5 py-0.5 rounded transition-colors ${lang === 'id' ? 'bg-sky-500/20 text-sky-300 font-bold' : 'text-text-muted hover:text-white'}`}
-          aria-label="Versi Bahasa Indonesia"
-        >
-          ID
         </a>
       </div>
 
@@ -343,65 +343,205 @@ const waUrl = lang === 'id'
           <span class="leading-relaxed">{t.services.pricingNote}</span>
         </div>
 
-        <div class="grid grid-cols-12 gap-6">
-          {t.services.projects.map((item, idx) => {
-            const colSpan = (idx === 0 || idx === 3) 
-              ? "col-span-12 lg:col-span-7" 
-              : "col-span-12 lg:col-span-5";
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {t.services.projects.map((item, idx) => (
+            <article class="bento-card p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300">
+              <div class="space-y-6">
+                
+                <!-- Service Category Header -->
+                <div class="border-b border-white/[0.08] pb-4">
+                  <div class="flex items-center justify-between text-xs font-mono mb-2">
+                    <span class="text-sky-400 font-semibold tracking-wider">SYSTEM 0{idx + 1}</span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-mono">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      {item.status}
+                    </span>
+                  </div>
+                  <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-sky-300 transition-colors">
+                    {item.projectTitle}
+                  </h3>
+                  <p class="text-text-muted text-xs leading-relaxed mt-1">
+                    {item.serviceSubtitle}
+                  </p>
+                </div>
 
-            return (
-              <article class={`${colSpan} bento-card p-5 sm:p-7 md:p-8 flex flex-col justify-between group transition-all duration-300`}>
-                <div class="space-y-6">
-                  
-                  <!-- Service Category Header -->
-                  <div class="border-b border-white/[0.08] pb-4">
-                    <div class="flex items-center justify-between text-xs font-mono mb-2">
-                      <span class="text-sky-400 font-semibold tracking-wider">CAPABILITY 0{idx + 1}</span>
-                      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-mono">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                        {item.status}
-                      </span>
+                <!-- Visual Screenshot / UI Mockup Slot -->
+                <div class="rounded-xl border border-white/10 bg-[#06080d] overflow-hidden shadow-inner font-mono text-xs select-none">
+                  <!-- Browser/Window Header -->
+                  <div class="px-3.5 py-2 border-b border-white/[0.08] bg-white/[0.02] flex items-center justify-between text-[11px] text-text-dim">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-rose-500/70 inline-block"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-amber-500/70 inline-block"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/70 inline-block"></span>
                     </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-sky-300 transition-colors">
-                      {item.serviceCategory}
-                    </h3>
-                    <p class="text-text-muted text-xs leading-relaxed mt-1">
-                      {item.serviceSubtitle}
-                    </p>
+                    <span class="truncate max-w-[200px] text-[10px] text-zinc-400">
+                      {item.screenshotType === 'taskapp' && 'task.djieproduction.com'}
+                      {item.screenshotType === 'warungkas' && 'WarungKas POS Client (Flutter Native)'}
+                      {item.screenshotType === 'bookshelf' && 'api.djieproduction.com/v1/books'}
+                      {item.screenshotType === 'invitation' && 'undangan.djieproduction.com'}
+                    </span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/[0.05] text-zinc-400">Preview</span>
                   </div>
 
-                  <!-- Associated Project Handled Details -->
-                  <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                      <span class="text-xs font-mono text-text-dim uppercase tracking-wider">Handled Platform</span>
-                      <span class="px-2.5 py-0.5 rounded text-[11px] font-mono bg-white/[0.04] border border-white/10 text-slate-300">
-                        {item.projectBadge}
-                      </span>
+                  <!-- Mockup Canvas Viewport -->
+                  <div class="p-4 sm:p-5 space-y-3 bg-gradient-to-b from-[#0a0d14] to-[#06080d] min-h-[160px] flex flex-col justify-center">
+                    {item.screenshotType === 'taskapp' && (
+                      <div class="space-y-2">
+                        <div class="flex items-center justify-between pb-2 border-b border-white/[0.06] text-[11px]">
+                          <span class="text-sky-300 font-semibold flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                            Task Board
+                          </span>
+                          <span class="text-emerald-400 text-[10px] bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">JWT Session: Active</span>
+                        </div>
+                        <div class="space-y-1.5">
+                          <div class="p-2 rounded bg-white/[0.03] border border-white/[0.06] flex items-center justify-between text-[11px]">
+                            <span class="text-zinc-200">Express.js API Backend Setup</span>
+                            <span class="text-emerald-400 text-[10px]">✓ Done</span>
+                          </div>
+                          <div class="p-2 rounded bg-white/[0.03] border border-white/[0.06] flex items-center justify-between text-[11px]">
+                            <span class="text-zinc-200">Zod Request Validation & Sanitization</span>
+                            <span class="text-emerald-400 text-[10px]">✓ Done</span>
+                          </div>
+                          <div class="p-2 rounded bg-sky-950/20 border border-sky-500/20 flex items-center justify-between text-[11px]">
+                            <span class="text-sky-200">Cloudflare CDN & Edge Routing</span>
+                            <span class="text-sky-400 text-[10px] animate-pulse">● Running</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {item.screenshotType === 'warungkas' && (
+                      <div class="space-y-2">
+                        <div class="flex items-center justify-between pb-2 border-b border-white/[0.06] text-[11px]">
+                          <span class="text-emerald-300 font-semibold flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            Kasir POS Warung
+                          </span>
+                          <span class="text-emerald-400 text-[10px] bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">Offline SQLite (WAL)</span>
+                        </div>
+                        <div class="p-2.5 rounded bg-white/[0.03] border border-white/[0.06] space-y-1 text-[11px]">
+                          <div class="flex justify-between text-zinc-300">
+                            <span>Kopi Susu Signature (x2)</span>
+                            <span class="text-white font-semibold">Rp 36.000</span>
+                          </div>
+                          <div class="flex justify-between text-zinc-300">
+                            <span>Roti Bakar Cokelat (x1)</span>
+                            <span class="text-white font-semibold">Rp 15.000</span>
+                          </div>
+                          <div class="pt-1.5 mt-1 border-t border-white/[0.08] flex justify-between font-bold text-emerald-400">
+                            <span>TOTAL TRANSAKSI</span>
+                            <span>Rp 51.000</span>
+                          </div>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] text-zinc-400 pt-0.5">
+                          <span>🖨️ Thermal Printer: Ready</span>
+                          <span class="text-sky-300">📄 Export Invoice PDF</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {item.screenshotType === 'bookshelf' && (
+                      <div class="space-y-1.5 text-[11px]">
+                        <div class="flex items-center justify-between pb-1.5 border-b border-white/[0.06]">
+                          <span class="text-indigo-300 font-semibold flex items-center gap-1.5">
+                            <span class="text-emerald-400 font-bold">POST</span> /api/v1/books
+                          </span>
+                          <span class="text-emerald-400 text-[10px]">201 Created</span>
+                        </div>
+                        <div class="p-2 rounded bg-black/60 border border-white/[0.06] text-[10px] text-zinc-300 space-y-0.5 font-mono">
+                          <div><span class="text-sky-400">Authorization:</span> Bearer &lt;JWT_TOKEN&gt;</div>
+                          <div><span class="text-sky-400">Zod Schema:</span> Passed (0 Error)</div>
+                          <div><span class="text-sky-400">Database:</span> MongoDB Mongoose Saved (ObjectId)</div>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] text-zinc-400">
+                          <span class="text-emerald-400">✓ Role-Based Access: Admin / User</span>
+                          <span>bcrypt (10 rounds)</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {item.screenshotType === 'invitation' && (
+                      <div class="space-y-2 text-[11px]">
+                        <div class="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+                          <span class="text-amber-200 font-semibold">Digital Wedding & Event</span>
+                          <span class="text-sky-300 text-[10px] bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30">Cloudflare Edge CDN</span>
+                        </div>
+                        <div class="p-3 rounded-lg bg-gradient-to-r from-amber-950/20 via-zinc-900 to-amber-950/20 border border-amber-500/20 text-center space-y-1">
+                          <div class="text-[9px] uppercase tracking-widest text-amber-300/80">The Wedding Celebration</div>
+                          <div class="text-white font-bold text-sm">Anggi & Asep</div>
+                          <div class="text-[10px] text-zinc-400">Kepada Yth: <span class="text-sky-300 font-medium">[Nama Tamu Personal via URL]</span></div>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] text-zinc-400">
+                          <span class="flex items-center gap-1 text-emerald-400">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Local MP3 Music Controller
+                          </span>
+                          <span class="text-zinc-400">0.00 Layout Shift (CLS)</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <!-- Technical Specifications & Key Features -->
+                <div class="space-y-4 font-sans">
+                  
+                  <!-- Architecture & Security Specifications Block -->
+                  <div class="p-4 rounded-xl bg-black/40 border border-white/[0.08] space-y-2.5">
+                    <div class="text-[11px] font-mono font-semibold uppercase tracking-wider text-sky-400 flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+                      <svg class="w-3.5 h-3.5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                      <span>{t.services.labels.specsTitle}</span>
                     </div>
 
-                    <h4 class="text-lg font-bold text-slate-100">
-                      {item.projectTitle}
-                    </h4>
+                    <div class="space-y-2 text-xs font-mono">
+                      <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                        <span class="text-text-dim text-[11px] shrink-0 sm:w-36">{t.services.labels.engineLabel}:</span>
+                        <span class="text-zinc-200">{item.architectureSpecs.engine}</span>
+                      </div>
+                      <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                        <span class="text-text-dim text-[11px] shrink-0 sm:w-36">{t.services.labels.dbLabel}:</span>
+                        <span class="text-emerald-300">{item.architectureSpecs.database}</span>
+                      </div>
+                      <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                        <span class="text-text-dim text-[11px] shrink-0 sm:w-36">{t.services.labels.securityLabel}:</span>
+                        <span class="text-sky-300">{item.architectureSpecs.security}</span>
+                      </div>
+                    </div>
+                  </div>
 
-                    <p class="text-xs text-text-muted leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    <!-- Highlights / What was architected -->
-                    <div class="space-y-2.5 pt-1 rounded-xl bg-black/30 p-4 border border-white/[0.04]">
-                      <div class="text-[11px] font-mono text-sky-300 uppercase tracking-wider">{t.services.highlightsTitle}</div>
-                      <ul class="space-y-2 text-xs text-text-muted">
-                        {item.highlights.map((point) => (
-                          <li class="flex items-start gap-2">
-                            <span class="text-sky-400 font-bold shrink-0 mt-0.5">&bull;</span>
-                            <span class="leading-relaxed">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <!-- Core Operational Features Checklist -->
+                  <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2.5">
+                    <div class="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+                      <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <span>{t.services.labels.featuresTitle}</span>
                     </div>
 
-                    <!-- Tech Stack Pills -->
-                    <div class="flex flex-wrap gap-1.5 pt-1">
+                    <ul class="space-y-2 text-xs text-zinc-300">
+                      {item.features.map((feat) => (
+                        <li class="flex items-start gap-2">
+                          <span class="text-emerald-400 font-bold shrink-0 mt-0.5">✓</span>
+                          <span class="leading-relaxed">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- TaskApp Self-Registration Note (Requirement 1) -->
+                  {item.publicRegisterNotice && (
+                    <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs flex items-start gap-2.5">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1 shrink-0 animate-pulse"></span>
+                      <div>
+                        <span class="font-bold text-white block mb-0.5">{lang === 'id' ? 'Live Demo Terbuka:' : 'Self-Serve Live Demo:'}</span>
+                        <span class="leading-relaxed">{item.publicRegisterNotice}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <!-- Tech Stack Pills -->
+                  <div class="space-y-1.5 pt-1">
+                    <div class="text-[10px] font-mono text-text-dim uppercase tracking-wider">{t.services.labels.techStack}</div>
+                    <div class="flex flex-wrap gap-1.5">
                       {item.tech.map((techItem) => (
                         <span class="px-2.5 py-1 rounded text-xs font-mono bg-black/50 border border-white/[0.08] text-slate-300">
                           {techItem}
@@ -412,49 +552,55 @@ const waUrl = lang === 'id'
 
                 </div>
 
-                <!-- Project Links / Verification -->
-                <div class="pt-6 border-t border-white/[0.08] mt-6 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-                  <div class="flex flex-wrap items-center gap-3">
-                    {item.demoUrl ? (
-                      <a
-                        href={item.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold transition-all shadow-md shadow-sky-500/20"
-                      >
-                        <span>Live Production</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                          <polyline points="15 3 21 3 21 9"></polyline>
-                          <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                      </a>
-                    ) : item.isComingSoonDemo ? (
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/[0.05] border border-white/10 text-zinc-400 text-xs font-mono cursor-default select-none">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400/80"></span>
-                        <span>{lang === 'id' ? 'Demo segera hadir' : 'Demo coming soon'}</span>
-                      </span>
-                    ) : null}
+              </div>
 
-                    {item.repoUrl && (
-                      <a
-                        href={item.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1.5 text-text-muted hover:text-white transition-colors"
-                      >
-                        <span>Source Code</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                      </a>
-                    )}
-                  </div>
-                  <span class="text-text-dim text-[11px]">Djie Production</span>
+              <!-- Action Buttons (Live Demo & Source Code) -->
+              <div class="pt-6 border-t border-white/[0.08] mt-6 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                <div class="flex flex-wrap items-center gap-3">
+                  {item.demoUrl ? (
+                    <a
+                      href={item.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold transition-all shadow-md shadow-sky-500/20 active:scale-95"
+                      aria-label={`${t.services.labels.liveDemo} - ${item.projectTitle}`}
+                    >
+                      <span>{t.services.labels.liveDemo}</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  ) : item.isComingSoonDemo ? (
+                    <span 
+                      class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono select-none"
+                      title={lang === 'id' ? 'Link demo sedang dipersiapkan dan segera dirilis' : 'Demo link is being prepared and will be released soon'}
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                      <span>{t.services.labels.comingSoon}</span>
+                    </span>
+                  ) : null}
+
+                  {item.repoUrl && (
+                    <a
+                      href={item.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-300 hover:text-white transition-colors"
+                      aria-label={`${t.services.labels.sourceCode} - ${item.projectTitle}`}
+                    >
+                      <span>{t.services.labels.sourceCode}</span>
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                  )}
                 </div>
-              </article>
-            );
-          })}
+                <span class="text-text-dim text-[11px]">Djie Production</span>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -796,6 +942,29 @@ const waUrl = lang === 'id'
 
     </div>
   </footer>
+
+  <!-- Floating WhatsApp Quick Action Button (High Trust, Non-Intrusive, 0 Layout Shift) -->
+  <aside class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 pointer-events-auto" aria-label="WhatsApp Quick Contact">
+    <a
+      href={waUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-2.5 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-[#128C7E] hover:bg-[#075E54] text-white shadow-2xl shadow-emerald-950/80 border border-emerald-400/30 transition-all duration-300 hover:scale-105 group active:scale-95"
+      aria-label={lang === 'id' ? 'Konsultasi langsung via WhatsApp dengan Anthony Djie' : 'Chat directly via WhatsApp with Anthony Djie'}
+    >
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-200"></span>
+      </span>
+      <!-- Official WhatsApp SVG Icon -->
+      <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.42-.101.825zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.176L2 22l4.954-1.396A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+      </svg>
+      <span class="text-xs font-semibold font-mono tracking-tight hidden sm:inline-block">
+        {lang === 'id' ? 'Chat WhatsApp' : 'Chat WhatsApp'}
+      </span>
+    </a>
+  </aside>
 
   <!-- CLIENT-SIDE SCRIPTING -->
   <script>
