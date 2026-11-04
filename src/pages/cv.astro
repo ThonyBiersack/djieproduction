@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<Layout
+  title="Curriculum Vitae — Anthony Djie | Full-Stack Software Engineer"
+  description="CV & profil profesional Anthony Djie. Software Engineer berpengalaman membangun aplikasi web full-stack, REST API modular, dan mobile apps Flutter offline-first."
+  lang="id"
+>
+  <header class="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
+    <div class="pointer-events-auto flex items-center justify-between gap-4 px-4 sm:px-6 py-2 rounded-full bg-[#0d1017]/90 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/60 font-mono text-xs">
+      <a href="/" class="flex items-center gap-2 text-text-muted hover:text-white transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>Ke Website Studio</span>
+      </a>
+      <div class="flex items-center gap-2 border-l border-white/10 pl-3">
+        <span class="text-sky-300 font-bold">ID</span>
+        <span class="text-white/20">/</span>
+        <a href="/en/cv" class="text-text-muted hover:text-white transition-colors">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24 sm:pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="space-y-12">
+      
+      <!-- Profile Header -->
+      <div class="border-b border-white/[0.08] pb-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-300 text-xs font-mono mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Terbuka untuk Posisi Full-Time Remote / Proyek Pilihan</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Anthony Djie</h1>
+            <p class="text-sky-300 font-mono text-sm mt-1">Full-Stack Software Engineer • Founder Djie Production</p>
+          </div>
+
+          <div>
+            <a
+              href="/AnthonyDJie-CV-ID.pdf"
+              target="_blank"
+              download
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold font-mono text-xs sm:text-sm transition-all shadow-lg shadow-sky-500/20 active:scale-95"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Download CV (PDF)</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono text-text-dim pt-2">
+          <div><span class="text-zinc-500 block">Domisili:</span> Indonesia (UTC+7)</div>
+          <div><span class="text-zinc-500 block">Email:</span> <a href="mailto:thony.djie@djieproduction.com" class="text-sky-300 hover:underline">thony.djie@djieproduction.com</a></div>
+          <div><span class="text-zinc-500 block">GitHub:</span> <a href="https://github.com/ThonyBiersack" target="_blank" class="text-white hover:underline">@ThonyBiersack</a></div>
+          <div><span class="text-zinc-500 block">LinkedIn:</span> <a href="https://linkedin.com/in/anthony-suryadjie-500063200" target="_blank" class="text-blue-400 hover:underline">Anthony Suryadjie</a></div>
+        </div>
+      </div>
+
+      <!-- Professional Summary -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-bold font-mono uppercase tracking-wider text-sky-400">Ringkasan Profesional</h2>
+        <p class="text-text-muted text-sm sm:text-base leading-relaxed">
+          Software Engineer dengan spesialisasi pengembangan sistem web end-to-end (Node.js, Express, Astro) dan aplikasi mobile cross-platform (Flutter). Berpengalaman merancang arsitektur database relasional dan NoSQL (MongoDB, SQLite offline-first), menyusun RESTful API contract yang aman dengan Zod schema validation dan JWT authentication, serta mengoptimalkan performa deployment di cloud infrastructure (Cloudflare, Vercel).
+        </p>
+      </section>
+
+      <!-- Technical Competencies -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-bold font-mono uppercase tracking-wider text-sky-400">Keahlian Teknis</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-black/40 space-y-2">
+            <h3 class="text-white font-semibold text-sm">Backend & APIs</h3>
+            <p class="text-text-dim text-xs leading-relaxed">Node.js, Express.js (ESM), RESTful APIs, Zod Schema Validation, JWT, bcrypt, RBAC Middleware, MVC Architecture.</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-black/40 space-y-2">
+            <h3 class="text-white font-semibold text-sm">Frontend & UI</h3>
+            <p class="text-text-dim text-xs leading-relaxed">Astro (Zero-JS Islands), Tailwind CSS, TypeScript, JavaScript (ES6+), Responsive Design, Accessibility (a11y).</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-black/40 space-y-2">
+            <h3 class="text-white font-semibold text-sm">Mobile Development</h3>
+            <p class="text-text-dim text-xs leading-relaxed">Flutter 3 SDK, Dart, Offline-First Architecture, ESC/POS Bluetooth Thermal Printing, Barcode Scanning (mobile_scanner).</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-black/40 space-y-2">
+            <h3 class="text-white font-semibold text-sm">Database & Infrastructure</h3>
+            <p class="text-text-dim text-xs leading-relaxed">MongoDB Atlas (Mongoose ODM), SQLite (sqflite WAL Mode), Cloudflare Pages & D1 SQL, Vercel, Git & GitHub.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlighted Production Projects -->
+      <section class="space-y-6">
+        <h2 class="text-lg font-bold font-mono uppercase tracking-wider text-sky-400">Proyek Rekayasa Unggulan</h2>
+        
+        <div class="space-y-5">
+          <!-- Project 1: TaskApp -->
+          <div class="p-5 rounded-2xl border border-white/[0.08] bg-black/40 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <h3 class="text-base font-bold text-white">TaskApp — Platform Manajemen Tugas Full-Stack</h3>
+              <span class="text-emerald-400 text-xs font-mono">Live di Produksi</span>
+            </div>
+            <p class="text-text-muted text-xs leading-relaxed">
+              Platform produktivitas berbasis Express.js 5 dan MongoDB Atlas dengan integrasi Google Gemini AI (@google/genai) dan Mermaid.js diagram. Mengimplementasikan autentikasi JWT di HTTP-Only cookie, RBAC, dan validasi Zod.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono">
+              <a href="https://task.djieproduction.com" target="_blank" class="text-sky-400 hover:underline">Demo Live &nearr;</a>
+              <a href="https://github.com/ThonyBiersack/taskApp" target="_blank" class="text-text-dim hover:text-white">GitHub Repo &nearr;</a>
+            </div>
+          </div>
+
+          <!-- Project 2: WarungKas -->
+          <div class="p-5 rounded-2xl border border-white/[0.08] bg-black/40 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <h3 class="text-base font-bold text-white">WarungKas — POS Kasir Mobile Offline-First</h3>
+              <span class="text-emerald-400 text-xs font-mono">Flutter Native</span>
+            </div>
+            <p class="text-text-muted text-xs leading-relaxed">
+              Aplikasi kasir ritel lintas platform dengan database lokal SQLite WAL mode dan transaksi ACID. Dilengkapi integrasi printer thermal bluetooth (ESC/POS), pemindaian barcode kamera, dan ekspor invoice PDF.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono">
+              <a href="https://github.com/ThonyBiersack/warungkas" target="_blank" class="text-text-dim hover:text-white">GitHub Repo &nearr;</a>
+            </div>
+          </div>
+
+          <!-- Project 3: Bookshelf API -->
+          <div class="p-5 rounded-2xl border border-white/[0.08] bg-black/40 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <h3 class="text-base font-bold text-white">Bookshelf REST API & Auth Engine</h3>
+              <span class="text-emerald-400 text-xs font-mono">13 Endpoints Terverifikasi</span>
+            </div>
+            <p class="text-text-muted text-xs leading-relaxed">
+              Arsitektur REST API modular berlapis (controllers, validators, middleware, models) dengan kepatuhan penuh standar HTTP status codes, sanitasi payload Zod, dan enkripsi bcrypt 12 rounds.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono">
+              <a href="https://github.com/ThonyBiersack/bookshelfAPI" target="_blank" class="text-text-dim hover:text-white">GitHub Repo &nearr;</a>
+            </div>
+          </div>
+
+          <!-- Project 4: Digital Invitation -->
+          <div class="p-5 rounded-2xl border border-white/[0.08] bg-black/40 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <h3 class="text-base font-bold text-white">Digital Invitation Platform — Cloudflare Edge</h3>
+              <span class="text-sky-300 text-xs font-mono">Astro + Cloudflare D1</span>
+            </div>
+            <p class="text-text-muted text-xs leading-relaxed">
+              Platform undangan interaktif dengan personalisasi URL slug instan tanpa bottleneck database, proteksi Turnstile CAPTCHA, rate-limiting server-side, dan pemutar musik lokal tanpa layout shift (CLS 0.00).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact CTA -->
+      <section class="p-6 rounded-2xl border border-sky-500/30 bg-sky-950/20 text-center space-y-4">
+        <h2 class="text-xl font-bold text-white">Tertarik Bekerja Sama atau Merekrut?</h2>
+        <p class="text-text-muted text-sm max-w-xl mx-auto">
+          Saya terbuka untuk diskusi teknis, wawancara kerja full-time, maupun kerja sama kontrak proyek.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 pt-2 font-mono text-xs">
+          <a
+            href="mailto:thony.djie@djieproduction.com"
+            class="px-5 py-2.5 rounded-lg bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold transition-all shadow-md active:scale-95"
+          >
+            Kirim Email Langsung
+          </a>
+          <a
+            href="https://wa.me/6283845641526"
+            target="_blank"
+            class="px-5 py-2.5 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] text-white font-semibold transition-colors"
+          >
+            Hubungi via WhatsApp
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-white/[0.07] bg-[#07080a] text-xs font-mono text-text-dim text-center">
+    <p>&copy; {currentYear} Anthony Djie • Djie Production. All rights reserved.</p>
+  </footer>
+</Layout>
+

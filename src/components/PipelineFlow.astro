@@ -1,0 +1,245 @@
+---
+export interface StageNode {
+  title: string;
+  subtitle: string;
+  icon: string;
+  x?: number;
+  y?: number;
+  labelY?: number;
+}
+
+export interface Props {
+  lang?: 'en' | 'id';
+  nodes?: StageNode[];
+}
+
+const { lang = 'id', nodes: customNodes } = Astro.props;
+
+const defaults: StageNode[] = lang === 'en' ? [
+  { title: 'Brief', subtitle: 'Discussion & Client Goals', icon: 'chat', x: 100, y: 220, labelY: 296 },
+  { title: 'Discovery', subtitle: 'Analysis & Planning', icon: 'search', x: 300, y: 130, labelY: 206 },
+  { title: 'Blueprint', subtitle: 'Architecture Design', icon: 'database', x: 500, y: 300, labelY: 364 },
+  { title: 'Build', subtitle: 'Implementation & Testing', icon: 'code', x: 700, y: 130, labelY: 206 },
+  { title: 'Live', subtitle: 'Deploy & Monitoring', icon: 'rocket', x: 900, y: 220, labelY: 296 },
+] : [
+  { title: 'Brief', subtitle: 'Diskusi & Goal Klien', icon: 'chat', x: 100, y: 220, labelY: 296 },
+  { title: 'Discovery', subtitle: 'Analisa & Perencanaan', icon: 'search', x: 300, y: 130, labelY: 206 },
+  { title: 'Blueprint', subtitle: 'Perancangan Arsitektur', icon: 'database', x: 500, y: 300, labelY: 364 },
+  { title: 'Build', subtitle: 'Implementasi & Pengujian', icon: 'code', x: 700, y: 130, labelY: 206 },
+  { title: 'Live', subtitle: 'Deploy & Monitoring', icon: 'rocket', x: 900, y: 220, labelY: 296 },
+];
+
+const meta = lang === 'en' ? {
+  title: 'Production Engineering & Delivery Pipeline',
+  desc: '5-stage delivery pipeline: Brief, Discovery, Blueprint, Build, and Live deployment.'
+} : {
+  title: 'Alur Kerja Rekayasa & Delivery Sistem',
+  desc: '5 tahap alur pengembangan software: Brief, Discovery, Blueprint, Build, dan Live deploy.'
+};
+
+const stages = (customNodes ?? defaults).map((node, i) => ({
+  ...node,
+  x: node.x ?? [100, 300, 500, 700, 900][i],
+  y: node.y ?? [220, 130, 300, 130, 220][i],
+  labelY: node.labelY ?? ([220, 130, 300, 130, 220][i] === 300 ? 364 : [220, 130, 300, 130, 220][i] + 76),
+}));
+
+const routePath = 'M100 220 C200 220 200 130 300 130 C400 130 400 300 500 300 C600 300 600 130 700 130 C800 130 800 220 900 220';
+const comets = Array.from({ length: 9 }, (_, k) => ({
+  r: +(6 - k * 0.55).toFixed(2),
+  opacity: +(1 - k * 0.11).toFixed(2),
+  begin: `${(k * 0.11).toFixed(2)}s`,
+}));
+---
+
+<div class="pipeline-container">
+  <svg viewBox="0 0 1000 440" class="pipeline-svg" role="img" aria-labelledby="flow-t flow-d">
+    <title id="flow-t">{meta.title}</title>
+    <desc id="flow-d">{meta.desc}</desc>
+    <defs>
+      <pattern id="flow-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0L0 0 0 40" fill="none" stroke="var(--flow-glow)" stroke-opacity="0.09" stroke-width="1" />
+        <animateTransform attributeName="patternTransform" type="translate" from="0 0" to="40 0" dur="3s" repeatCount="indefinite" />
+      </pattern>
+      <linearGradient id="flow-beam" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="var(--flow-glow)" stop-opacity="0" />
+        <stop offset="50%" stop-color="var(--flow-glow)" stop-opacity="0.16" />
+        <stop offset="100%" stop-color="var(--flow-glow)" stop-opacity="0" />
+      </linearGradient>
+      <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+        <feMerge><feMergeNode in="blur" /><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+      <path id="route-line" d={routePath} fill="none" />
+    </defs>
+
+    <!-- Grid & Sweeping Light Beam -->
+    <rect width="1000" height="440" fill="url(#flow-grid)" />
+    <rect class="pipe-beam" x="-240" y="0" width="240" height="440" fill="url(#flow-beam)">
+      <animate attributeName="x" from="-240" to="1000" dur="9s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- Route Line: Base + Animated Overlay -->
+    <path d={routePath} fill="none" stroke="var(--flow-line)" stroke-width="3" stroke-linecap="round" />
+    <path d={routePath} fill="none" stroke="var(--flow-glow)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 14" filter="url(#node-glow)">
+      <animate attributeName="stroke-dashoffset" from="0" to="-44" dur="1.1s" repeatCount="indefinite" />
+    </path>
+
+    <!-- 9 Comets -->
+    <g class="pipe-comets">
+      {comets.map((c) => (
+        <circle r={c.r} fill="var(--flow-icon)" opacity={c.opacity} filter="url(#node-glow)" visibility="hidden">
+          <set attributeName="visibility" to="visible" begin={c.begin} />
+          <animateMotion dur="9s" begin={c.begin} repeatCount="indefinite" calcMode="linear">
+            <mpath href="#route-line" />
+          </animateMotion>
+        </circle>
+      ))}
+    </g>
+
+    <!-- 5 Nodes -->
+    {stages.map((node, i) => {
+      const begin = `${i * 2}s`;
+      const rot = i % 2 === 0 ? `0 ${node.x} ${node.y};360 ${node.x} ${node.y}` : `360 ${node.x} ${node.y};0 ${node.x} ${node.y}`;
+      return (
+        <g>
+          <!-- Ping Ripple -->
+          <circle class="pipe-ripple" cx={node.x} cy={node.y} r="30" fill="none" stroke="var(--flow-glow-soft)" stroke-width="1.5" opacity="0">
+            <animate attributeName="r" values="30;74;74" keyTimes="0;.14;1" dur="9s" begin={begin} repeatCount="indefinite" />
+            <animate attributeName="opacity" values=".9;0;0" keyTimes="0;.14;1" dur="9s" begin={begin} repeatCount="indefinite" />
+          </circle>
+          <!-- Rotating Dashed Orbit Ring -->
+          <circle cx={node.x} cy={node.y} r="46" fill="none" stroke="var(--flow-glow-soft)" stroke-width="1.5" stroke-dasharray="3 9" opacity="0.55">
+            <animateTransform attributeName="transform" type="rotate" values={rot} dur="14s" repeatCount="indefinite" />
+          </circle>
+          <!-- Node Core Circle -->
+          <circle class="pipe-core" cx={node.x} cy={node.y} r="30" fill="var(--flow-panel)" stroke="var(--flow-glow)" stroke-width="2.5" stroke-opacity=".35" filter="url(#node-glow)">
+            <animate attributeName="stroke-opacity" values=".35;1;1;.35;.35" keyTimes="0;.08;.25;.42;1" dur="9s" begin={begin} repeatCount="indefinite" />
+            <animate attributeName="r" values="30;36;32;30;30" keyTimes="0;.08;.25;.42;1" dur="9s" begin={begin} repeatCount="indefinite" />
+          </circle>
+
+          <!-- Centered Tabler Icon with Micro-Animations -->
+          <g class="pipe-icon" transform={`translate(${node.x},${node.y}) scale(1.1667) translate(-12,-12)`} fill="none" stroke="var(--flow-icon)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".6">
+            <animate attributeName="opacity" values=".6;1;1;.6;.6" keyTimes="0;.08;.25;.42;1" dur="9s" begin={begin} repeatCount="indefinite" />
+
+            {/* Brief: Two lines draw in and out via stroke-dasharray */}
+            {node.icon === 'chat' && (
+              <g>
+                <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3h-2a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3z" />
+                <path d="M8 9h8" pathLength="12" stroke-dasharray="0 12">
+                  <animate attributeName="stroke-dasharray" values="0 12; 12 0; 12 0; 0 12" keyTimes="0; .4; .6; 1" dur="2.4s" repeatCount="indefinite" />
+                </path>
+                <path d="M8 13h6" pathLength="12" stroke-dasharray="0 12">
+                  <animate attributeName="stroke-dasharray" values="0 12; 12 0; 12 0; 0 12" keyTimes="0; .4; .6; 1" dur="2.4s" begin="0.4s" repeatCount="indefinite" />
+                </path>
+              </g>
+            )}
+
+            {/* Discovery: Drifts in a small circle */}
+            {node.icon === 'search' && (
+              <g>
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1,-0.8; 0,-1.4; -1,-0.8; -1.2,0; -1,0.8; 0,1.4; 1,0.8; 0,0" dur="3s" repeatCount="indefinite" />
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0-14 0 M21 21l-6-6" />
+              </g>
+            )}
+
+            {/* Blueprint: Three database layers fade staggered 0.3s */}
+            {node.icon === 'database' && (
+              <g>
+                <path d="M4 6c0 1.66 3.58 3 8 3s8-1.34 8-3s-3.58-3-8-3s-8 1.34-8 3" stroke-opacity="1">
+                  <animate attributeName="stroke-opacity" values="1; .25; 1" dur="2.4s" begin="0s" repeatCount="indefinite" />
+                </path>
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-opacity="1">
+                  <animate attributeName="stroke-opacity" values="1; .25; 1" dur="2.4s" begin="0.3s" repeatCount="indefinite" />
+                </path>
+                <path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-opacity="1">
+                  <animate attributeName="stroke-opacity" values="1; .25; 1" dur="2.4s" begin="0.6s" repeatCount="indefinite" />
+                </path>
+              </g>
+            )}
+
+            {/* Build: Left/right brackets translate, slash fades */}
+            {node.icon === 'code' && (
+              <g>
+                <g>
+                  <animateTransform attributeName="transform" type="translate" values="0,0; -1.8,0; 0,0" dur="2s" repeatCount="indefinite" />
+                  <path d="M7 8l-4 4l4 4" />
+                </g>
+                <g>
+                  <animateTransform attributeName="transform" type="translate" values="0,0; 1.8,0; 0,0" dur="2s" repeatCount="indefinite" />
+                  <path d="M17 8l4 4l-4 4" />
+                </g>
+                <path d="M14 4l-4 16" stroke-opacity="1">
+                  <animate attributeName="stroke-opacity" values="1; .25; 1" dur="2s" repeatCount="indefinite" />
+                </path>
+              </g>
+            )}
+
+            {/* Live: Rocket jitters <1px, exhaust flickers opacity */}
+            {node.icon === 'rocket' && (
+              <g>
+                <animateTransform attributeName="transform" type="translate" values="0,0; 0.6,-0.6; -0.4,0.4; 0.5,0.2; -0.3,-0.5; 0,0" dur="1.2s" repeatCount="indefinite" />
+                <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3-5a9 9 0 0 0 6-8a3 3 0 0 0-3-3a9 9 0 0 0-8 6a6 6 0 0 0-5 3" />
+                <circle cx="15" cy="9" r="1" fill="var(--flow-icon)" />
+                <path d="M7 14a6 6 0 0 0-3 6a6 6 0 0 0 6-3">
+                  <animate attributeName="opacity" values="1; .2; 1" dur="0.5s" repeatCount="indefinite" />
+                </path>
+              </g>
+            )}
+          </g>
+
+          <!-- Labels -->
+          <text x={node.x} y={node.labelY} text-anchor="middle" class="pipe-title">{node.title}</text>
+          <text x={node.x} y={node.labelY + 22} text-anchor="middle" class="pipe-sub">{node.subtitle}</text>
+        </g>
+      );
+    })}
+  </svg>
+</div>
+
+<style>
+  .pipeline-container {
+    --flow-bg: var(--color-bg-dark, #08090b);
+    --flow-panel: var(--color-bg-panel, #0e1117);
+    --flow-line: rgba(56, 189, 248, 0.22);
+    --flow-glow: var(--color-brand-cyan, #38bdf8);
+    --flow-glow-soft: #7dd3fc;
+    --flow-text: var(--color-text-main, #f0f3f6);
+    --flow-muted: var(--color-text-muted, #949da6);
+    --flow-icon: #e0f2fe;
+
+    width: 100%;
+    background-color: var(--flow-bg);
+    border-radius: 18px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 0 35px -8px rgba(56, 189, 248, 0.18);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
+  }
+  .pipeline-svg {
+    display: block;
+    width: 100%;
+    min-width: 760px;
+    height: auto;
+    font-family: var(--font-sans, 'Outfit', -apple-system, sans-serif);
+  }
+  .pipe-title { font-size: 19px; font-weight: 600; fill: var(--flow-text); }
+  .pipe-sub { font-size: 14px; font-weight: 400; fill: var(--flow-muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pipeline-container animate,
+    .pipeline-container animateTransform,
+    .pipeline-container animateMotion,
+    .pipeline-container set {
+      animation: none !important;
+    }
+    .pipe-comets, .pipe-ripple, .pipe-beam { display: none !important; }
+    .pipe-core { stroke-opacity: 1 !important; r: 32px !important; }
+    .pipe-icon, .pipe-icon * {
+      opacity: 1 !important;
+      stroke-opacity: 1 !important;
+      stroke-dasharray: none !important;
+    }
+  }
+</style>

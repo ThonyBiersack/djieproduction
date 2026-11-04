@@ -1,0 +1,30 @@
+---
+import type { SiteContent, Language } from '../../data/translations';
+
+interface Props {
+  t: SiteContent;
+  lang: Language;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="why-me" class="scroll-reveal scroll-mt-24 space-y-10 pt-10 border-t border-white/[0.07]">
+  <div>
+    <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2">{t.whyMe.tag}</p>
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">{t.whyMe.title}</h2>
+    <p class="text-text-muted text-sm sm:text-base mt-2 max-w-2xl">
+      {t.whyMe.subtitle}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+    {t.whyMe.items.map((item) => (
+      <div class="glass-panel rounded-2xl p-5 sm:p-7 space-y-3 hover:border-sky-500/40 transition-all">
+        <h3 class="text-lg font-bold text-white tracking-tight">{item.title}</h3>
+        <p class="text-text-muted text-sm leading-relaxed">{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
+

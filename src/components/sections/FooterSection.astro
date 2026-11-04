@@ -1,0 +1,43 @@
+---
+import type { SiteContent, Language } from '../../data/translations';
+
+interface Props {
+  t: SiteContent;
+  lang: Language;
+}
+
+const { t, lang } = Astro.props;
+const currentYear = new Date().getFullYear();
+const cvPageUrl = lang === 'en' ? '/en/cv' : '/cv';
+---
+
+<footer class="py-12 border-t border-white/[0.07] bg-[#07080a] text-xs font-mono text-text-dim">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+    
+    <div class="flex items-center gap-3">
+      <img src="/djie-icon-white.svg" alt="Djie Logo" class="h-5 w-5 opacity-60" />
+      <span>&copy; {currentYear} {t.footer.rights}</span>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6">
+      <a href={cvPageUrl} class="text-sky-400 hover:text-sky-300 transition-colors font-semibold">
+        {t.footer.recruiterLink}
+      </a>
+      <a href="#hero" class="hover:text-white transition-colors">{t.footer.backToTop}</a>
+      <a href="https://wa.me/6283845641526" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+        WhatsApp
+      </a>
+      <a href="https://github.com/ThonyBiersack" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/anthony-suryadjie-500063200" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+        LinkedIn
+      </a>
+      <a href="/api/health.json" target="_blank" class="hover:text-white transition-colors">
+        Health API
+      </a>
+    </div>
+
+  </div>
+</footer>
+

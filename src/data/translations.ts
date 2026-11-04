@@ -21,6 +21,33 @@ export interface ProjectItem {
   screenshotType: 'taskapp' | 'warungkas' | 'bookshelf' | 'invitation';
 }
 
+export interface ServiceCategoryItem {
+  icon: 'globe' | 'smartphone' | 'server' | 'mail';
+  title: string;
+  description: string;
+  stack: string[];
+}
+
+export interface ServiceCategories {
+  tag: string;
+  title: string;
+  subtitle: string;
+  items: ServiceCategoryItem[];
+}
+
+export interface TestimonialItem {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+export interface Testimonials {
+  tag: string;
+  title: string;
+  subtitle: string;
+  items: TestimonialItem[];
+}
+
 export interface SiteContent {
   meta: {
     title: string;
@@ -90,6 +117,7 @@ export interface SiteContent {
       ctaText: string;
     };
   };
+  serviceCategories: ServiceCategories;
   services: {
     tag: string;
     title: string;
@@ -101,6 +129,8 @@ export interface SiteContent {
       specsTitle: string;
       featuresTitle: string;
       techStack: string;
+      previewLabel: string;
+      detailsToggle: string;
       liveDemo: string;
       sourceCode: string;
       comingSoon: string;
@@ -110,6 +140,7 @@ export interface SiteContent {
     };
     projects: ProjectItem[];
   };
+  testimonials: Testimonials;
   whyMe: {
     tag: string;
     title: string;
@@ -121,20 +152,24 @@ export interface SiteContent {
     title: string;
     subtitle: string;
     badge: string;
-    outputLabel: string;
-    steps: {
-      step: string;
-      phase: string;
-      title: string;
-      description: string;
-      chips: string[];
-    }[];
-    legend: {
-      discovery: string;
-      architecture: string;
-      release: string;
-      footer: string;
+    labels: {
+      flow: string;
+      pause: string;
+      resume: string;
+      stage: string;
+      clientAction: string;
+      deliverable: string;
     };
+    stages: {
+      id: string;
+      title: string;
+      subtitle: string;
+      detailTitle: string;
+      detailDesc: string;
+      clientAction: string;
+      deliverable: string;
+      ariaLabel: string;
+    }[];
   };
   contact: {
     tag: string;
@@ -169,6 +204,7 @@ export interface SiteContent {
   footer: {
     rights: string;
     backToTop: string;
+    recruiterLink: string;
   };
 }
 
@@ -181,21 +217,21 @@ export const content: Record<Language, SiteContent> = {
     nav: {
       about: "About",
       services: "Services",
-      whyMe: "Why Me",
+      whyMe: "Why Us",
       pipeline: "Pipeline",
       contact: "Contact",
       cv: "Download CV"
     },
     hero: {
-      roleStatus: "Open to full-time & remote roles • Available for select projects",
+      roleStatus: "Accepting new projects • Independent studio",
       headlineStart: "Production-Ready Websites & Applications, ",
       headlineHighlight: "from Database",
       headlineEnd: " to Cloud Deploy.",
-      bio: "<strong>Djie Production</strong> is an independent software studio founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. Specializing in company profile websites, offline-first cashier POS apps, and custom full-stack web platforms. Direct engineering without agency middlemen — fast communication, transparent pricing, and resilient systems.",
-      exploreBtn: "Explore Systems",
-      quoteBtn: "Request a Quote",
-      downloadCvBtn: "Download CV (EN)",
-      cvUrl: "/AnthonySuryadjie-CV-EN.pdf",
+      bio: "<strong>Djie Production</strong> is an independent software studio founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. We build <strong>company profile websites</strong>, <strong>offline-first cashier POS apps</strong> for small businesses, and <strong>custom full-stack web platforms</strong>. From database design to cloud deployment — no agency middlemen, direct communication, transparent pricing, and resilient systems.",
+      exploreBtn: "Explore our services",
+      quoteBtn: "Discuss a project",
+      downloadCvBtn: "For recruiters: view CV",
+      cvUrl: "/en/cv",
       cvFileName: "AnthonySuryadjie-CV-EN.pdf",
       console: {
         windowTitle: "core-stack.sys",
@@ -211,30 +247,30 @@ export const content: Record<Language, SiteContent> = {
         layer3Title: "Layer 03 • Database",
         layer3Name: "MongoDB / SQLite",
         layer3Tag: "Database",
-        footerLeft: "Direct Development",
+        footerLeft: "Direct Engineering",
         footerRight: "Anthony Djie"
       }
     },
     metrics: {
       item1: {
-        val: "Cloudflare",
-        title: "Served via Cloudflare CDN",
-        sub: "Fast global caching & SSL routing"
+        val: "4+",
+        title: "Systems Delivered",
+        sub: "Full-stack projects live and running in production"
       },
       item2: {
-        val: "Cloud",
-        title: "Cloud-Deployed & HTTPS",
-        sub: "PaaS deployment with secure routing"
+        val: "24h",
+        title: "Max Response Time",
+        sub: "Direct response on business days via WhatsApp"
       },
       item3: {
-        val: "Direct",
-        title: "Independent Developer",
-        sub: "Direct collaboration with the engineer"
+        val: "100%",
+        title: "Direct Communication",
+        sub: "No middlemen — you talk directly with the engineer"
       },
       item4: {
-        val: "Zod",
-        title: "Request Schema Validation",
-        sub: "Strict input validation with Zod"
+        val: "End-to-End",
+        title: "Database to Deploy",
+        sub: "Comprehensive architecture across the entire stack"
       }
     },
     about: {
@@ -242,13 +278,13 @@ export const content: Record<Language, SiteContent> = {
       title: "Why Djie Production Operates as an Independent Studio",
       paragraphs: [
         "Traditional development agencies often introduce unnecessary layers: technical requirements get passed between sales reps and account managers before finally reaching the developer writing the code.",
-        "<strong class=\"text-white font-medium\">Djie Production</strong> was founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span> to cut out that overhead. As an independent developer, I focus on clean technical execution: designing structured database schemas, writing validated REST APIs, building clean responsive web interfaces, and shipping offline-first Flutter mobile apps.",
+        "<strong class=\"text-white font-medium\">Djie Production</strong> was founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span> to cut out that overhead. As an independent studio, we focus on clean technical execution: designing structured database schemas, writing validated REST APIs, building clean responsive web interfaces, and shipping offline-first Flutter mobile apps.",
         "The result is practical software built with direct communication, agile iterations, and clear focus on your project requirements."
       ],
       advantages: [
         {
           title: "Direct Communication",
-          desc: "From the initial consultation to final deployment, you collaborate directly with the engineer writing your code."
+          desc: "From initial consultation to final deployment, you collaborate directly with the engineer writing your code."
         },
         {
           title: "Focused on Real Utility",
@@ -265,23 +301,56 @@ export const content: Record<Language, SiteContent> = {
         locationLabel: "Base Location:",
         locationVal: "Indonesia (UTC+7)",
         whatsappLabel: "Direct WhatsApp:",
-        emailLabel: "Direct Email:",
+        emailLabel: "Studio Email:",
         availabilityLabel: "Availability:",
-        availabilityVal: "Open to Full-Time, Remote & Projects",
+        availabilityVal: "Accepting select projects",
         ctaText: "Chat via WhatsApp"
       }
     },
+    serviceCategories: {
+      tag: "OUR SERVICES",
+      title: "What We Can Build for You",
+      subtitle: "Every service is handled end-to-end — from requirements consultation and architecture design, all the way to deployment and handover.",
+      items: [
+        {
+          icon: "globe",
+          title: "Company Profile Website",
+          description: "Fast, modern, and SEO-optimized company profiles designed to build credibility and convert visitors into clients.",
+          stack: ["Astro", "Tailwind CSS", "Cloudflare CDN"]
+        },
+        {
+          icon: "smartphone",
+          title: "Offline-First Mobile POS App",
+          description: "Cross-platform cashier application that functions 100% offline. Includes Bluetooth thermal printing and barcode scanning.",
+          stack: ["Flutter", "Dart", "SQLite (WAL)"]
+        },
+        {
+          icon: "server",
+          title: "REST API & Backend Architecture",
+          description: "Secure and scalable API backends featuring JWT auth, Zod input validation, RBAC, and clean layered modular design.",
+          stack: ["Node.js", "Express.js", "MongoDB", "Zod"]
+        },
+        {
+          icon: "mail",
+          title: "Interactive Digital Invitations",
+          description: "Dynamic wedding and event platforms with custom guest URL slugs, real-time RSVP database sync, and zero layout shift.",
+          stack: ["Astro", "Cloudflare D1 (SQL)", "Turnstile"]
+        }
+      ]
+    },
     services: {
-      tag: "Handled Systems & Technical Specifications",
-      title: "Production Systems & Engineering Architecture",
-      subtitle: "Verified software systems architected, developed, and deployed by Anthony Djie. Inspect the exact technical stack, database engines, and core operational features.",
-      pricingNote: "Pricing is tailored to project requirements. Contact me for consultation and transparent estimates.",
-      badgeCount: "4 Production Systems",
+      tag: "Selected work",
+      title: "Projects built for real workflows",
+      subtitle: "Explore products and systems built by Djie Production. Each case highlights the need it addresses, with technical details available for a closer look.",
+      pricingNote: "Project cost depends on the agreed scope. Discuss your needs to receive an initial estimate before work begins.",
+      badgeCount: "4 selected projects",
       highlightsTitle: "Technical Architecture & Security:",
       labels: {
         specsTitle: "System Architecture & Security",
         featuresTitle: "Core Application Features",
         techStack: "Tech Stack",
+        previewLabel: "Illustrative interface",
+        detailsToggle: "Features and technical details",
         liveDemo: "Live Demo",
         sourceCode: "Source Code",
         comingSoon: "Demo Coming Soon",
@@ -292,7 +361,7 @@ export const content: Record<Language, SiteContent> = {
       projects: [
         {
           serviceCategory: "Full-Stack Web Application",
-          serviceSubtitle: "Modular cloud task management platform with cookie session security, schema validation, and Gemini AI integration.",
+          serviceSubtitle: "Organize team tasks, track progress, and help users plan their work in one platform.",
           projectTitle: "TaskApp — Task Management Platform",
           projectBadge: "Express 5 + MongoDB",
           status: "Live Production",
@@ -317,7 +386,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "Offline-First Mobile POS Application",
-          serviceSubtitle: "Native retail cashier and store management app engineered to operate seamlessly with zero internet connectivity.",
+          serviceSubtitle: "Record sales, check products, and print receipts even when an internet connection is unavailable.",
           projectTitle: "WarungKas — Cashier & Store POS",
           projectBadge: "Flutter + SQLite WAL",
           status: "Production Ready",
@@ -340,7 +409,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "RESTful Backend Architecture & Auth API",
-          serviceSubtitle: "Modular backend API service featuring strict Zod schema validation, RBAC authorization, and structured routing.",
+          serviceSubtitle: "Manage a book catalog and user access through a structured service that other applications can connect to.",
           projectTitle: "Bookshelf REST API & Auth Engine",
           projectBadge: "Express + Zod + RBAC",
           status: "13 Endpoints Verified",
@@ -363,7 +432,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "Edge-Rendered Web & Event Platform",
-          serviceSubtitle: "High-performance digital invitation platform powered by Cloudflare edge workers and serverless SQL database.",
+          serviceSubtitle: "Personalize event invitations for guests and collect attendance confirmations online.",
           projectTitle: "Digital Invitation Platform",
           projectBadge: "Astro + Cloudflare D1",
           status: "Cloudflare Edge D1",
@@ -386,10 +455,27 @@ export const content: Record<Language, SiteContent> = {
         }
       ]
     },
+    testimonials: {
+      tag: "CLIENT TESTIMONIALS",
+      title: "Trusted by Real Clients",
+      subtitle: "Honest feedback from people and teams who have worked directly with Djie Production.",
+      items: [
+        {
+          quote: "The turnaround was fast and the communication was effortless since we worked directly with the developer. Our digital invitation turned out exactly as we envisioned.",
+          name: "Anggi & Asep",
+          role: "Wedding Invitation Clients"
+        },
+        {
+          quote: "Very detail-oriented technical execution. Architecture, API contracts, and offline reliability were built cleanly from day one without bloated overhead.",
+          name: "Retail Store Owner",
+          role: "WarungKas POS Client"
+        }
+      ]
+    },
     whyMe: {
-      tag: "The Independent Advantage",
-      title: "Why Partner Directly with Me?",
-      subtitle: "A direct comparison between working with a dedicated independent developer versus traditional agency structures.",
+      tag: "The Independent Studio Advantage",
+      title: "Why Choose Djie Production?",
+      subtitle: "A direct comparison between working with a hands-on independent studio versus traditional agency structures.",
       items: [
         {
           title: "100% Direct Communication",
@@ -410,53 +496,76 @@ export const content: Record<Language, SiteContent> = {
       ]
     },
     workflow: {
-      tag: "System Graph",
-      title: "Engineering Delivery Pipeline",
-      subtitle: "Structured engineering workflow from initial scope discovery and schema design to cloud deployment.",
-      badge: "Continuous Pipeline Architecture",
-      outputLabel: "Engineered Outputs:",
-      steps: [
+      tag: "How we work",
+      title: "A clear path from idea to launch",
+      subtitle: "You stay part of the decisions at every stage—from defining what the business needs to reviewing the finished system.",
+      badge: "Direct collaboration with Anthony",
+      labels: {
+        flow: "Project workflow",
+        pause: "Pause animation",
+        resume: "Resume animation",
+        stage: "Stage",
+        clientAction: "Your part",
+        deliverable: "What you get"
+      },
+      stages: [
         {
-          step: "01",
-          phase: "Discovery",
-          title: "Scope Alignment & Initial Estimate",
-          description: "We discuss the core problem, essential MVP requirements, and technical constraints. Initial consultation and cost estimation are provided upfront before any development starts.",
-          chips: ["Requirements Discussion", "Transparent Scope & Estimate"]
+          id: "brief",
+          title: "Discuss",
+          subtitle: "Needs & estimate",
+          detailTitle: "Start with the business need",
+          detailDesc: "We discuss the problem, who the system is for, and the essential requirements before work begins.",
+          clientAction: "Share your goals, current process, and constraints.",
+          deliverable: "An initial scope and cost estimate.",
+          ariaLabel: "Discuss: share needs and receive an initial estimate"
         },
         {
-          step: "02",
-          phase: "Architecture",
-          title: "System Blueprint",
-          description: "I map out the technical blueprint: database schemas (MongoDB/SQLite), REST API endpoint contracts, and validation rules before writing application code.",
-          chips: ["MongoDB / SQLite Schemas", "REST API & Zod Validation"]
+          id: "discovery",
+          title: "Define",
+          subtitle: "Scope & priorities",
+          detailTitle: "Agree on what to build",
+          detailDesc: "We identify the key user journeys, prioritize features, and clarify what is included in the project.",
+          clientAction: "Review priorities and confirm the project scope.",
+          deliverable: "A shared project scope and feature priorities.",
+          ariaLabel: "Define: review and agree on project scope"
         },
         {
-          step: "03",
-          phase: "Development",
-          title: "Build & Integration",
-          description: "Implementation phase: building reliable backend logic with Express.js, securing auth with JWT/bcrypt, and building clean web interfaces or Flutter mobile apps.",
-          chips: ["Stateless JWT & Auth", "Express.js & Flutter Mobile"]
+          id: "blueprint",
+          title: "Plan",
+          subtitle: "Solution design",
+          detailTitle: "Plan the right solution",
+          detailDesc: "We translate the agreed needs into a system plan and check that it fits the intended workflow.",
+          clientAction: "Give feedback on the proposed approach before implementation.",
+          deliverable: "A system plan aligned with the agreed needs.",
+          ariaLabel: "Plan: review the system approach"
         },
         {
-          step: "04",
-          phase: "Delivery",
-          title: "Deploy & Handover",
-          description: "Functional testing, cloud deployment with HTTPS and Cloudflare routing, followed by transparent system handover and documentation.",
-          chips: ["Cloudflare CDN & HTTPS", "Transparent Handover"]
+          id: "build",
+          title: "Build",
+          subtitle: "Development & review",
+          detailTitle: "Build and review the product",
+          detailDesc: "The system is developed and tested against the agreed scope. You can review the working result and share feedback.",
+          clientAction: "Review the working version and share feedback.",
+          deliverable: "A tested working version for review.",
+          ariaLabel: "Build: review and give feedback on the working version"
+        },
+        {
+          id: "live",
+          title: "Launch",
+          subtitle: "Release & handover",
+          detailTitle: "Launch with a clear handover",
+          detailDesc: "After testing, the system is deployed and its handover is completed. Any post-launch support follows the project agreement.",
+          clientAction: "Confirm launch readiness and receive the handover.",
+          deliverable: "A deployed system and agreed handover materials.",
+          ariaLabel: "Launch: approve release and receive the handover"
         }
-      ],
-      legend: {
-        discovery: "Discovery & Estimate",
-        architecture: "Architecture & Schemas",
-        release: "Cloud Deployment",
-        footer: "Direct pipeline execution by Anthony Djie"
-      }
+      ]
     },
     contact: {
       tag: "GET IN TOUCH DIRECTLY",
       title: "Have a Project in Mind?",
       titleHighlight: "Let's Build It Right.",
-      description: "Whether you are architecting a new web platform, building an offline mobile application, or designing resilient APIs — reach out via your preferred channel. Pricing is tailored to project requirements with transparent initial consultation.",
+      description: "Whether you need a company profile website, an offline mobile application, or resilient backend APIs — reach out directly. Pricing is tailored to project requirements with transparent initial consultation.",
       channels: {
         whatsappTitle: "WHATSAPP",
         whatsappSub: "Fastest response for direct inquiries",
@@ -483,8 +592,9 @@ export const content: Record<Language, SiteContent> = {
       }
     },
     footer: {
-      rights: "Djie Production. Built by Anthony Djie.",
-      backToTop: "Back to Top ↑"
+      rights: "Djie Production. Founded by Anthony Djie.",
+      backToTop: "Back to Top ↑",
+      recruiterLink: "For recruiters: view CV →"
     }
   },
   id: {
@@ -501,15 +611,15 @@ export const content: Record<Language, SiteContent> = {
       cv: "Download CV"
     },
     hero: {
-      roleStatus: "Terbuka untuk posisi full-time & remote • Menerima project pilihan",
+      roleStatus: "Menerima proyek baru • Studio independen aktif",
       headlineStart: "Website & Aplikasi Siap Pakai untuk Bisnis Anda, ",
       headlineHighlight: "dari Database",
       headlineEnd: " sampai Siap Deploy.",
-      bio: "<strong>Djie Production</strong> adalah software studio independen yang dirintis oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. Melayani <strong>jasa pembuatan website company profile</strong>, <strong>aplikasi kasir offline</strong> untuk UMKM, hingga sistem web custom. Dibangun langsung dari skema database sampai deployment tanpa perantara sales agensi — komunikasi cepat, harga transparan, dan sistem yang andal.",
-      exploreBtn: "Lihat Studi Kasus",
-      quoteBtn: "Konsultasi & Estimasi Project",
-      downloadCvBtn: "Download CV (ID)",
-      cvUrl: "/AnthonyDJie-CV-ID.pdf",
+      bio: "<strong>Djie Production</strong> adalah software studio independen yang didirikan oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span>. Kami membangun <strong>website company profile</strong>, <strong>aplikasi kasir offline</strong> untuk UMKM, dan <strong>sistem web custom full-stack</strong>. Dari perancangan database hingga deployment — tanpa perantara agensi, komunikasi langsung, harga transparan, dan sistem yang andal.",
+      exploreBtn: "Lihat layanan kami",
+      quoteBtn: "Diskusikan proyek",
+      downloadCvBtn: "Untuk perekrut: lihat CV",
+      cvUrl: "/cv",
       cvFileName: "AnthonyDJie-CV-ID.pdf",
       console: {
         windowTitle: "core-stack.sys",
@@ -531,24 +641,24 @@ export const content: Record<Language, SiteContent> = {
     },
     metrics: {
       item1: {
-        val: "Cloudflare",
-        title: "Dilayani lewat Cloudflare CDN",
-        sub: "Distribusi global cepat & routing SSL aman"
+        val: "4+",
+        title: "Sistem Terdeliver",
+        sub: "Proyek full-stack yang sudah live dan berjalan di produksi"
       },
       item2: {
-        val: "Cloud",
-        title: "Dideploy di Cloud & HTTPS",
-        sub: "Dideploy di cloud dengan HTTPS dan routing via Cloudflare"
+        val: "24 Jam",
+        title: "Waktu Respon Maksimal",
+        sub: "Respon langsung di hari kerja via WhatsApp"
       },
       item3: {
-        val: "Direct",
-        title: "Independent Developer",
-        sub: "Diskusi teknis langsung dengan pembuat kode"
+        val: "100%",
+        title: "Komunikasi Langsung",
+        sub: "Tanpa perantara — diskusi langsung dengan developer"
       },
       item4: {
-        val: "Zod",
-        title: "Validasi Skema Request",
-        sub: "Validasi skema request dengan Zod"
+        val: "End-to-End",
+        title: "Database sampai Deploy",
+        sub: "Arsitektur utuh menangani seluruh lapisan stack"
       }
     },
     about: {
@@ -556,7 +666,7 @@ export const content: Record<Language, SiteContent> = {
       title: "Mengapa Djie Production Hadir sebagai Studio Independen",
       paragraphs: [
         "Banyak klien mengalami hambatan saat bekerja dengan struktur agensi konvensional: kebutuhan teknis harus melewati sales dan account manager sebelum akhirnya sampai ke developer yang menulis kodenya.",
-        "<strong class=\"text-white font-medium\">Djie Production</strong> dirintis oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span> untuk memotong birokrasi tersebut. Sebagai independent developer, fokus saya adalah eksekusi teknis yang bersih: merancang skema database terstruktur, menulis REST API tervalidasi, membangun antarmuka web yang responsif, serta mengembangkan aplikasi mobile Flutter dengan kemampuan offline.",
+        "<strong class=\"text-white font-medium\">Djie Production</strong> didirikan oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span> untuk memotong birokrasi tersebut. Sebagai studio independen, fokus kami adalah eksekusi teknis yang bersih: merancang skema database terstruktur, menulis REST API tervalidasi, membangun antarmuka web yang responsif, serta mengembangkan aplikasi mobile Flutter dengan kemampuan offline.",
         "Hasilnya adalah software yang fungsional, iterasi yang cepat, serta komunikasi langsung tanpa miskomunikasi antar divisi."
       ],
       advantages: [
@@ -579,23 +689,56 @@ export const content: Record<Language, SiteContent> = {
         locationLabel: "Domisili:",
         locationVal: "Indonesia (UTC+7)",
         whatsappLabel: "WhatsApp Langsung:",
-        emailLabel: "Email Langsung:",
+        emailLabel: "Email Studio:",
         availabilityLabel: "Ketersediaan:",
-        availabilityVal: "Terbuka untuk Full-Time, Remote & Project",
+        availabilityVal: "Menerima proyek baru",
         ctaText: "Chat via WhatsApp"
       }
     },
+    serviceCategories: {
+      tag: "LAYANAN KAMI",
+      title: "Apa yang Bisa Kami Bangun untuk Anda",
+      subtitle: "Setiap layanan dikerjakan end-to-end — dari konsultasi kebutuhan, perancangan sistem, hingga deployment dan serah terima.",
+      items: [
+        {
+          icon: "globe",
+          title: "Website Company Profile",
+          description: "Website profesional untuk bisnis dan UMKM. Responsif, cepat, ramah SEO, dan dirancang meningkatkan kredibilitas brand Anda.",
+          stack: ["Astro", "Tailwind CSS", "Cloudflare CDN"]
+        },
+        {
+          icon: "smartphone",
+          title: "Aplikasi Kasir & POS Offline",
+          description: "Aplikasi kasir mobile yang berjalan 100% tanpa internet. Cetak struk printer thermal bluetooth, scan barcode produk, dan kelola laporan otomatis.",
+          stack: ["Flutter", "Dart", "SQLite (WAL)"]
+        },
+        {
+          icon: "server",
+          title: "REST API & Backend System",
+          description: "Arsitektur backend modular dengan autentikasi JWT aman, sanitasi payload Zod, proteksi RBAC, dan struktur database efisien.",
+          stack: ["Node.js", "Express.js", "MongoDB", "Zod"]
+        },
+        {
+          icon: "mail",
+          title: "Website Undangan Digital Interaktif",
+          description: "Platform undangan pernikahan & acara online dengan rute personalisasi nama tamu, RSVP real-time ke database SQL edge, dan musik latar.",
+          stack: ["Astro", "Cloudflare D1 (SQL)", "Turnstile"]
+        }
+      ]
+    },
     services: {
-      tag: "Sistem & Spesifikasi Teknis",
-      title: "Sistem Produksi & Arsitektur Rekayasa",
-      subtitle: "Sistem software nyata yang dirancang, dibangun, dan dideploy langsung oleh Anthony Djie. Lihat spesifikasi engine, basis data, dan fitur operasional yang bekerja di balik layar.",
-      pricingNote: "Harga disesuaikan dengan kebutuhan project. Hubungi saya untuk konsultasi gratis dan estimasi transparan.",
-      badgeCount: "4 Sistem Produksi",
+      tag: "Karya pilihan",
+      title: "Proyek untuk kebutuhan kerja nyata",
+      subtitle: "Lihat produk dan sistem yang dibangun oleh Djie Production. Tiap proyek menunjukkan kebutuhan yang dijawab, dengan detail teknis untuk yang ingin mempelajari lebih jauh.",
+      pricingNote: "Biaya mengikuti lingkup proyek yang disepakati. Diskusikan kebutuhan Anda untuk mendapat estimasi awal sebelum pengerjaan dimulai.",
+      badgeCount: "4 proyek pilihan",
       highlightsTitle: "Spesifikasi Arsitektur & Keamanan:",
       labels: {
         specsTitle: "Spesifikasi Arsitektur & Keamanan",
         featuresTitle: "Fitur Operasional Utama",
         techStack: "Tech Stack",
+        previewLabel: "Ilustrasi antarmuka",
+        detailsToggle: "Fitur dan detail teknis",
         liveDemo: "Live Demo",
         sourceCode: "Source Code",
         comingSoon: "Demo Segera Hadir",
@@ -606,7 +749,7 @@ export const content: Record<Language, SiteContent> = {
       projects: [
         {
           serviceCategory: "Aplikasi Web Full-Stack",
-          serviceSubtitle: "Platform manajemen tugas cloud dengan arsitektur autentikasi modular, session cookies aman, dan integrasi Gemini AI.",
+          serviceSubtitle: "Kelola tugas tim, pantau progres, dan bantu pengguna merencanakan pekerjaan dari satu platform.",
           projectTitle: "TaskApp — Platform Manajemen Tugas",
           projectBadge: "Express 5 + MongoDB",
           status: "Aktif di Cloud",
@@ -631,7 +774,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "Aplikasi Mobile POS Mode Offline",
-          serviceSubtitle: "Aplikasi kasir dan manajemen toko ritel native yang beroperasi mulus 100% tanpa koneksi internet.",
+          serviceSubtitle: "Catat transaksi, cek produk, dan cetak struk meski koneksi internet tidak tersedia.",
           projectTitle: "WarungKas — POS Kasir & Manajemen Toko",
           projectBadge: "Flutter + SQLite WAL",
           status: "Siap Digunakan",
@@ -654,7 +797,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "RESTful Backend Architecture & Auth API",
-          serviceSubtitle: "Layanan backend API modular dengan validasi skema ketat, otorisasi RBAC, dan struktur data terisolasi.",
+          serviceSubtitle: "Kelola katalog buku dan akses pengguna melalui layanan terstruktur yang dapat dihubungkan ke aplikasi lain.",
           projectTitle: "Bookshelf REST API & Auth Engine",
           projectBadge: "Express + Zod + RBAC",
           status: "13 Endpoint Terverifikasi",
@@ -677,7 +820,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           serviceCategory: "Platform Web & Undangan Digital di Edge",
-          serviceSubtitle: "Platform undangan digital interaktif berkecepatan tinggi dengan serverless SQL database di edge CDN.",
+          serviceSubtitle: "Personalisasi undangan acara untuk tamu dan kumpulkan konfirmasi kehadiran secara online.",
           projectTitle: "Digital Invitation Platform",
           projectBadge: "Astro + Cloudflare D1",
           status: "Cloudflare Edge D1",
@@ -700,10 +843,27 @@ export const content: Record<Language, SiteContent> = {
         }
       ]
     },
+    testimonials: {
+      tag: "KATA KLIEN",
+      title: "Dipercaya oleh Klien Nyata",
+      subtitle: "Ulasan dari mereka yang telah bekerja sama langsung dengan Djie Production.",
+      items: [
+        {
+          quote: "Pengerjaan cepat dan komunikasinya enak karena langsung dengan developernya. Undangan digital kami jadi persis seperti yang dibayangkan dan lancar diakses ratusan tamu.",
+          name: "Anggi & Asep",
+          role: "Klien Undangan Digital"
+        },
+        {
+          quote: "Eksekusi teknis sangat rapi dan teliti. Aplikasi kasir POS langsung jalan lancar secara offline di toko tanpa kendala koneksi, integrasi thermal print juga mulus.",
+          name: "Pemilik Toko Retail",
+          role: "Klien POS WarungKas"
+        }
+      ]
+    },
     whyMe: {
-      tag: "Keunggulan Independent Developer",
-      title: "Mengapa Bekerja Sama Langsung dengan Saya?",
-      subtitle: "Perbandingan jelas antara bekerja sama langsung dengan independent developer versus struktur agensi berlapis.",
+      tag: "Keunggulan Studio Independen",
+      title: "Mengapa Memilih Djie Production?",
+      subtitle: "Perbandingan jelas antara bekerja sama dengan studio independen yang menangani langsung versus struktur agensi berlapis.",
       items: [
         {
           title: "100% Komunikasi Langsung",
@@ -724,53 +884,76 @@ export const content: Record<Language, SiteContent> = {
       ]
     },
     workflow: {
-      tag: "Diagram Alur",
-      title: "Alur Kerja Pengembangan Software",
-      subtitle: "Alur kerja terstruktur mulai dari konsultasi awal dan estimasi kebutuhan hingga deployment cloud.",
-      badge: "Arsitektur Pipeline Kontinu",
-      outputLabel: "Output yang Dihasilkan:",
-      steps: [
+      tag: "Cara kerja",
+      title: "Langkah jelas dari ide sampai rilis",
+      subtitle: "Anda ikut menentukan arah di setiap tahap—mulai dari kebutuhan bisnis hingga meninjau sistem yang selesai.",
+      badge: "Kolaborasi langsung dengan Anthony",
+      labels: {
+        flow: "Alur pengerjaan proyek",
+        pause: "Jeda animasi",
+        resume: "Lanjutkan animasi",
+        stage: "Tahap",
+        clientAction: "Peran Anda",
+        deliverable: "Yang Anda terima"
+      },
+      stages: [
         {
-          step: "01",
-          phase: "Konsultasi",
-          title: "Konsultasi Awal & Estimasi",
-          description: "Kita mendiskusikan inti masalah bisnis, kebutuhan esensial MVP, dan batasan teknis. Konsultasi awal serta estimasi biaya diberikan secara transparan sebelum pengerjaan dimulai.",
-          chips: ["Diskusi Kebutuhan", "Lingkup & Estimasi Jelas"]
+          id: "brief",
+          title: "Diskusi",
+          subtitle: "Kebutuhan & estimasi",
+          detailTitle: "Mulai dari kebutuhan bisnis",
+          detailDesc: "Kita membahas masalah, siapa yang akan menggunakan sistem, dan kebutuhan utama sebelum pengerjaan dimulai.",
+          clientAction: "Ceritakan tujuan, proses saat ini, dan batasan yang ada.",
+          deliverable: "Ruang lingkup awal dan estimasi biaya.",
+          ariaLabel: "Diskusi: sampaikan kebutuhan dan dapatkan estimasi awal"
         },
         {
-          step: "02",
-          phase: "Arsitektur",
-          title: "Perancangan Sistem",
-          description: "Perancangan blueprint teknis: skema database (MongoDB/SQLite), kontrak endpoint REST API, dan aturan validasi data sebelum menulis kode aplikasi.",
-          chips: ["Skema MongoDB / SQLite", "REST API & Validasi Zod"]
+          id: "discovery",
+          title: "Tentukan",
+          subtitle: "Lingkup & prioritas",
+          detailTitle: "Sepakati apa yang dibangun",
+          detailDesc: "Kita menentukan alur pengguna utama, memprioritaskan fitur, dan memperjelas apa saja yang termasuk dalam proyek.",
+          clientAction: "Tinjau prioritas dan sepakati lingkup proyek.",
+          deliverable: "Lingkup proyek dan prioritas fitur yang disepakati.",
+          ariaLabel: "Tentukan: tinjau dan sepakati lingkup proyek"
         },
         {
-          step: "03",
-          phase: "Pengembangan",
-          title: "Implementasi & Integrasi",
-          description: "Tahap penulisan kode: membangun logika backend dengan Express.js, mengamankan autentikasi dengan JWT/bcrypt, dan membuat antarmuka web responsif atau aplikasi Flutter.",
-          chips: ["Autentikasi JWT & bcrypt", "Express.js & Flutter Mobile"]
+          id: "blueprint",
+          title: "Rancang",
+          subtitle: "Rancangan solusi",
+          detailTitle: "Rancang solusi yang sesuai",
+          detailDesc: "Saya menerjemahkan kebutuhan yang disepakati menjadi rencana sistem dan memastikan alurnya sesuai kebutuhan.",
+          clientAction: "Berikan masukan pada pendekatan sebelum implementasi.",
+          deliverable: "Rencana sistem sesuai kebutuhan yang disepakati.",
+          ariaLabel: "Rancang: tinjau pendekatan sistem"
         },
         {
-          step: "04",
-          phase: "Deployment",
-          title: "Deploy & Serah Terima",
-          description: "Pengujian fungsional menyeluruh, deployment cloud dengan HTTPS dan routing Cloudflare, serta serah terima sistem dan dokumentasi yang transparan.",
-          chips: ["Cloudflare CDN & HTTPS", "Serah Terima Sistem"]
+          id: "build",
+          title: "Bangun",
+          subtitle: "Pengerjaan & tinjauan",
+          detailTitle: "Bangun dan tinjau produk",
+          detailDesc: "Sistem dikembangkan dan diuji sesuai lingkup yang disepakati. Anda dapat meninjau versi yang sudah berjalan dan memberi masukan.",
+          clientAction: "Tinjau versi yang berjalan dan sampaikan masukan.",
+          deliverable: "Versi sistem yang telah diuji untuk ditinjau.",
+          ariaLabel: "Bangun: tinjau versi sistem dan berikan masukan"
+        },
+        {
+          id: "live",
+          title: "Rilis",
+          subtitle: "Deploy & serah terima",
+          detailTitle: "Rilis dengan serah terima yang jelas",
+          detailDesc: "Setelah pengujian, sistem dideploy dan proses serah terima dilakukan. Dukungan setelah rilis mengikuti kesepakatan proyek.",
+          clientAction: "Konfirmasi kesiapan rilis dan terima hasil serah terima.",
+          deliverable: "Sistem yang sudah dirilis beserta materi serah terima yang disepakati.",
+          ariaLabel: "Rilis: setujui peluncuran dan terima hasil serah terima"
         }
-      ],
-      legend: {
-        discovery: "Konsultasi & Estimasi",
-        architecture: "Arsitektur & Skema",
-        release: "Deployment Cloud",
-        footer: "Eksekusi alur langsung oleh Anthony Djie"
-      }
+      ]
     },
     contact: {
       tag: "HUBUNGI SAYA LANGSUNG",
       title: "Punya Rencana Project?",
       titleHighlight: "Mari Diskusikan.",
-      description: "Baik Anda membutuhkan aplikasi web full-stack, aplikasi mobile offline, maupun REST API backend — hubungi saya langsung. Harga disesuaikan dengan kebutuhan project melalui konsultasi awal dan estimasi yang transparan.",
+      description: "Baik Anda membutuhkan website company profile, aplikasi kasir offline, maupun REST API backend — hubungi kami langsung. Harga disesuaikan dengan kebutuhan project melalui konsultasi awal dan estimasi yang transparan.",
       channels: {
         whatsappTitle: "WHATSAPP",
         whatsappSub: "Respon tercepat untuk diskusi langsung",
@@ -797,8 +980,9 @@ export const content: Record<Language, SiteContent> = {
       }
     },
     footer: {
-      rights: "Djie Production. Dibuat oleh Anthony Djie.",
-      backToTop: "Kembali ke Atas ↑"
+      rights: "Djie Production. Didirikan oleh Anthony Djie.",
+      backToTop: "Kembali ke Atas ↑",
+      recruiterLink: "Untuk perekrut: lihat CV →"
     }
   }
 };

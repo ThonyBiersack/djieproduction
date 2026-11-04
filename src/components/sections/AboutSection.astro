@@ -1,0 +1,97 @@
+---
+import type { SiteContent, Language } from '../../data/translations';
+
+interface Props {
+  t: SiteContent;
+  lang: Language;
+  waUrl: string;
+}
+
+const { t, lang, waUrl } = Astro.props;
+---
+
+<section id="about" class="scroll-reveal scroll-mt-24 space-y-10 pt-10 border-t border-white/[0.07]">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    
+    <!-- Narrative -->
+    <div class="lg:col-span-7 space-y-5">
+      <p class="text-xs font-mono uppercase tracking-widest text-sky-400 font-semibold">{t.about.tag}</p>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        {t.about.title}
+      </h2>
+
+      <div class="space-y-4 text-text-muted text-sm sm:text-base leading-relaxed">
+        {t.about.paragraphs.map((p) => (
+          <p set:html={p} />
+        ))}
+      </div>
+
+      <!-- Key Advantages Pill -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs font-mono">
+        {t.about.advantages.map((adv) => (
+          <div class="p-4 rounded-xl bg-black/40 border border-white/[0.08]">
+            <div class="text-white font-semibold mb-1">{adv.title}</div>
+            <div class="text-text-dim leading-relaxed">{adv.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Studio Dossier Card -->
+    <div class="lg:col-span-5">
+      <div class="rounded-2xl border border-white/10 bg-[#0d1017] p-5 sm:p-7 space-y-6 shadow-xl">
+        <div class="pb-4 border-b border-white/[0.08] flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-bold text-white">{t.about.dossier.title}</h3>
+            <p class="text-xs font-mono text-text-dim">{t.about.dossier.subtitle}</p>
+          </div>
+          <img src="/djie-icon-white.svg" alt="Djie Icon" class="w-8 h-8 opacity-80" />
+        </div>
+
+        <div class="space-y-3 font-mono text-xs">
+          <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+            <span class="text-text-dim">{t.about.dossier.operatingModelLabel}</span>
+            <span class="text-white">{t.about.dossier.operatingModelVal}</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+            <span class="text-text-dim">{t.about.dossier.founderLabel}</span>
+            <span class="text-sky-300 font-medium">{t.about.dossier.founderVal}</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+            <span class="text-text-dim">{t.about.dossier.locationLabel}</span>
+            <span class="text-white">{t.about.dossier.locationVal}</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+            <span class="text-text-dim">{t.about.dossier.whatsappLabel}</span>
+            <a href="https://wa.me/6283845641526" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">+62 838-4564-1526</a>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+            <span class="text-text-dim">{t.about.dossier.emailLabel}</span>
+            <a href="mailto:thony.djie@djieproduction.com" class="text-sky-300 hover:underline">thony.djie@djieproduction.com</a>
+          </div>
+          <div class="flex justify-between pt-2">
+            <span class="text-text-dim">{t.about.dossier.availabilityLabel}</span>
+            <span class="text-emerald-400 flex items-center gap-1.5 text-right">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+              <span>{t.about.dossier.availabilityVal}</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-white/[0.08]">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full py-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-mono text-xs font-medium flex items-center justify-center gap-2 border border-emerald-500/30 transition-colors"
+          >
+            <span>{t.about.dossier.ctaText}</span>
+            &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+

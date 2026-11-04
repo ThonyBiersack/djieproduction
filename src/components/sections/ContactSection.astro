@@ -1,0 +1,160 @@
+---
+import type { SiteContent, Language } from '../../data/translations';
+
+interface Props {
+  t: SiteContent;
+  lang: Language;
+  waUrl: string;
+}
+
+const { t, lang, waUrl } = Astro.props;
+const cvPageUrl = lang === 'en' ? '/en/cv' : '/cv';
+---
+
+<section id="contact" class="scroll-reveal scroll-mt-24 pt-10 border-t border-white/[0.07]">
+  <div class="rounded-3xl border border-sky-500/20 bg-gradient-to-b from-[#101928] via-[#0c121c] to-[#080b11] p-6 sm:p-10 md:p-14 space-y-10 relative overflow-hidden">
+    
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-sky-500/10 blur-3xl pointer-events-none rounded-full"></div>
+
+    <div class="text-center space-y-4 max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-950/40 text-sky-300 text-xs font-mono">
+        <span>{t.contact.tag}</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        {t.contact.title} <br />
+        <span class="text-sky-300">{t.contact.titleHighlight}</span>
+      </h2>
+
+      <p class="text-text-muted text-sm sm:text-base leading-relaxed">
+        {t.contact.description}
+      </p>
+    </div>
+
+    <!-- Contact Channels Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-2">
+      
+      <!-- Channel: WhatsApp -->
+      <a
+        href={waUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-900/30 transition-all group flex flex-col justify-between"
+      >
+        <div>
+          <div class="text-emerald-400 font-mono text-xs mb-1 font-semibold flex items-center justify-between">
+            <span>{t.contact.channels.whatsappTitle}</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          </div>
+          <div class="text-white font-bold text-sm group-hover:text-emerald-300 transition-colors">
+            +62 838-4564-1526
+          </div>
+          <p class="text-text-muted text-xs mt-1">{t.contact.channels.whatsappSub}</p>
+        </div>
+        <div class="pt-3 text-xs font-mono text-emerald-400 flex items-center gap-1 mt-4">
+          <span>{t.contact.channels.whatsappCta}</span> &rarr;
+        </div>
+      </a>
+
+      <!-- Channel: CV (Links to dedicated recruiter page) -->
+      <a
+        href={cvPageUrl}
+        class="p-5 rounded-2xl border border-sky-500/30 bg-sky-950/20 hover:bg-sky-900/30 transition-all group flex flex-col justify-between"
+      >
+        <div>
+          <div class="text-sky-400 font-mono text-xs mb-1 font-semibold flex items-center justify-between">
+            <span>{t.contact.channels.cvTitle}</span>
+            <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div class="text-white font-bold text-sm group-hover:text-sky-300 transition-colors">
+            Anthony Djie
+          </div>
+          <p class="text-text-muted text-xs mt-1">{t.contact.channels.cvSub}</p>
+        </div>
+        <div class="pt-3 text-xs font-mono text-sky-300 flex items-center gap-1 mt-4">
+          <span>{lang === 'id' ? 'Buka Halaman CV' : 'Open CV Page'}</span> &rarr;
+        </div>
+      </a>
+
+      <!-- Channel: Email -->
+      <div class="p-5 rounded-2xl border border-white/10 bg-black/40 flex flex-col justify-between">
+        <div>
+          <div class="text-sky-400 font-mono text-xs mb-1 font-semibold">{t.contact.channels.emailTitle}</div>
+          <div class="text-white font-bold text-sm truncate" title="thony.djie@djieproduction.com">
+            thony.djie@djieproduction.com
+          </div>
+          <p class="text-text-muted text-xs mt-1">{t.contact.channels.emailSub}</p>
+        </div>
+        <div class="pt-3 flex items-center gap-2 mt-4 font-mono text-xs">
+          <a
+            href="mailto:thony.djie@djieproduction.com"
+            class="text-sky-400 hover:underline"
+          >
+            {t.contact.channels.emailCta} &nearr;
+          </a>
+          <button
+            id="contact-copy-email"
+            type="button"
+            class="text-text-dim hover:text-white transition-colors"
+          >
+            {t.contact.channels.emailCopy}
+          </button>
+        </div>
+      </div>
+
+      <!-- Channel: LinkedIn -->
+      <a
+        href="https://linkedin.com/in/anthony-suryadjie-500063200"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-5 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/[0.04] transition-all group flex flex-col justify-between"
+      >
+        <div>
+          <div class="text-blue-400 font-mono text-xs mb-1 font-semibold">{t.contact.channels.linkedinTitle}</div>
+          <div class="text-white font-bold text-sm group-hover:text-blue-300 transition-colors">
+            Anthony Suryadjie
+          </div>
+          <p class="text-text-muted text-xs mt-1">{t.contact.channels.linkedinSub}</p>
+        </div>
+        <div class="pt-3 text-xs font-mono text-blue-400 flex items-center gap-1 mt-4">
+          <span>{t.contact.channels.linkedinCta}</span> &nearr;
+        </div>
+      </a>
+
+      <!-- Channel: GitHub -->
+      <a
+        href="https://github.com/ThonyBiersack"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-5 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/[0.04] transition-all group flex flex-col justify-between"
+      >
+        <div>
+          <div class="text-purple-400 font-mono text-xs mb-1 font-semibold">{t.contact.channels.githubTitle}</div>
+          <div class="text-white font-bold text-sm group-hover:text-purple-300 transition-colors">
+            @ThonyBiersack
+          </div>
+          <p class="text-text-muted text-xs mt-1">{t.contact.channels.githubSub}</p>
+        </div>
+        <div class="pt-3 text-xs font-mono text-purple-400 flex items-center gap-1 mt-4">
+          <span>{t.contact.channels.githubCta}</span> &nearr;
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Bottom SLA Guarantee -->
+    <div class="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-text-dim gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span>{t.contact.footerSla.location}</span>
+      </div>
+      <div class="text-slate-400">
+        {t.contact.footerSla.response}
+      </div>
+    </div>
+
+  </div>
+</section>
+
