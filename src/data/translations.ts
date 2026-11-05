@@ -253,14 +253,14 @@ export const content: Record<Language, SiteContent> = {
     },
     metrics: {
       item1: {
-        val: "4+",
-        title: "Systems Delivered",
-        sub: "Full-stack projects live and running in production"
+        val: "4",
+        title: "Projects Built",
+        sub: "Full-stack systems deployed and publicly accessible"
       },
       item2: {
-        val: "24h",
-        title: "Max Response Time",
-        sub: "Direct response on business days via WhatsApp"
+        val: "<24h",
+        title: "Response Time Target",
+        sub: "Response on business days via WhatsApp or email"
       },
       item3: {
         val: "100%",
@@ -270,16 +270,16 @@ export const content: Record<Language, SiteContent> = {
       item4: {
         val: "End-to-End",
         title: "Database to Deploy",
-        sub: "Comprehensive architecture across the entire stack"
+        sub: "One developer handling the entire stack"
       }
     },
     about: {
       tag: "ABOUT STUDIO",
       title: "Why Djie Production Operates as an Independent Studio",
       paragraphs: [
-        "Traditional development agencies often introduce unnecessary layers: technical requirements get passed between sales reps and account managers before finally reaching the developer writing the code.",
-        "<strong class=\"text-white font-medium\">Djie Production</strong> was founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span> to cut out that overhead. As an independent studio, we focus on clean technical execution: designing structured database schemas, writing validated REST APIs, building clean responsive web interfaces, and shipping offline-first Flutter mobile apps.",
-        "The result is practical software built with direct communication, agile iterations, and clear focus on your project requirements."
+        "For certain types of projects, working directly with a single hands-on developer can be more efficient than going through a larger team structure — especially when technical requirements need to be communicated quickly and precisely.",
+        "<strong class=\"text-white font-medium\">Djie Production</strong> was founded by <span class=\"text-sky-300 font-medium\">Anthony Djie</span> with this approach. As an independent studio, we focus on clean technical execution: designing structured database schemas, writing validated REST APIs, building clean responsive web interfaces, and shipping offline-first Flutter mobile apps.",
+        "The result is practical software built with direct communication, fast iterations, and no added layers in between."
       ],
       advantages: [
         {
@@ -303,7 +303,7 @@ export const content: Record<Language, SiteContent> = {
         whatsappLabel: "Direct WhatsApp:",
         emailLabel: "Studio Email:",
         availabilityLabel: "Availability:",
-        availabilityVal: "Accepting select projects",
+        availabilityVal: "Open to projects & discussions",
         ctaText: "Chat via WhatsApp"
       }
     },
@@ -364,7 +364,7 @@ export const content: Record<Language, SiteContent> = {
           serviceSubtitle: "Organize team tasks, track progress, and help users plan their work in one platform.",
           projectTitle: "TaskApp — Task Management Platform",
           projectBadge: "Express 5 + MongoDB",
-          status: "Live Production",
+          status: "Live & Open Access",
           description: "Full-stack productivity and task orchestration platform built on Express.js 5 and MongoDB Atlas with production-grade session security.",
           architectureSpecs: {
             engine: "Node.js (ESM) + Express.js 5 + EJS Layouts & Bootstrap 5 UI",
@@ -389,7 +389,7 @@ export const content: Record<Language, SiteContent> = {
           serviceSubtitle: "Record sales, check products, and print receipts even when an internet connection is unavailable.",
           projectTitle: "WarungKas — Cashier & Store POS",
           projectBadge: "Flutter + SQLite WAL",
-          status: "Production Ready",
+          status: "Built & Tested",
           description: "Cross-platform mobile point-of-sale application for retail merchants, featuring local ACID transactions and thermal printing.",
           architectureSpecs: {
             engine: "Flutter 3 SDK & Dart for smooth 60fps native mobile execution",
@@ -456,42 +456,42 @@ export const content: Record<Language, SiteContent> = {
       ]
     },
     testimonials: {
-      tag: "CLIENT TESTIMONIALS",
-      title: "Trusted by Real Clients",
-      subtitle: "Honest feedback from people and teams who have worked directly with Djie Production.",
+      tag: "PROJECT TRACK RECORD",
+      title: "Built and Shipped",
+      subtitle: "A transparent look at what has been built, deployed, and delivered by Djie Production.",
       items: [
         {
-          quote: "The turnaround was fast and the communication was effortless since we worked directly with the developer. Our digital invitation turned out exactly as we envisioned.",
-          name: "Anggi & Asep",
-          role: "Wedding Invitation Clients"
+          quote: "Invitation platform for a real wedding event — fully deployed on Cloudflare Edge with personalized guest URLs, real-time RSVP database, and self-hosted audio. Accessed by the couple's invited guests on launch day.",
+          name: "Wedding Invitation Platform",
+          role: "Client Commission • Cloudflare D1"
         },
         {
-          quote: "Very detail-oriented technical execution. Architecture, API contracts, and offline reliability were built cleanly from day one without bloated overhead.",
-          name: "Retail Store Owner",
-          role: "WarungKas POS Client"
+          quote: "Full-stack task management platform with JWT session security, role-based access control, and Gemini AI integration — publicly accessible for anyone to register and test the live system.",
+          name: "TaskApp",
+          role: "Independent Project • Live at task.djieproduction.com"
         }
       ]
     },
     whyMe: {
       tag: "The Independent Studio Advantage",
       title: "Why Choose Djie Production?",
-      subtitle: "A direct comparison between working with a hands-on independent studio versus traditional agency structures.",
+      subtitle: "The benefits of working with an independent studio that handles projects hands-on.",
       items: [
         {
-          title: "100% Direct Communication",
-          description: "No account managers or sales intermediaries. You discuss requirements directly with the engineer writing your code — eliminating lost-in-translation bottlenecks."
+          title: "Direct Communication",
+          description: "You discuss requirements directly with the developer writing your code — technical needs are communicated without going through intermediaries."
         },
         {
-          title: "Agile & Focused Iterations",
-          description: "No multi-day internal agency meetings. Architectural decisions and feature iterations are made and implemented with minimal turnaround time."
+          title: "Fast & Focused Iterations",
+          description: "Technical decisions and feature revisions can be tested and implemented right away without waiting for lengthy internal processes."
         },
         {
           title: "Unified Full-Stack Architecture",
-          description: "Because database schemas, APIs, web frontends, and mobile apps are architected cohesively, every layer connects cleanly without departmental friction."
+          description: "Database schemas, API validation, web interfaces, and mobile apps are designed cohesively by one developer, so every layer connects consistently."
         },
         {
-          title: "Lean Investment, Direct Value",
-          description: "Your budget goes directly toward software engineering quality — not toward funding agency overhead, account executives, or sales commissions."
+          title: "Cost-Efficient for Small to Mid-Scale",
+          description: "For small to mid-scale projects, the independent studio model can be more economical since the budget goes directly toward technical execution."
         }
       ]
     },
@@ -588,7 +588,7 @@ export const content: Record<Language, SiteContent> = {
       },
       footerSla: {
         location: "Based in Indonesia (UTC+7) • Monitored daily",
-        response: "Direct response within 24 hours on business days."
+        response: "Business day response target: within 24 hours."
       }
     },
     footer: {
@@ -641,14 +641,14 @@ export const content: Record<Language, SiteContent> = {
     },
     metrics: {
       item1: {
-        val: "4+",
-        title: "Sistem Terdeliver",
-        sub: "Proyek full-stack yang sudah live dan berjalan di produksi"
+        val: "4",
+        title: "Proyek Dibangun",
+        sub: "Sistem full-stack yang sudah di-deploy dan bisa diakses"
       },
       item2: {
-        val: "24 Jam",
-        title: "Waktu Respon Maksimal",
-        sub: "Respon langsung di hari kerja via WhatsApp"
+        val: "<24 Jam",
+        title: "Target Waktu Respon",
+        sub: "Respon di hari kerja via WhatsApp atau email"
       },
       item3: {
         val: "100%",
@@ -658,16 +658,16 @@ export const content: Record<Language, SiteContent> = {
       item4: {
         val: "End-to-End",
         title: "Database sampai Deploy",
-        sub: "Arsitektur utuh menangani seluruh lapisan stack"
+        sub: "Satu developer menangani seluruh lapisan stack"
       }
     },
     about: {
       tag: "TENTANG STUDIO",
       title: "Mengapa Djie Production Hadir sebagai Studio Independen",
       paragraphs: [
-        "Banyak klien mengalami hambatan saat bekerja dengan struktur agensi konvensional: kebutuhan teknis harus melewati sales dan account manager sebelum akhirnya sampai ke developer yang menulis kodenya.",
-        "<strong class=\"text-white font-medium\">Djie Production</strong> didirikan oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span> untuk memotong birokrasi tersebut. Sebagai studio independen, fokus kami adalah eksekusi teknis yang bersih: merancang skema database terstruktur, menulis REST API tervalidasi, membangun antarmuka web yang responsif, serta mengembangkan aplikasi mobile Flutter dengan kemampuan offline.",
-        "Hasilnya adalah software yang fungsional, iterasi yang cepat, serta komunikasi langsung tanpa miskomunikasi antar divisi."
+        "Untuk beberapa jenis proyek, bekerja dengan satu developer yang menangani langsung bisa lebih efisien dibanding melalui struktur tim yang lebih besar — terutama ketika kebutuhan teknis perlu dikomunikasikan dengan cepat dan tepat.",
+        "<strong class=\"text-white font-medium\">Djie Production</strong> didirikan oleh <span class=\"text-sky-300 font-medium\">Anthony Djie</span> dengan pendekatan ini. Sebagai studio independen, fokus kami adalah eksekusi teknis yang bersih: merancang skema database terstruktur, menulis REST API tervalidasi, membangun antarmuka web yang responsif, serta mengembangkan aplikasi mobile Flutter dengan kemampuan offline.",
+        "Hasilnya adalah software yang fungsional, iterasi yang cepat, serta komunikasi langsung tanpa lapisan tambahan."
       ],
       advantages: [
         {
@@ -691,7 +691,7 @@ export const content: Record<Language, SiteContent> = {
         whatsappLabel: "WhatsApp Langsung:",
         emailLabel: "Email Studio:",
         availabilityLabel: "Ketersediaan:",
-        availabilityVal: "Menerima proyek baru",
+        availabilityVal: "Terbuka untuk proyek & diskusi",
         ctaText: "Chat via WhatsApp"
       }
     },
@@ -752,7 +752,7 @@ export const content: Record<Language, SiteContent> = {
           serviceSubtitle: "Kelola tugas tim, pantau progres, dan bantu pengguna merencanakan pekerjaan dari satu platform.",
           projectTitle: "TaskApp — Platform Manajemen Tugas",
           projectBadge: "Express 5 + MongoDB",
-          status: "Aktif di Cloud",
+          status: "Live & Akses Terbuka",
           description: "Platform produktivitas dan orkestrasi tugas full-stack berbasis Express.js 5 dan MongoDB Atlas dengan keamanan sesi tingkat produksi.",
           architectureSpecs: {
             engine: "Node.js (ESM) + Express.js 5 + EJS Layouts & UI Bootstrap 5",
@@ -777,7 +777,7 @@ export const content: Record<Language, SiteContent> = {
           serviceSubtitle: "Catat transaksi, cek produk, dan cetak struk meski koneksi internet tidak tersedia.",
           projectTitle: "WarungKas — POS Kasir & Manajemen Toko",
           projectBadge: "Flutter + SQLite WAL",
-          status: "Siap Digunakan",
+          status: "Dibangun & Diuji",
           description: "Aplikasi kasir mobile cross-platform untuk UMKM dan toko ritel dengan database transaksi lokal berkecepatan tinggi.",
           architectureSpecs: {
             engine: "Flutter 3 SDK & Dart untuk rendering native 60fps yang responsif",
@@ -844,42 +844,42 @@ export const content: Record<Language, SiteContent> = {
       ]
     },
     testimonials: {
-      tag: "KATA KLIEN",
-      title: "Dipercaya oleh Klien Nyata",
-      subtitle: "Ulasan dari mereka yang telah bekerja sama langsung dengan Djie Production.",
+      tag: "REKAM JEJAK PROYEK",
+      title: "Dibangun dan Dirilis",
+      subtitle: "Transparansi tentang apa yang telah dibangun, di-deploy, dan dikirimkan oleh Djie Production.",
       items: [
         {
-          quote: "Pengerjaan cepat dan komunikasinya enak karena langsung dengan developernya. Undangan digital kami jadi persis seperti yang dibayangkan dan lancar diakses ratusan tamu.",
-          name: "Anggi & Asep",
-          role: "Klien Undangan Digital"
+          quote: "Platform undangan untuk acara pernikahan nyata — di-deploy penuh di Cloudflare Edge dengan URL personal per tamu, database RSVP real-time, dan audio mandiri. Diakses oleh tamu undangan pasangan di hari peluncuran.",
+          name: "Proyek Undangan Pernikahan",
+          role: "Pesanan Klien • Cloudflare D1"
         },
         {
-          quote: "Eksekusi teknis sangat rapi dan teliti. Aplikasi kasir POS langsung jalan lancar secara offline di toko tanpa kendala koneksi, integrasi thermal print juga mulus.",
-          name: "Pemilik Toko Retail",
-          role: "Klien POS WarungKas"
+          quote: "Platform manajemen tugas full-stack dengan keamanan sesi JWT, kontrol akses berbasis peran, dan integrasi Gemini AI — dapat diakses publik untuk siapa saja yang ingin mendaftar dan menguji sistem secara live.",
+          name: "TaskApp",
+          role: "Proyek Independen • Live di task.djieproduction.com"
         }
       ]
     },
     whyMe: {
       tag: "Keunggulan Studio Independen",
       title: "Mengapa Memilih Djie Production?",
-      subtitle: "Perbandingan jelas antara bekerja sama dengan studio independen yang menangani langsung versus struktur agensi berlapis.",
+      subtitle: "Keuntungan bekerja sama dengan studio independen yang menangani proyek secara langsung.",
       items: [
         {
-          title: "100% Komunikasi Langsung",
-          description: "Tanpa account manager atau perantara sales. Anda berdiskusi langsung dengan developer yang menulis kode — menghilangkan risiko miskomunikasi teknis."
+          title: "Komunikasi Langsung",
+          description: "Anda berdiskusi langsung dengan developer yang menulis kode — kebutuhan teknis tersampaikan tanpa melalui perantara."
         },
         {
           title: "Iterasi Cepat & Terfokus",
-          description: "Tanpa birokrasi rapat internal agensi yang berhari-hari. Keputusan teknis dan revisi fitur dapat segera diuji dan diimplementasikan."
+          description: "Keputusan teknis dan revisi fitur bisa langsung diuji dan diimplementasikan tanpa menunggu proses internal yang panjang."
         },
         {
           title: "Arsitektur Full-Stack yang Kohesif",
-          description: "Skema database, validasi API, antarmuka web, dan mobile dirancang terintegrasi sehingga setiap layer terhubung tanpa gesekan antar divisi."
+          description: "Skema database, validasi API, antarmuka web, dan mobile dirancang terintegrasi oleh satu developer sehingga setiap layer terhubung secara konsisten."
         },
         {
-          title: "Investasi Efisien, Nilai Langsung",
-          description: "Anggaran Anda dialokasikan langsung untuk kualitas rekayasa software — bukan untuk mendanai sewa kantor agensi atau komisi tim penjualan."
+          title: "Biaya Efisien untuk Lingkup Kecil-Menengah",
+          description: "Untuk proyek skala kecil hingga menengah, model studio independen bisa lebih hemat karena anggaran dialokasikan langsung untuk pengerjaan teknis."
         }
       ]
     },
@@ -976,7 +976,7 @@ export const content: Record<Language, SiteContent> = {
       },
       footerSla: {
         location: "Domisili di Indonesia (UTC+7) • Dipantau setiap hari",
-        response: "Respon langsung dalam 24 jam pada hari kerja."
+        response: "Target respon di hari kerja: dalam 24 jam."
       }
     },
     footer: {
